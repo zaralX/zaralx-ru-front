@@ -21,7 +21,7 @@ initDark()
 <template>
   <div class="text-black dark:text-white w-full min-h-[100vh]">
 
-    <div class="fixed top-0 left-0 w-full h-[100vh] bg-background-level-1-light dark:bg-background-level-1-dark -z-10 transition-all"/>
+    <div class="fixed top-0 left-0 w-full h-[100vh] bg-background-level-0-light dark:bg-background-level-0-dark -z-10 transition-all"/>
 
     <EmptyLayout v-if="isEmptyLayout" />
     <MainLayout v-else>
