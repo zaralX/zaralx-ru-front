@@ -7,6 +7,18 @@ export default {
     theme: {
         extend: {
             colors: {
+                'border-main': {
+                    light: '#3D2D1E',
+                    dark: '#3D2D1E'
+                },
+                'bg-main': {
+                    light: '#191919',
+                    dark: '#191919'
+                },
+                'border-inside': {
+                    light: '#968060',
+                    dark: '#968060'
+                },
                 background: {
                     'level-0': {
                         light: '#ffffff',
@@ -25,7 +37,12 @@ export default {
                         dark: '#191919'
                     }
                 },
-            }
+            },
+            fontFamily: {
+                'montserrat': ['Montserrat', "none"],
+                'rubik': ['Rubik', "none"],
+                'fira': ['"Fira Code"', "none"],
+            },
         },
     },
     darkMode: 'class',

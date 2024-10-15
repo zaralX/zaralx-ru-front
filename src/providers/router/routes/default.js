@@ -8,6 +8,14 @@ export default [
         component: () => import('/src/pages/Index.vue')
     },
     {
+        name: 'AboutPage',
+        path: '/about',
+        meta: {
+            layout: 'basic'
+        },
+        component: () => import('/src/pages/About.vue')
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFoundPage',
         meta: {
