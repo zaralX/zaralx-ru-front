@@ -1,16 +1,22 @@
 <script setup>
-
+const socials = [
+  {
+    link: "https://t.me/zWork1",
+    icon: "pi-telegram",
+  }
+]
 </script>
 
 <template>
-  <footer class="min-h-16 w-full text-lg bg-background-level-1-light dark:bg-background-level-1-dark p-4">
-    <RouterLink to="/" class="flex gap-4 items-center text-sky-400 text-xl font-bold">
-      <img src="/vite.svg" alt="logo" class="w-10 h-10">
-      zaralX
-    </RouterLink>
+  <div class="h-16 border-t-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center text-border-inside-light dark:text-border-inside-dark font-[450] text-lg">
+    <div class="px-4 h-full flex items-center">find me in:</div>
 
-    <p class="text-sm mt-4 opacity-75">
-      Developer Website
-    </p>
-  </footer>
+    <nav class="relative grow border-x-2 border-border-main-light dark:border-border-main-dark h-full flex">
+      <a v-for="social in socials" :href="social.link" class="w-16 h-full flex items-center justify-center text-3xl gap-2 border-r-2 border-border-main-light dark:border-border-main-dark">
+        <i class="pi" :class="social.icon"></i>
+      </a>
+    </nav>
+
+    <a href="https://github.com/zaralx" class="px-4 h-full flex items-center gap-2">@zaralx <i class="pi pi-github"></i></a>
+  </div>
 </template>

@@ -3,10 +3,12 @@
 </script>
 
 <template>
-  <slot name="header" />
-  <main class="w-full min-h-[100vh]">
-    <router-view />
-  </main>
-  <slot name="footer" />
-  <slot />
+  <div class="min-h-screen flex flex-col">
+    <slot name="header" />
+    <main class="flex-grow w-full">
+      <router-view />
+    </main>
+    <slot name="footer" />
+    <slot />
+  </div>
 </template>
