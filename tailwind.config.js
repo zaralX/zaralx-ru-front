@@ -15,27 +15,17 @@ export default {
                     light: '#191919',
                     dark: '#191919'
                 },
+                'bg-second': {
+                    light: '#151515',
+                    dark: '#151515'
+                },
+                'bg-third': {
+                    light: '#111111',
+                    dark: '#111111'
+                },
                 'border-inside': {
                     light: '#968060',
                     dark: '#968060'
-                },
-                background: {
-                    'level-0': {
-                        light: '#ffffff',
-                        dark: '#060606'
-                    },
-                    'level-1': {
-                        light: '#f5f5f5',
-                        dark: '#101010'
-                    },
-                    'level-2': {
-                        light: '#f1f1f1',
-                        dark: '#151515'
-                    },
-                    'level-3': {
-                        light: '#ededed',
-                        dark: '#191919'
-                    }
                 },
             },
             fontFamily: {

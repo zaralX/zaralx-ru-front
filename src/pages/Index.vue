@@ -1,6 +1,7 @@
 <script setup>
 
 import IndexCodeLine from "../components/index/IndexCodeLine.vue";
+import IndexSnake from "../components/index/IndexSnake.vue";
 </script>
 
 <template>
@@ -10,8 +11,8 @@ import IndexCodeLine from "../components/index/IndexCodeLine.vue";
 <!--  <div-->
 <!--      class="absolute h-full w-full"-->
 <!--  ><img src="/grid.svg" alt="grid"></div>-->
-<div class="lg:px-32 xl:px-64 my-16 min-h-full h-full grid grid-cols-2 gap-2">
-  <div class="min-h-96 grid grid-rows-2 py-16">
+<div class="lg:px-32 xl:px-64 my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
+  <div class="min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
     <div>
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
       <p class="text-7xl font-[450] mb-4">zaralX</p>
@@ -33,8 +34,15 @@ import IndexCodeLine from "../components/index/IndexCodeLine.vue";
       </IndexCodeLine>
     </div>
   </div>
-  <div class="bg-red-500 h-96">
-
+  <div class="hidden lg:flex justify-center">
+    <div class="w-[32rem] bg-bg-second-light dark:bg-bg-second-dark h-[32rem] rounded-lg shadow p-4 flex items-center gap-4">
+      <div class="min-w-64 min-h-[30rem] bg-bg-third-light dark:bg-bg-third-dark shadow-[0_0_8px_2px_rgba(15,15,15,0.6)] rounded-lg">
+        <IndexSnake />
+      </div>
+      Ну да, это змейка. А что?
+      <br>
+      Сайт в разработке если что.
+    </div>
   </div>
 </div>
 </template>
