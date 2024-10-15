@@ -51,7 +51,7 @@ onUnmounted(() => {
 
 <template>
   <div class="h-16 border-b-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center text-border-inside-light dark:text-border-inside-dark font-[450] text-lg">
-    <div class="pl-4 pr-[10%] h-full flex items-center">zaralx-website</div>
+    <div class="px-4 min-w-64 h-full flex items-center text-center">zaralx-website</div>
 
     <nav class="relative grow border-x-2 border-border-main-light dark:border-border-main-dark h-full lg:grid grid-cols-5 hidden">
       <!-- Линия под активной ссылкой -->
@@ -74,6 +74,6 @@ onUnmounted(() => {
       </router-link>
     </nav>
 
-    <div class="px-4 h-full flex items-center">_contact-me</div>
+    <div class="px-4 min-w-64 h-full flex items-center justify-center">_contact-me</div>
   </div>
 </template>
