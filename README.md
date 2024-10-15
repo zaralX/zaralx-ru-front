@@ -1,2 +1,2 @@
 # My website
-https://zaralx.ru
+https://test.zaralx.ru
