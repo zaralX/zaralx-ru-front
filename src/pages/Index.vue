@@ -17,6 +17,7 @@ import IndexSnake from "../components/index/IndexSnake.vue";
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
       <p class="text-7xl font-[450] mb-4">zaralX</p>
       <p class="text-4xl font-[450] text-red-500">> Разработчик всего! </p>
+      <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-800 hover:bg-neutral-700 rounded-md px-2 py-1 duration-200 transition-all max-w-64" href="https://old.zaralx.ru"><i class="pi pi-arrow-left"></i> <p class="grow text-center">На старый сайт</p></a>
     </div>
     <div class="text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
       <IndexCodeLine line="1">
