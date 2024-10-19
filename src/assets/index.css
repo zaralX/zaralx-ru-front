@@ -21,3 +21,7 @@ body {
 *::-webkit-scrollbar-thumb {
     background-color: rgb(63, 63, 63);
 }
+
+h1 {
+    @apply text-4xl font-medium;
+}
