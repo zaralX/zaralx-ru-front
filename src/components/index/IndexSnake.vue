@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, onUnmounted, ref} from "vue";
 
-const grid = {w: 16, h: 30};
+const grid = {w: 8, h: 15};
 const snakeWindow = ref({w: 256, h: 480});
 
 const cellSize = snakeWindow.value.w / grid.w;
@@ -11,6 +11,8 @@ const snakePositions = ref([]);
 const foodPositions = ref([]);
 const direction = ref("top");
 const gameLoop = ref();
+const gameStarted = ref(false)
+
 
 function drawGrid(ctx) {
   ctx.strokeStyle = "#aaaaaa0a";
@@ -198,10 +200,16 @@ function restartGame() {
   createFood();
 }
 
+function startGame() {
+  if (!gameStarted.value) {
+    gameStarted.value = true
+    restartGame()
+  }
+}
+
 onMounted(() => {
   window.addEventListener("keydown", keydown);
   const ctx = canvas.value.getContext("2d");
-  restartGame();
   gameLoop.value = setInterval(() => {
     move();
     ctx.clearRect(0, 0, snakeWindow.value.w, snakeWindow.value.h);
@@ -218,5 +226,26 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <canvas ref="canvas" :width="snakeWindow.w" :height="snakeWindow.h" class="w-full h-full"></canvas>
+  <div class="relative w-full h-full flex justify-center items-center">
+    <canvas ref="canvas" :width="snakeWindow.w" :height="snakeWindow.h" class="w-full h-full"></canvas>
+    <transition name="slide-fade">
+      <Button v-if="!gameStarted" @click="startGame" class="absolute bottom-10 bg-red-500 rounded-lg shadow-lg py-1 px-4 text-black font-medium">Start</Button>
+    </transition>
+  </div>
 </template>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>
