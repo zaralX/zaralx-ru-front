@@ -100,7 +100,7 @@ onUnmounted(() => {
 
     <div class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4">
 <!--      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>-->
-      <div>_contact-me</div>
+      <div>_nothing</div>
     </div>
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>
