@@ -8,23 +8,23 @@ export default {
         extend: {
             colors: {
                 'border-main': {
-                    light: '#3D2D1E',
+                    light: '#8d683f',
                     dark: '#3D2D1E'
                 },
                 'bg-main': {
-                    light: '#191919',
+                    light: '#ffffff',
                     dark: '#191919'
                 },
                 'bg-second': {
-                    light: '#151515',
+                    light: '#f3f3f3',
                     dark: '#151515'
                 },
                 'bg-third': {
-                    light: '#111111',
+                    light: '#e8e8e8',
                     dark: '#111111'
                 },
                 'border-inside': {
-                    light: '#968060',
+                    light: '#dab76a',
                     dark: '#968060'
                 },
             },

@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 import {ref, onMounted, nextTick, watch, onUnmounted} from "vue";
+import {isDark, toggleDark} from "../../providers/theme/index.js";
 
 const route = useRoute();
 const links = [
@@ -9,6 +10,12 @@ const links = [
 ];
 
 const mobileMenu = ref(false);
+const dark = ref(isDark());
+
+const _toggleDark = () => {
+  toggleDark();
+  dark.value = isDark();
+}
 
 // Позиция и ширина для линии
 const activeLinkIndex = ref(0);
@@ -91,7 +98,10 @@ onUnmounted(() => {
       </router-link>
     </nav>
 
-    <div class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center">_contact-me</div>
+    <div class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4">
+<!--      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>-->
+      <div>_contact-me</div>
+    </div>
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>
       <i v-if="mobileMenu" class="pi pi-times"></i>
