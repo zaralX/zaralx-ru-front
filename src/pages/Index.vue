@@ -11,8 +11,8 @@ import IndexSnake from "../components/index/IndexSnake.vue";
 <!--  <div-->
 <!--      class="absolute h-full w-full"-->
 <!--  ><img src="/grid.svg" alt="grid"></div>-->
-<div class="lg:px-32 xl:px-64 my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
-  <div class="min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
+<div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
+  <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
     <div>
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
       <p class="text-7xl font-[450] mb-4">zaralX</p>

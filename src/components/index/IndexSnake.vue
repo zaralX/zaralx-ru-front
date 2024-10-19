@@ -162,22 +162,22 @@ function createFood() {
 function keydown(event) {
   const currentDirection = direction.value;
   let newDirection = currentDirection;
-
-  switch (event.key) {
+console.log(event)
+  switch (event.code) {
     case "ArrowUp":
-    case "w":
+    case "KeyW":
       newDirection = "top";
       break;
     case "ArrowRight":
-    case "d":
+    case "KeyD":
       newDirection = "right";
       break;
     case "ArrowDown":
-    case "s":
+    case "KeyS":
       newDirection = "bottom";
       break;
     case "ArrowLeft":
-    case "a":
+    case "KeyA":
       newDirection = "left";
       break;
   }

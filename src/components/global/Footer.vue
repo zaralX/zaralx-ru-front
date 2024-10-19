@@ -9,7 +9,7 @@ const socials = [
 
 <template>
   <div class="h-16 border-t-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center text-border-inside-light dark:text-border-inside-dark font-[450] text-lg">
-    <div class="px-4 h-full flex items-center">find me in:</div>
+    <div class="px-4 h-full hidden md:flex items-center">find me in:</div>
 
     <nav class="relative grow border-x-2 border-border-main-light dark:border-border-main-dark h-full flex">
       <a v-for="social in socials" :href="social.link" class="w-16 h-full flex items-center justify-center text-3xl gap-2 border-r-2 border-border-main-light dark:border-border-main-dark">
