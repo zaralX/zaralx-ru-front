@@ -210,6 +210,9 @@ function startGame() {
 onMounted(() => {
   window.addEventListener("keydown", keydown);
   const ctx = canvas.value.getContext("2d");
+  ctx.lineWidth = cellSize - segmentPadding;
+  ctx.strokeStyle = "#ffa600";
+  ctx.fillStyle = "#ffa600";
   gameLoop.value = setInterval(() => {
     move();
     ctx.clearRect(0, 0, snakeWindow.value.w, snakeWindow.value.h);

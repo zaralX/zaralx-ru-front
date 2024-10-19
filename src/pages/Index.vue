@@ -35,13 +35,13 @@ import IndexSnake from "../components/index/IndexSnake.vue";
     </div>
   </div>
   <div class="hidden lg:flex justify-center">
-    <div class="w-[32rem] bg-bg-second-light dark:bg-bg-second-dark h-[32rem] rounded-lg shadow p-4 flex items-center gap-4">
+    <div class="bg-bg-second-light dark:bg-bg-second-dark h-[32rem] rounded-lg shadow p-4 flex items-center gap-4">
       <div class="min-w-64 min-h-[30rem] bg-bg-third-light dark:bg-bg-third-dark shadow-[0_0_8px_2px_rgba(15,15,15,0.6)] rounded-lg">
         <IndexSnake />
       </div>
-      Ну да, это змейка. А что?
-      <br>
-      Сайт в разработке если что.
+<!--      Ну да, это змейка. А что?-->
+<!--      <br>-->
+<!--      Сайт в разработке если что.-->
     </div>
   </div>
 </div>

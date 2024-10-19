@@ -59,7 +59,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="fixed w-screen h-screen top-0 left-0 z-20">
+  <div v-if="mobileMenu" class="fixed w-screen h-screen top-0 left-0 z-20">
     <div :class="mobileMenu ? 'top-0' : '-top-full'" class="absolute w-screen h-screen bg-bg-second-light dark:bg-bg-second-dark transition-all duration-200 ease-out pt-16">
       <div class="text-2xl flex flex-col text-border-inside-light dark:text-border-inside-dark">
         <router-link
