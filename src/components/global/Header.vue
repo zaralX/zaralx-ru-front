@@ -27,7 +27,18 @@ const updateActiveLink = () => {
   nextTick(() => {
     const currentLink = linkRefs.value[activeLinkIndex.value];
     if (currentLink && currentLink.$el) {
-      const { offsetLeft, offsetWidth } = currentLink.$el; // Используем $el для доступа к DOM
+      let { offsetLeft, offsetWidth } = currentLink.$el; // Используем $el для доступа к DOM
+      let found = false;
+      for (const link of links) {
+        if (link.to === route.fullPath) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        offsetLeft = 0;
+        offsetWidth = 0;
+      }
       activeLineStyles.value = {
         left: `${offsetLeft}px`,
         width: `${offsetWidth-1}px`
