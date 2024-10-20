@@ -5,7 +5,7 @@ const route = useRoute();
 </script>
 
 <template>
-<div class="fixed w-screen h-screen flex flex-col justify-center items-center px-8">
+<div class="mt-4 w-screen flex flex-col justify-center items-center px-8">
   <div class="mb-8 bg-bg-second-light dark:bg-bg-second-dark rounded-lg p-8 shadow-lg border-2 border-blue-400/[.75]">
     <h1 class="text-xl text-center md:text-4xl">Розыгрыш <span class="text-blue-400 underline">10.000 АР</span> на сервере СПм</h1>
     <p class="mt-4 mb-2 text-lg">Требования:</p>
