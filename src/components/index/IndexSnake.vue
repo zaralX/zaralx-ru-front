@@ -214,6 +214,7 @@ onMounted(() => {
   ctx.strokeStyle = "#ffa600";
   ctx.fillStyle = "#ffa600";
   gameLoop.value = setInterval(() => {
+    if (!gameStarted.value) return;
     move();
     ctx.clearRect(0, 0, snakeWindow.value.w, snakeWindow.value.h);
     drawGrid(ctx);
