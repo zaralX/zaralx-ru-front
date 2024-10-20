@@ -14,7 +14,7 @@ const route = useRoute();
         <a href="https://spworlds.ru/spm/groups/4b01e2ae-a8cd-4fa7-b8f7-ebbc5e9c5a18" target="_blank">555 Подписчиков на сообщество SPm Combat сообщество</a>
       </li>
       <li class="hover:underline text-pink-500">
-        <a href="" target="_blank">Комментарий под этим постом</a>
+        <a href="https://spworlds.ru/spm/feed/d9f907a9-0523-43f6-93a5-62ede3aaa05d" target="_blank">Комментарий под этим постом</a>
       </li>
       <li class="hover:underline text-blue-500">
         <a href="https://t.me/underzaral" target="_blank">Подписка на телеграмм канал</a>
