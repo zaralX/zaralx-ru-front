@@ -82,6 +82,9 @@ onUnmounted(() => {
         >
           {{ link.name }}
         </router-link>
+        <a href="https://old.zaralx.ru/buy" class="flex items-center justify-center border-border-third-light dark:border-border-third-dark transition-all duration-300 border-b-2 border-border-main-light dark:border-border-main-dark py-2">
+          _buy
+        </a>
       </div>
     </div>
   </div>
@@ -100,13 +103,16 @@ onUnmounted(() => {
           v-for="(link, index) in links"
           :key="link.to"
           :to="link.to"
-          class="flex items-center justify-center border-r-2 border-border-main-light dark:border-border-main-dark relative transition-all duration-300 z-10 shadow-[0_0_8px_2px_24px"
+          class="flex items-center justify-center border-r-2 border-border-main-light dark:border-border-main-dark relative transition-all duration-300 z-10 shadow-[0_0_8px_2px_24px]"
           :class="route.fullPath === link.to ? 'text-white bg-black/[.05]' : ''"
           ref="linkRefs"
           v-slot="{ el }"
       >
         {{ link.name }}
       </router-link>
+      <a href="https://old.zaralx.ru/buy" class="flex items-center justify-center border-r-2 border-border-main-light dark:border-border-main-dark relative transition-all duration-300 z-10 shadow-[0_0_8px_2px_24px]">
+        _buy
+      </a>
     </nav>
 
     <div class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4">
