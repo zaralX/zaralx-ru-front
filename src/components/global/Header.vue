@@ -6,7 +6,8 @@ import {isDark, toggleDark} from "../../providers/theme/index.js";
 const route = useRoute();
 const links = [
   { name: "_home", to: "/" },
-  { name: "_about", to: "/about" }
+  { name: "_about", to: "/about" },
+  { name: "_projects", to: "/projects" },
 ];
 
 const mobileMenu = ref(false);

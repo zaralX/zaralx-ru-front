@@ -16,6 +16,14 @@ export default [
         component: () => import('/src/pages/About.vue')
     },
     {
+        name: 'ProjectsPage',
+        path: '/projects',
+        meta: {
+            layout: 'basic'
+        },
+        component: () => import('/src/pages/Projects.vue')
+    },
+    {
         name: 'GiveawayPage',
         path: '/giveaway',
         meta: {

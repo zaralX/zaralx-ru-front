@@ -27,6 +27,11 @@ export default {
                     light: '#dab76a',
                     dark: '#968060'
                 },
+                'border-inside-more': {
+                    light: '#93857d',
+                    dark: '#d5d0a1'
+                },
+
             },
             fontFamily: {
                 'montserrat': ['Montserrat', "none"],
