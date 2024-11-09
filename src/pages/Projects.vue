@@ -209,7 +209,7 @@ const tagsTitle = () => {
 
 <template>
 <div class="flex-grow flex h-full">
-  <div class="w-64 flex-shrink-0">
+  <div class="w-64 hidden md:block flex-shrink-0">
     <div class="h-10 flex items-center gap-2 px-4 border-b-2 border-border-main-light dark:border-border-main-dark text-border-inside-more-light dark:text-border-inside-more-dark">
       <i class="pi pi-sort-down-fill text-xs"></i>
       <p>projects</p>
@@ -225,8 +225,8 @@ const tagsTitle = () => {
     </div>
   </div>
 
-  <div class="flex-1 border-l-2 border-border-main-dark flex flex-col">
-    <div class="h-10 flex items-center gap-2 border-b-2 border-border-main-light dark:border-border-main-dark text-border-inside-more-light dark:text-border-inside-more-dark">
+  <div class="flex-1 md:border-l-2 border-border-main-dark flex flex-col">
+    <div class="h-10 hidden md:flex items-center gap-2 border-b-2 border-border-main-light dark:border-border-main-dark text-border-inside-more-light dark:text-border-inside-more-dark">
       <p class="pl-4 pr-4 max-w-64 overflow-ellipsis truncate">{{ tagsTitle() }}</p>
       <div class="h-full border-r-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center pr-4">
         <i class="pi pi-times text-xs"></i>
@@ -236,7 +236,7 @@ const tagsTitle = () => {
         <i class="pi pi-times text-xs"></i>
       </div>
     </div>
-    <div class="flex-1 grid grid-cols-3 gap-8 overflow-y-scroll p-12">
+    <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 md:overflow-y-scroll p-2 md:p-12">
       <div v-for="project in visibleProjects">
         <div class="flex gap-2">
           <p class="font-bold text-orange-500">{{ project.name }}</p>
