@@ -239,11 +239,11 @@ const tagsTitle = () => {
     </div>
 
     <!-- MOBILE -->
-    <div @click="showTagsMenuMobile = !showTagsMenuMobile" class="flex items-center gap-2 w-full py-2 px-2 bg-border-main-dark text-border-inside-light my-2">
+    <div @click="showTagsMenuMobile = !showTagsMenuMobile" class="flex md:hidden items-center gap-2 w-full py-2 px-2 bg-border-main-dark text-border-inside-light my-2">
       <i class="pi pi-sort-down-fill text-xs transition-all duration-200" :class="showTagsMenuMobile ? '' : '-rotate-90'"></i>
       <p>projects</p>
     </div>
-    <div v-if="showTagsMenuMobile" class="flex flex-col gap-2 py-1">
+    <div v-if="showTagsMenuMobile" class="flex flex-col gap-2 py-1 md:hidden">
       <div @click="tag.selected = !tag.selected; updateShowingProjects()" v-for="tag in tags"  class="flex items-center gap-4 px-4 cursor-pointer">
         <Checkbox v-model="tag.selected" />
         <div class="flex items-center gap-2 text-lg text-white select-none transition-all duration-100 font-[450]" :class="tag.selected ? 'opacity-90' : 'opacity-50'">
@@ -252,7 +252,7 @@ const tagsTitle = () => {
         </div>
       </div>
     </div>
-    <div class="mt-8 mb-4 px-2 flex gap-2 font-medium truncate max-w-80">
+    <div class="mt-8 mb-4 px-2 flex md:hidden gap-2 font-medium truncate max-w-80">
       <p class="text-white">// projects</p>
       <p class="text-slate-500 truncate">/ {{ tagsTitle() }}</p>
     </div>
