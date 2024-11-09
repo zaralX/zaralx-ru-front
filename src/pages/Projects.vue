@@ -175,6 +175,7 @@ const projects = [
 ]
 
 const visibleProjects = ref(projects)
+const showTagsMenuMobile = ref(true)
 
 const updateShowingProjects = () => {
   const selectedTags = []
@@ -236,11 +237,32 @@ const tagsTitle = () => {
         <i class="pi pi-times text-xs"></i>
       </div>
     </div>
+
+    <!-- MOBILE -->
+    <div @click="showTagsMenuMobile = !showTagsMenuMobile" class="flex items-center gap-2 w-full py-2 px-2 bg-border-main-dark text-border-inside-light my-2">
+      <i class="pi pi-sort-down-fill text-xs transition-all duration-200" :class="showTagsMenuMobile ? '' : '-rotate-90'"></i>
+      <p>projects</p>
+    </div>
+    <div v-if="showTagsMenuMobile" class="flex flex-col gap-2 py-1">
+      <div @click="tag.selected = !tag.selected; updateShowingProjects()" v-for="tag in tags"  class="flex items-center gap-4 px-4 cursor-pointer">
+        <Checkbox v-model="tag.selected" />
+        <div class="flex items-center gap-2 text-lg text-white select-none transition-all duration-100 font-[450]" :class="tag.selected ? 'opacity-90' : 'opacity-50'">
+          <img class="w-6 h-6" :src="tag.icon" :alt="tag.key" />
+          <p>{{tag.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 mb-4 px-2 flex gap-2 font-medium truncate max-w-80">
+      <p class="text-white">// projects</p>
+      <p class="text-slate-500 truncate">/ {{ tagsTitle() }}</p>
+    </div>
+
+    <!-- ANY -->
     <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 md:overflow-y-scroll p-2 md:p-12">
       <div v-for="project in visibleProjects">
-        <div class="flex gap-2">
+        <div class="flex gap-2 text-sm md:text-base">
           <p class="font-bold text-orange-500">{{ project.name }}</p>
-          <p class="text-slate-500">// {{ project.type }}</p>
+          <p class="text-slate-500 truncate">// {{ project.type }}</p>
         </div>
         <div class="bg-bg-second-dark border-[1px] border-slate-700/[.4] shadow-lg rounded-xl flex flex-col">
           <div class="relative flex justify-end">
