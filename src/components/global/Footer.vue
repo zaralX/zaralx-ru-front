@@ -3,6 +3,14 @@ const socials = [
   {
     link: "https://t.me/zWork1",
     icon: "pi-telegram",
+  },
+  {
+    link: "https://discord.com/users/459745638507347979",
+    icon: "pi-discord",
+  },
+  {
+    link: "https://www.youtube.com/@zaralx",
+    icon: "pi-youtube",
   }
 ]
 </script>
