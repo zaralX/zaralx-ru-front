@@ -276,14 +276,14 @@ const tagsTitle = () => {
           <div class="p-4 text-slate-400 font-medium flex flex-col flex-grow h-40">
             <div class="flex-1 line-clamp-4">{{project.description}}</div>
             <div class="flex gap-2">
-              <a v-for="link in project.links" :href="link.link" class="text-white py-1 px-2 rounded-lg flex justify-center items-center gap-1"
+              <a v-for="link in project.links" :href="link.link" class="text-white py-1 px-2 rounded-lg flex justify-center items-center gap-2"
               :class="
               link.type === 'youtube' ? 'bg-red-500 hover:bg-red-600' :
                 link.type === 'website' ? 'bg-blue-600 hover:bg-blue-700' :
                   link.type === 'buy-tg' ? 'bg-sky-600 hover:bg-sky-700' :
                     link.type === 'source-github' ? 'bg-slate-600 hover:bg-slate-700' : '?'
 ">
-                <img class="w-6 h-6" :src="
+                <img class="w-5 h-5" :src="
                 link.type === 'youtube' ? '/logos/youtube.svg' :
                   link.type === 'website' ? '/logos/globe.svg' :
                     link.type === 'buy-tg' ? '/logos/telegram.svg' :
