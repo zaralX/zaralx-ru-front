@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import Checkbox from "../components/global/Checkbox.vue";
+import Project from "../components/projects/Project.vue";
 
 const tags = ref([
   {
@@ -259,47 +260,7 @@ const tagsTitle = () => {
 
     <!-- ANY -->
     <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 md:overflow-y-scroll p-2 md:p-12">
-      <div v-for="project in visibleProjects">
-        <div class="flex gap-2 text-sm md:text-base">
-          <p class="font-bold text-orange-500">{{ project.name }}</p>
-          <p class="text-slate-500 truncate">// {{ project.type }}</p>
-        </div>
-        <div class="bg-bg-second-dark border-[1px] border-slate-700/[.4] shadow-lg hover:shadow-[0_5px_8px_2px_rgba(0,0,0,0.25)] transition-all duration-200 transform hover:-translate-y-1 hover:ring-1 ring-amber-600 rounded-xl flex flex-col cursor-pointer">
-          <div class="relative flex justify-end">
-            <div class="absolute pt-2 pr-3 flex gap-2">
-              <div v-for="tag in project.tags" class="bg-amber-600 rounded p-1 w-7 h-7">
-                <img :src="tags.find((el) => el.key === tag).icon" alt="icon">
-              </div>
-            </div>
-          </div>
-          <div class="w-full h-32 bg-cover rounded-t-xl border-b-[1px] border-slate-700/[.4]" :style="'background-image: url('+project.image+')'"></div>
-          <div class="p-4 text-slate-400 font-medium flex flex-col flex-grow h-40">
-            <div class="flex-1 line-clamp-4">{{project.description}}</div>
-            <div class="flex gap-2">
-              <a v-for="link in project.links" :href="link.link" class="text-white py-1 px-2 rounded-lg flex justify-center items-center gap-2"
-              :class="
-              link.type === 'youtube' ? 'bg-red-500 hover:bg-red-600' :
-                link.type === 'website' ? 'bg-blue-600 hover:bg-blue-700' :
-                  link.type === 'buy-tg' ? 'bg-sky-600 hover:bg-sky-700' :
-                    link.type === 'source-github' ? 'bg-slate-600 hover:bg-slate-700' : '?'
-">
-                <img class="w-5 h-5" :src="
-                link.type === 'youtube' ? '/logos/youtube.svg' :
-                  link.type === 'website' ? '/logos/globe.svg' :
-                    link.type === 'buy-tg' ? '/logos/telegram.svg' :
-                      link.type === 'source-github' ? '/logos/github.svg' : '?'
-" alt="">
-                <p class="font-[450]">{{
-                    link.type === "youtube" ? 'Видео' :
-                        link.type === "website" ? 'Сайт' :
-                            link.type === "buy-tg" ? 'Купить' :
-                                link.type === "source-github" ? 'Исходники' : '?'
-                  }}</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Project :project="project" :tags="tags" v-for="project in visibleProjects" />
     </div>
   </div>
 </div>
