@@ -17,7 +17,7 @@ export default [
     },
     {
         name: 'ProjectsPage',
-        path: '/projects',
+        path: '/projects/:projectId?',
         meta: {
             layout: 'basic'
         },

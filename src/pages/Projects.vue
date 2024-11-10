@@ -2,36 +2,42 @@
 import {ref} from "vue";
 import Checkbox from "../components/global/Checkbox.vue";
 import Project from "../components/projects/Project.vue";
+import {useRoute} from "vue-router";
 
 const tags = ref([
   {
     key: "minecraft",
     name: "Minecraft",
     icon: "/logos/minecraft-cube.svg",
+    classes: "bg-green-600",
     selected: false
   },
   {
     key: "website",
     name: "Website",
     icon: "/logos/globe.svg",
+    classes: "bg-blue-600",
     selected: false
   },
   {
     key: "application",
     name: "Application",
     icon: "/logos/browser.svg",
+    classes: "bg-purple-600",
     selected: false
   },
   {
     key: "source",
     name: "Source Code",
     icon: "/logos/source-code.svg",
+    classes: "bg-slate-800",
     selected: false
   }
 ])
 
 const projects = [
   {
+    id: 1,
     name: "SPm Combat",
     description: "Игра пародирующая популярный в 2024 году Hamster Combat, но со своими фичами. Работающая на СПм.",
     type: "_hamster_criminal",
@@ -46,6 +52,7 @@ const projects = [
     ]
   },
   {
+    id: 2,
     name: "Pillars",
     description: "Minecraft Bukkit плагин добавляющий игру Столбы, ваша задача - остаться последним, получая случайные предметы.",
     type: "_best_pillars",
@@ -64,6 +71,7 @@ const projects = [
     ]
   },
   {
+    id: 3,
     name: "BridgeBuilders",
     description: "Minecraft Bukkit плагин добавляющий игру Мосты, ваша задача - вместе с командой как можно быстрее собрать ресурсы для строителя, вы можете телепортироваться на базы противников и воровать у них ресурсы.",
     type: "_new_bridges",
@@ -82,6 +90,7 @@ const projects = [
     ]
   },
   {
+    id: 4,
     name: "Grief Mod",
     description: "Minecraft Bukkit плагин который предоставляет ограничения для новых игроков (Например чтобы пока игрок не проведёт на сервере 24ч. он не сможет никого ударить)",
     type: "_anti_grief",
@@ -96,6 +105,7 @@ const projects = [
     ]
   },
   {
+    id: 5,
     name: "InfinityButtonSimulator",
     description: "Minecraft Bukkit плагин с простой игрой симулятором и топом. Создано за 24ч.",
     type: "_infinity_afk",
@@ -114,6 +124,7 @@ const projects = [
     ]
   },
   {
+    id: 6,
     name: "Cristalix Dungeons",
     description: "Разработка игрового режима в команде на проекте cristalix.gg",
     type: "_cristalix_dev",
@@ -132,6 +143,7 @@ const projects = [
     ]
   },
   {
+    id: 7,
     name: "FreshMarket",
     description: "Маркетплейс в игре Minecraft который предоставляет продажу и покупку товаров.",
     type: "_marketplace",
@@ -150,6 +162,7 @@ const projects = [
     ]
   },
   {
+    id: 8,
     name: "Image Service",
     description: "API которое предоставляет minecraft иконки предметов, а так же майнкрафт скины",
     type: "_minecraft_icons",
@@ -164,6 +177,7 @@ const projects = [
     ]
   },
   {
+    id: 9,
     name: "Minecast Launcher",
     description: "Лаунчер для майнкрафт сервера. (Сейчас проект закрыт)",
     type: "_minecraft_launcher",
@@ -206,7 +220,7 @@ const tagsTitle = () => {
   return filteredTags.map(tag => tag.name).join('; ');
 }
 
-// TODO: Mobile adaptation
+const route = useRoute()
 </script>
 
 <template>
@@ -260,7 +274,7 @@ const tagsTitle = () => {
 
     <!-- ANY -->
     <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 md:overflow-y-scroll p-2 md:p-12">
-      <Project :project="project" :tags="tags" v-for="project in visibleProjects" />
+      <Project :opened="route.params.projectId == project.id" :project="project" :tags="tags" v-for="project in visibleProjects" />
     </div>
   </div>
 </div>
