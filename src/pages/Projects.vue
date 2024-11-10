@@ -264,7 +264,7 @@ const tagsTitle = () => {
           <p class="font-bold text-orange-500">{{ project.name }}</p>
           <p class="text-slate-500 truncate">// {{ project.type }}</p>
         </div>
-        <div class="bg-bg-second-dark border-[1px] border-slate-700/[.4] shadow-lg rounded-xl flex flex-col">
+        <div class="bg-bg-second-dark border-[1px] border-slate-700/[.4] shadow-lg hover:shadow-[0_5px_8px_2px_rgba(0,0,0,0.25)] transition-all duration-200 transform hover:-translate-y-1 hover:ring-1 ring-amber-600 rounded-xl flex flex-col cursor-pointer">
           <div class="relative flex justify-end">
             <div class="absolute pt-2 pr-3 flex gap-2">
               <div v-for="tag in project.tags" class="bg-amber-600 rounded p-1 w-7 h-7">
