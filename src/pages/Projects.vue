@@ -34,7 +34,7 @@ const projects = [
     name: "SPm Combat",
     description: "Игра пародирующая популярный в 2024 году Hamster Combat, но со своими фичами. Работающая на СПм.",
     type: "_hamster_criminal",
-    image: "/fillers/3.png",
+    image: "/projects/spm-combat-banner.png",
     tags: ["website", "minecraft"],
     date: "2024-08-19",
     links: [
@@ -48,7 +48,7 @@ const projects = [
     name: "Pillars",
     description: "Minecraft Bukkit плагин добавляющий игру Столбы, ваша задача - остаться последним, получая случайные предметы.",
     type: "_best_pillars",
-    image: "/fillers/2.png",
+    image: "/projects/pillars-banner.png",
     tags: ["minecraft"],
     date: "2024-03-16",
     links: [
@@ -66,7 +66,7 @@ const projects = [
     name: "BridgeBuilders",
     description: "Minecraft Bukkit плагин добавляющий игру Мосты, ваша задача - вместе с командой как можно быстрее собрать ресурсы для строителя, вы можете телепортироваться на базы противников и воровать у них ресурсы.",
     type: "_new_bridges",
-    image: "/fillers/2.png",
+    image: "/projects/bridgebuilders-banner.png",
     tags: ["minecraft"],
     date: "2024-06-23",
     links: [
@@ -84,7 +84,7 @@ const projects = [
     name: "Grief Mod",
     description: "Minecraft Bukkit плагин который предоставляет ограничения для новых игроков (Например чтобы пока игрок не проведёт на сервере 24ч. он не сможет никого ударить)",
     type: "_anti_grief",
-    image: "/fillers/1.png",
+    image: "/fillers/3.png",
     tags: ["minecraft", "source"],
     date: "2024-04-11",
     links: [
@@ -98,13 +98,17 @@ const projects = [
     name: "InfinityButtonSimulator",
     description: "Minecraft Bukkit плагин с простой игрой симулятором и топом. Создано за 24ч.",
     type: "_infinity_afk",
-    image: "/fillers/1.png",
+    image: "/projects/infbuttonsim-banner.png",
     tags: ["minecraft", "source"],
     date: "2024-04-29",
     links: [
       {
         type: "source-github",
         link: "https://github.com/zaralX/InfinityButtonSimulator"
+      },
+      {
+        type: "youtube",
+        link: "https://www.youtube.com/watch?v=v8jNgkoQlmQ"
       }
     ]
   },
@@ -112,7 +116,7 @@ const projects = [
     name: "Cristalix Dungeons",
     description: "Разработка игрового режима в команде на проекте cristalix.gg",
     type: "_cristalix_dev",
-    image: "/fillers/3.png",
+    image: "/projects/dungeons-banner.jpg",
     tags: ["minecraft"],
     date: "2024-04-06",
     links: [
@@ -130,7 +134,7 @@ const projects = [
     name: "FreshMarket",
     description: "Маркетплейс в игре Minecraft который предоставляет продажу и покупку товаров.",
     type: "_marketplace",
-    image: "/fillers/3.png",
+    image: "/projects/freshmarket-banner.gif",
     tags: ["minecraft", "website"],
     date: "2023-07-28",
     links: [
@@ -148,7 +152,7 @@ const projects = [
     name: "Image Service",
     description: "API которое предоставляет minecraft иконки предметов, а так же майнкрафт скины",
     type: "_minecraft_icons",
-    image: "/fillers/2.png",
+    image: "/projects/xis-banner.png",
     tags: ["minecraft", "website"],
     date: "2023-11-01",
     links: [
