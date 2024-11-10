@@ -194,13 +194,9 @@ const updateShowingProjects = () => {
     return;
   }
 
-  visibleProjects.value = []
-
-  for (const project of projects) {
-    if (project.tags.some(tag => selectedTags.includes(tag))) {
-      visibleProjects.value.push(project)
-    }
-  }
+  visibleProjects.value = projects.filter(project =>
+      selectedTags.every(tag => project.tags.includes(tag))
+  );
 }
 
 const tagsTitle = () => {
