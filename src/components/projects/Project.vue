@@ -32,13 +32,13 @@ const linkClass = type => {
 const linkIcon = type => {
   switch (type) {
     case 'youtube':
-      return '/logos/youtube.svg';
+      return '/img/logos/youtube.svg';
     case 'website':
-      return '/logos/globe.svg';
+      return '/img/logos/globe.svg';
     case 'buy-tg':
-      return '/logos/telegram.svg';
+      return '/img/logos/telegram.svg';
     case 'source-github':
-      return '/logos/github.svg';
+      return '/img/logos/github.svg';
     default:
       return '?';
   }
