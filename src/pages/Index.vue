@@ -5,16 +5,14 @@ import IndexSnake from "../components/index/IndexSnake.vue";
 </script>
 
 <template>
-<!--  <div-->
-<!--      class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"-->
-<!--  ></div>-->
-<!--  <div-->
-<!--      class="absolute h-full w-full"-->
-<!--  ><img src="/grid.svg" alt="grid"></div>-->
+  <div
+      class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808009_1px,transparent_1px),linear-gradient(to_bottom,#80808009_1px,transparent_1px)] bg-[size:32px_32px] -z-10"
+  ></div>
 <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
   <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
     <div>
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
+      <i class="absolute pi pi-circle-fill text-white blur-3xl -z-10 text-[3rem] light-line opacity-0 transform"></i>
       <p class="text-7xl font-[450] mb-4">zaralX</p>
       <p class="text-4xl font-[450] text-red-500">> Разработчик всего! </p>
       <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-800 hover:bg-neutral-700 rounded-md px-2 py-1 duration-200 transition-all max-w-64" href="https://old.zaralx.ru"><i class="pi pi-arrow-left"></i> <p class="grow text-center">На старый сайт</p></a>
@@ -49,5 +47,26 @@ import IndexSnake from "../components/index/IndexSnake.vue";
 </template>
 
 <style scoped>
+.light-line {
+  animation: light-line 2s linear;
+}
 
+@keyframes light-line {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(10px) scale(0.25);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(100px) translateY(10px) scale(0.7);
+  }
+  100% {
+    transform: translateX(300px) translateY(10px) scale(0.25);
+    opacity: 0;
+  }
+}
 </style>
