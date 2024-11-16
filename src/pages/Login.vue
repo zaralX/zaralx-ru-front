@@ -111,18 +111,14 @@ function processTexts(textList) {
   function showNextText(textItem, beforeText = "") {
     currentText.value = beforeText + textItem.text;
 
-    // Ждем указанный time
     setTimeout(() => {
       if (textItem.next) {
-        // Если есть next, продолжаем показывать следующий текст
         showNextText(textItem.next, beforeText);
       } else {
-        // Если next нет, переходим к следующему элементу списка
         index++;
         if (index < textList.length) {
           showNextText(textList[index], currentText.value + "<br>");
         } else {
-          // Если элементы закончились, начинаем снова с первого массива
           currentIndex.value++;
           if (currentIndex.value < firstLoadTexts.length) {
             processTexts(firstLoadTexts[currentIndex.value]);
@@ -132,7 +128,6 @@ function processTexts(textList) {
     }, textItem.time);
   }
 
-  // Запускаем первый элемент
   if (textList.length > 0) {
     showNextText(textList[0]);
   }
