@@ -4,6 +4,7 @@ const model = defineModel()
 const props = defineProps({
   placeholder: { type: String, default: "Введите.." },
   name: { type: String, default: "Имя" },
+  max: { type: Number, default: 16 },
 })
 </script>
 
@@ -15,6 +16,8 @@ const props = defineProps({
         :placeholder="props.placeholder"
         type="text"
         model-value="model"
+        :max="props.max"
+        :maxlength="props.max"
     />
   </div>
 </template>
