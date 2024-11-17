@@ -18,7 +18,7 @@ const useUser = defineStore('userStore', () => {
                 await UpdateUser()
             } catch (error) { console.error(error); }
             UserLoading.value = false;
-            if (User) {
+            if (User.value) {
                 UserLoaded.value = true;
             }
         } catch (e) {
