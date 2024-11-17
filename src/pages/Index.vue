@@ -1,7 +1,58 @@
 <script setup>
-
 import IndexCodeLine from "../components/index/IndexCodeLine.vue";
 import IndexSnake from "../components/index/IndexSnake.vue";
+import {onMounted, ref} from "vue";
+
+const currentSubtitleText = ref("> ");
+const endSubtitleTexts = [
+  "Разработчик всего!",
+  "Немного инфлюенсер",
+  "Майнкрафт разработчик",
+  "Пишу Front/Back/Full",
+  "Заходи в телеграм :)",
+].sort( () => .5 - Math.random() );
+const isBlinking = ref(true);
+
+onMounted(() => {
+  let textIndex = 0;
+  let index = 0;
+  let blinker = 0;
+  let waitSwitch = 0;
+  let clearing = false;
+
+  // Таймер для анимации печати
+  const typingInterval = setInterval(() => {
+    if (clearing) {
+      index--;
+      if (index < -2) {
+        clearing = false;
+        index = 0;
+        textIndex++;
+        if (endSubtitleTexts.length <= textIndex) {
+          textIndex = 0;
+        }
+      }
+    }
+    if (index < endSubtitleTexts[textIndex].length) {
+      currentSubtitleText.value = "> " + endSubtitleTexts[textIndex].substring(0, index+1);
+      if (!clearing) {
+        index++;
+      }
+    } else {
+      blinker++;
+      if (blinker > 3) {
+        blinker = 0;
+        isBlinking.value = !isBlinking.value;
+      }
+      waitSwitch++;
+      if (waitSwitch > 20) {
+        clearing = true;
+        isBlinking.value = true;
+        waitSwitch = 0;
+      }
+    }
+  }, 100);
+});
 </script>
 
 <template>
@@ -14,7 +65,8 @@ import IndexSnake from "../components/index/IndexSnake.vue";
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
       <i class="absolute pi pi-circle-fill text-white blur-3xl -z-10 text-[3rem] light-line opacity-0 transform"></i>
       <p class="text-7xl font-[450] mb-4">zaralX</p>
-      <p class="text-4xl font-[450] text-red-500">> Разработчик всего! </p>
+      <p class="text-4xl font-[450] text-red-500 typewriter"><span>{{ currentSubtitleText }}</span>
+        <span :class="isBlinking ? '' : 'hidden'">_</span></p>
       <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-800 hover:bg-neutral-700 rounded-md px-2 py-1 duration-200 transition-all max-w-64" href="https://old.zaralx.ru"><i class="pi pi-arrow-left"></i> <p class="grow text-center">На старый сайт</p></a>
     </div>
     <div class="text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
@@ -68,5 +120,10 @@ import IndexSnake from "../components/index/IndexSnake.vue";
     transform: translateX(300px) translateY(10px) scale(0.25);
     opacity: 0;
   }
+}
+
+.typewriter {
+  font-family: monospace;
+  white-space: pre; /* Чтобы пробелы и символы отображались корректно */
 }
 </style>

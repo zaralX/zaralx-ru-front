@@ -1,7 +1,7 @@
 <script setup>
 const socials = [
   {
-    link: "https://t.me/zWork1",
+    link: "https://t.me/underzaral",
     icon: "pi-telegram",
   },
   {
