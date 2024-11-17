@@ -3,6 +3,10 @@
 import store from "../../providers/store/index.js";
 import {config} from "../../providers/config/config.js";
 import TelegramLogin from "../../components/auth/TelegramLogin.vue";
+
+function gotoDiscord() {
+  window.location.href = config.discord_auth
+}
 </script>
 
 <template>
@@ -17,11 +21,11 @@ import TelegramLogin from "../../components/auth/TelegramLogin.vue";
   </button>
   Привязка аккаунтов
   <div class="max-w-72">
-    <button @click="window.location.href = config.discord_auth" :disabled="store()?.User?.discordId" class="bg-violet-700 disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg flex w-full justify-start items-center px-3">
+    <button @click="gotoDiscord()" :disabled="store()?.User?.discordId" class="bg-violet-700 disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg flex w-full justify-start items-center px-3">
       <i class="pi pi-discord text-lg"></i>
       <span class="text-center w-full">Привязать Discord</span>
     </button>
-    <TelegramLogin>Привязать Telegram</TelegramLogin>
+    <TelegramLogin :disabled="store()?.User?.telegramId">Привязать Telegram</TelegramLogin>
   </div>
 </template>
 

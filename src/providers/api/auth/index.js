@@ -15,7 +15,7 @@ http.interceptors.response.use(
 
         if (error.response.status === 401) {
             try {
-                await http.post('/user/refresh');
+                await http.post('/users/@me/refresh');
                 return http(originalRequest);
             } catch (refreshError) {
                 return Promise.reject(refreshError);
@@ -29,7 +29,7 @@ http.interceptors.response.use(
 export async function loginDiscord(code, userData) {
     console.log(code, userData);
     try {
-        const response = await http.post(`auth/discord/login`, {code})
+        const response = await http.post(`auth/discord/login`, {code, user: userData})
         return {ok: true, ...response.data};
     } catch (e) {
         return {ok: false, ...e};
@@ -38,9 +38,9 @@ export async function loginDiscord(code, userData) {
 
 export async function loginTelegram(hash, userData) {
     console.log(hash, userData);
-    return;
     try {
         const data = JSON.parse(atob(hash));
+        data.user = userData;
         const response = await http.post(`auth/telegram/login`, data)
         return {ok: true, ...response.data};
     } catch (e) {

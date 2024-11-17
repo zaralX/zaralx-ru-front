@@ -1,4 +1,4 @@
-import {defineStore} from "pinia";
+import {defineStore, storeToRefs} from "pinia";
 import {ref} from "vue"
 import {http} from "../api/auth/index.js";
 
@@ -14,7 +14,9 @@ const useUser = defineStore('userStore', () => {
 
     async function RefreshData() {
         try {
-            await UpdateUser()
+            try {
+                await UpdateUser()
+            } catch (error) { console.error(error); }
             UserLoading.value = false;
             if (User) {
                 UserLoaded.value = true;
