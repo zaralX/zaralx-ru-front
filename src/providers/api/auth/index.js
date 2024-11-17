@@ -34,3 +34,12 @@ export async function loginDiscord(code) {
         return {ok: false, ...e};
     }
 }
+
+export async function loginTelegram(data) {
+    try {
+        const response = await http.post(`auth/telegram/login`, data)
+        return {ok: true, ...response.data};
+    } catch (e) {
+        return {ok: false, ...e};
+    }
+}
