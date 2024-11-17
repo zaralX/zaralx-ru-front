@@ -8,6 +8,14 @@ export default [
         component: () => import('/src/pages/Index.vue')
     },
     {
+        name: 'LoginPage',
+        path: '/login',
+        meta: {
+            layout: 'basic'
+        },
+        component: () => import('/src/pages/Login.vue')
+    },
+    {
         name: 'AboutPage',
         path: '/about',
         meta: {

@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {ref} from "vue"
+import {http} from "../api/auth/index.js";
 
 const useUser = defineStore('userStore', () => {
     const User = ref(null)
@@ -7,8 +8,8 @@ const useUser = defineStore('userStore', () => {
     const UserLoaded = ref(false)
 
     async function UpdateUser() {
-        // const response = await http.post('/user');
-        // User.value = response.data;
+        const response = await http.post('/users/@me');
+        User.value = response.data;
     }
 
     async function RefreshData() {
@@ -25,7 +26,7 @@ const useUser = defineStore('userStore', () => {
     }
 
     async function Logout() {
-        // await http.post(`/user/logout`)
+        await http.post(`/users/@me/logout`)
     }
 
     return {

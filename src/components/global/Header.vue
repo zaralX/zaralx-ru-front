@@ -10,6 +10,13 @@ const links = [
   { name: "_projects", to: "/projects" },
 ];
 
+const linksIvisible = [
+  { name: "_home", to: "/" },
+  { name: "_about", to: "/about" },
+  { name: "_projects", to: "/projects" },
+  { name: "_login", to: "/login" },
+];
+
 const mobileMenu = ref(false);
 const dark = ref(isDark());
 
@@ -20,17 +27,22 @@ const _toggleDark = () => {
 
 // Позиция и ширина для линии
 const activeLinkIndex = ref(0);
-const linkRefs = ref([]); // Ссылки на DOM-элементы
+const linkRefs = ref([]);
+const linkLoginRef = ref();
 const activeLineStyles = ref({ left: '0px', width: '0px' });
 
 // Обновляем активную ссылку после рендера
 const updateActiveLink = () => {
   nextTick(() => {
+    if (!linkRefs.value.some(el => el === linkLoginRef.value)) {
+        linkRefs.value.push(linkLoginRef.value);
+    }
     const currentLink = linkRefs.value[activeLinkIndex.value];
     if (currentLink && currentLink.$el) {
       let { offsetLeft, offsetWidth } = currentLink.$el; // Используем $el для доступа к DOM
+      console.log(offsetLeft, offsetWidth)
       let found = false;
-      for (const link of links) {
+      for (const link of linksIvisible) {
         if (link.to === route.fullPath) {
           found = true;
           break;
@@ -40,9 +52,12 @@ const updateActiveLink = () => {
         offsetLeft = 0;
         offsetWidth = 0;
       }
+      if (linkRefs.value[activeLinkIndex.value] === linkLoginRef.value) {
+        offsetLeft -= offsetWidth
+      }
       activeLineStyles.value = {
         left: `${offsetLeft}px`,
-        width: `${offsetWidth-1}px`
+        width: `${offsetWidth-activeLinkIndex.value-1}px`
       };
     }
   });
@@ -52,7 +67,7 @@ const updateActiveLink = () => {
 watch(
     () => route.fullPath,
     () => {
-      const activeIndex = links.findIndex(link => route.fullPath === link.to);
+      const activeIndex = linksIvisible.findIndex(link => route.fullPath === link.to);
 
       activeLinkIndex.value = activeIndex !== -1 ? activeIndex : 0;
       updateActiveLink();
@@ -116,10 +131,10 @@ onUnmounted(() => {
       </a>
     </nav>
 
-    <div class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4">
-<!--      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>-->
-      <div>_nothing</div>
-    </div>
+<!--    <router-link :class="route.fullPath === '/login' ? 'text-white bg-black/[.05]' : ''" to="/login" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">-->
+<!--&lt;!&ndash;      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>&ndash;&gt;-->
+<!--      <div>login($me)</div>-->
+<!--    </router-link>-->
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>
       <i v-if="mobileMenu" class="pi pi-times"></i>
