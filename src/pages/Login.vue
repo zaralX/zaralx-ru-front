@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import Input from "../components/global/Input.vue";
+import {config} from "../providers/config/config.js";
 
 const firstLoadTexts = [
   [
@@ -142,11 +143,11 @@ const pageType = ref("login")
 </script>
 
 <template>
-  <button class="absolute" @click="() => {if (pageType === 'login') {
-    pageType = 'register';
-  } else {
-    pageType = 'login';
-  }}">toggle</button>
+<!--  <button class="absolute" @click="() => {if (pageType === 'login') {-->
+<!--    pageType = 'register';-->
+<!--  } else {-->
+<!--    pageType = 'login';-->
+<!--  }}">toggle</button>-->
   <div class="flex-1 w-full h-full flex justify-center items-center">
     <div class="bg-neutral-950 rounded-lg md:w-96 min-h-96 shadow-lg relative flex flex-col">
       <i class="absolute pi pi-circle-fill text-white blur-[90px] -z-10 text-[6rem] animate-[pulse_10s_ease-in-out_infinite]"></i>
@@ -169,13 +170,29 @@ const pageType = ref("login")
       <div class="flex-1 relative">
         <transition name="fade-window">
           <!-- LOGIN -->
-          <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center">
-            <div class="flex-1 flex flex-col gap-4">
-              <Input name="Никнейм или почта" max="255" placeholder="Введите никнейм"/>
-              <Input name="Пароль" placeholder="Введите никнейм"/>
-            </div>
+          <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center gap-4">
+            <a :href="config.discord_auth" class="bg-violet-700 hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+              <i class="pi pi-discord absolute text-lg"></i>
+              <span class="text-center w-full">Войти с помощью Discord</span>
+            </a>
+            <button class="bg-blue-600 hover:bg-blue-700 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+              <i class="pi pi-telegram absolute text-lg"></i>
+              <span class="text-center w-full">Войти с помощью Telegram</span>
+            </button>
+            <button class="bg-neutral-100 text-black hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+              <i class="pi pi-google absolute text-lg"></i>
+              <span class="text-center w-full">Войти с помощью Google</span>
+            </button>
+            <button class="bg-neutral-800 hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+              <i class="pi pi-github absolute text-lg"></i>
+              <span class="text-center w-full">Войти с помощью Github</span>
+            </button>
+<!--            <div class="flex-1 flex flex-col gap-4">-->
+<!--              <Input name="Никнейм или почта" max="255" placeholder="Введите никнейм"/>-->
+<!--              <Input name="Пароль" placeholder="Введите никнейм"/>-->
+<!--            </div>-->
 
-            <button class="bg-neutral-900 hover:bg-neutral-800 transition-all duration-100 py-2 rounded-lg w-2/3">Войти</button>
+<!--            <button class="bg-neutral-900 hover:bg-neutral-800 transition-all duration-100 py-2 rounded-lg w-2/3">Войти</button>-->
           </div>
 
           <!-- REGISTER -->
