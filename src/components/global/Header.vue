@@ -131,10 +131,10 @@ onUnmounted(() => {
       </a>
     </nav>
 
-    <router-link :class="route.fullPath === '/login' ? 'text-white bg-black/[.05]' : ''" to="/login" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">
-<!--      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>-->
-      <div>login($me)</div>
-    </router-link>
+<!--    <router-link :class="route.fullPath === '/login' ? 'text-white bg-black/[.05]' : ''" to="/login" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">-->
+<!--&lt;!&ndash;      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>&ndash;&gt;-->
+<!--      <div>login($me)</div>-->
+<!--    </router-link>-->
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>
       <i v-if="mobileMenu" class="pi pi-times"></i>

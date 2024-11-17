@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import Input from "../components/global/Input.vue";
 import {config} from "../providers/config/config.js";
+import TelegramLogin from "../components/auth/TelegramLogin.vue";
 
 const firstLoadTexts = [
   [
@@ -167,6 +168,7 @@ const pageType = ref("login")
         </div>
       </div>
 
+      <p class="text-red-500">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
       <div class="flex-1 relative">
         <transition name="fade-window">
           <!-- LOGIN -->
@@ -175,10 +177,7 @@ const pageType = ref("login")
               <i class="pi pi-discord absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Discord</span>
             </a>
-            <button class="bg-blue-600 hover:bg-blue-700 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
-              <i class="pi pi-telegram absolute text-lg"></i>
-              <span class="text-center w-full">Войти с помощью Telegram</span>
-            </button>
+            <TelegramLogin />
             <button class="bg-neutral-100 text-black hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-google absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Google</span>
