@@ -26,12 +26,21 @@ const useUser = defineStore('userStore', () => {
     }
 
     async function Logout() {
-        await http.post(`/users/@me/logout`)
+        await http.post(`/users/@me/logout`).then(() => {
+            window.location.href = '/'
+        })
+    }
+
+    async function Delete() {
+        await http.post(`/users/@me/delete`).then(() => {
+            window.location.href = '/'
+        })
     }
 
     return {
         RefreshData,
         Logout,
+        Delete,
         User,
         UserLoading,
         UserLoaded,

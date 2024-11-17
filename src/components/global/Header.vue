@@ -2,6 +2,7 @@
 import { useRoute } from "vue-router";
 import {ref, onMounted, nextTick, watch, onUnmounted} from "vue";
 import {isDark, toggleDark} from "../../providers/theme/index.js";
+import store from "../../providers/store/index.js";
 
 const route = useRoute();
 const links = [
@@ -43,6 +44,10 @@ const updateActiveLink = () => {
       console.log(offsetLeft, offsetWidth)
       let found = false;
       for (const link of linksIvisible) {
+        if (link.to === "/login" || route.fullPath.startsWith("/cabinet")) {
+          found = true;
+          break;
+        }
         if (link.to === route.fullPath) {
           found = true;
           break;
@@ -67,7 +72,12 @@ const updateActiveLink = () => {
 watch(
     () => route.fullPath,
     () => {
-      const activeIndex = linksIvisible.findIndex(link => route.fullPath === link.to);
+      const activeIndex = linksIvisible.findIndex(link => {
+        if (link.to === "/login") {
+          return link.to === "/login" || route.fullPath.startsWith("/cabinet");
+        }
+        return route.fullPath === link.to
+      });
 
       activeLinkIndex.value = activeIndex !== -1 ? activeIndex : 0;
       updateActiveLink();
@@ -131,9 +141,9 @@ onUnmounted(() => {
       </a>
     </nav>
 
-<!--    <router-link :class="route.fullPath === '/login' ? 'text-white bg-black/[.05]' : ''" to="/login" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">-->
+<!--    <router-link :class="route.fullPath === '/login' || route.fullPath.startsWith('/cabinet') ? 'text-white bg-black/[.05]' : ''" :to="store().UserLoaded ? '/cabinet' : '/login'" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">-->
 <!--&lt;!&ndash;      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>&ndash;&gt;-->
-<!--      <div>login($me)</div>-->
+<!--      <div>{{ store().UserLoaded ? '_cabinet' : 'login($me)' }}</div>-->
 <!--    </router-link>-->
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>

@@ -177,7 +177,7 @@ const pageType = ref("login")
               <i class="pi pi-discord absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Discord</span>
             </a>
-            <TelegramLogin />
+            <TelegramLogin class="w-5/6" />
             <button class="bg-neutral-100 text-black hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-google absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Google</span>
