@@ -26,7 +26,8 @@ http.interceptors.response.use(
     }
 );
 
-export async function loginDiscord(code) {
+export async function loginDiscord(code, userData) {
+    console.log(code, userData);
     try {
         const response = await http.post(`auth/discord/login`, {code})
         return {ok: true, ...response.data};
@@ -35,7 +36,9 @@ export async function loginDiscord(code) {
     }
 }
 
-export async function loginTelegram(hash) {
+export async function loginTelegram(hash, userData) {
+    console.log(hash, userData);
+    return;
     try {
         const data = JSON.parse(atob(hash));
         const response = await http.post(`auth/telegram/login`, data)

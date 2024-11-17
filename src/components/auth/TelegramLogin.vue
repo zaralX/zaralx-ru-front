@@ -11,8 +11,8 @@ function openTelegramAuth() {
 </script>
 
 <template>
-  <button @click="openTelegramAuth" class="bg-blue-600 hover:bg-blue-700 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+  <button @click="openTelegramAuth" class="bg-blue-600 hover:bg-blue-700 transition-all duration-100 py-2 rounded-lg w-full flex justify-start items-center px-3">
     <i class="pi pi-telegram absolute text-lg"></i>
-    <span class="text-center w-full">Войти с помощью Telegram</span>
+    <span class="text-center w-full"><slot>Войти с помощью Telegram</slot></span>
   </button>
 </template>
