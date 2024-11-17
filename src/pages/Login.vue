@@ -168,21 +168,21 @@ const pageType = ref("login")
         </div>
       </div>
 
-      <p class="text-red-500">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
       <div class="flex-1 relative">
+        <p class="text-red-500 text-center font-semibold absolute z-20 w-full text-xl mt-6">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
         <transition name="fade-window">
           <!-- LOGIN -->
           <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center gap-4">
-            <a :href="config.discord_auth" class="bg-violet-700 hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            <button disabled :href="config.discord_auth" class="bg-violet-700 disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-discord absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Discord</span>
-            </a>
-            <TelegramLogin class="w-5/6" />
-            <button class="bg-neutral-100 text-black hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            </button>
+            <TelegramLogin disabled class="!w-5/6" />
+            <button disabled class="bg-neutral-100 text-black disabled:opacity-75 enabled:hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-google absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Google</span>
             </button>
-            <button class="bg-neutral-800 hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            <button disabled class="bg-neutral-800 disabled:opacity-75 enabled:hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-github absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Github</span>
             </button>
