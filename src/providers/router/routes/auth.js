@@ -6,5 +6,13 @@ export default [
             layout: 'empty'
         },
         component: () => import('/src/pages/auth/discord/DiscordAuthEnd.vue')
+    },
+    {
+        name: 'AuthTelegramPage',
+        path: '/auth/telegram/end',
+        meta: {
+            layout: 'empty'
+        },
+        component: () => import('/src/pages/auth/telegram/TelegramAuthEnd.vue')
     }
 ]
