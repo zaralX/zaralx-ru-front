@@ -5,8 +5,8 @@ const botId = '8031549593';
 const redirectUrl = config.api + 'auth/telegram/login';
 
 function openTelegramAuth() {
-  const authUrl = `https://oauth.telegram.org/auth?bot_id=${botId}&origin=${encodeURIComponent(config.api)}&redirect_uri=${encodeURIComponent(redirectUrl)}`;
-  window.open(authUrl, '_blank', 'width=600,height=700');
+  const authUrl = `https://oauth.telegram.org/auth?bot_id=${botId}&origin=${encodeURIComponent("https://zaralx.ru")}&request_access=write&return_to=${encodeURIComponent(window.origin)}/auth/telegram/end`;
+  window.open(authUrl, '_top', 'width=600,height=700');
 }
 </script>
 
