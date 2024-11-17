@@ -5,7 +5,7 @@ const botId = '8031549593';
 const redirectUrl = config.api + 'auth/telegram/login';
 
 function openTelegramAuth() {
-  const authUrl = `https://oauth.telegram.org/auth?bot_id=${botId}&origin=${encodeURIComponent("https://e3c5-176-114-130-38.ngrok-free.app")}&redirect_uri=${encodeURIComponent(redirectUrl)}`;
+  const authUrl = `https://oauth.telegram.org/auth?bot_id=${botId}&origin=${encodeURIComponent(config.api)}&redirect_uri=${encodeURIComponent(redirectUrl)}`;
   window.open(authUrl, '_blank', 'width=600,height=700');
 }
 </script>
