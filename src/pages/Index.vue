@@ -14,6 +14,10 @@ const endSubtitleTexts = [
 const isBlinking = ref(true);
 
 onMounted(() => {
+  if (window.screenX < 780) {
+    currentSubtitleText.value += endSubtitleTexts[0];
+    return;
+  }
   let textIndex = 0;
   let index = 0;
   let blinker = 0;
@@ -63,13 +67,13 @@ onMounted(() => {
   <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
     <div>
       <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
-      <i class="absolute pi pi-circle-fill text-white blur-3xl -z-10 text-[3rem] light-line opacity-0 transform"></i>
-      <p class="text-7xl font-[450] mb-4">zaralX</p>
-      <p class="text-4xl font-[450] text-red-500 typewriter"><span>{{ currentSubtitleText }}</span>
+      <i class="absolute pi pi-circle-fill text-white blur-3xl -z-10 text-sm md:text-[3rem] light-line opacity-0 transform"></i>
+      <p class="text-5xl md:text-7xl font-[450] mb-4">zaralX</p>
+      <p class="text-2xl md:text-4xl font-[450] text-red-500 typewriter text-wrap"><span>{{ currentSubtitleText }}</span>
         <span :class="isBlinking ? '' : 'hidden'">_</span></p>
       <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-800 hover:bg-neutral-700 rounded-md px-2 py-1 duration-200 transition-all max-w-64" href="https://old.zaralx.ru"><i class="pi pi-arrow-left"></i> <p class="grow text-center">На старый сайт</p></a>
     </div>
-    <div class="text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
+    <div class="text-sm md:text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
       <IndexCodeLine line="1">
         <p class="">// приветствую на сайте,</p>
       </IndexCodeLine>
@@ -120,10 +124,5 @@ onMounted(() => {
     transform: translateX(300px) translateY(10px) scale(0.25);
     opacity: 0;
   }
-}
-
-.typewriter {
-  font-family: monospace;
-  white-space: pre; /* Чтобы пробелы и символы отображались корректно */
 }
 </style>
