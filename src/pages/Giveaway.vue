@@ -23,8 +23,8 @@ const route = useRoute();
     <div class="w-full flex justify-center">
       <a class="mt-4 flex justify-center items-center gap-2 bg-red-600 hover:bg-red-500 rounded-md px-2 py-1 duration-200 transition-all min-w-48 max-w-64"
          href="">
-        <i class="pi pi-spinner animate-spin"></i>
-        <p class="grow text-center">Завершение 1.11.2024</p>
+        <i class="pi pi-check"></i>
+        <p class="grow text-center">Завершено</p>
       </a>
     </div>
   </div>
@@ -45,10 +45,15 @@ const route = useRoute();
 <!--        <i class="pi pi-spinner animate-spin"></i>-->
 <!--        <p class="grow text-center">Завершение 7.11.2024</p>-->
 <!--      </a>-->
-      <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-600 hover:bg-neutral-500 rounded-md px-2 py-1 duration-200 transition-all min-w-48 max-w-64"
+<!--      <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-600 hover:bg-neutral-500 rounded-md px-2 py-1 duration-200 transition-all min-w-48 max-w-64"-->
+<!--         href="">-->
+<!--        <i class="pi pi-spinner animate-spin"></i>-->
+<!--        <p class="grow text-center">Скоро</p>-->
+<!--      </a>-->
+      <a class="mt-4 flex justify-center items-center gap-2 bg-red-600 hover:bg-red-500 rounded-md px-2 py-1 duration-200 transition-all min-w-48 max-w-64"
          href="">
-        <i class="pi pi-spinner animate-spin"></i>
-        <p class="grow text-center">Скоро</p>
+        <i class="pi pi-check"></i>
+        <p class="grow text-center">Завершено</p>
       </a>
     </div>
   </div>
