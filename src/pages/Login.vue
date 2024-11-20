@@ -169,7 +169,7 @@ const pageType = ref("login")
       </div>
 
       <div class="flex-1 relative">
-        <p class="text-red-500 text-center font-semibold absolute z-20 w-full text-xl mt-6">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
+        <p class="text-red-500 text-center font-semibold absolute z-10 w-full text-xl mt-6">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
         <transition name="fade-window">
           <!-- LOGIN -->
           <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center gap-4">
