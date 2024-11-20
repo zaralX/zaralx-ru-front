@@ -150,7 +150,7 @@ const pageType = ref("login")
 <!--    pageType = 'login';-->
 <!--  }}">toggle</button>-->
   <div class="flex-1 w-full h-full flex justify-center items-center">
-    <div class="bg-neutral-950 rounded-lg md:w-96 min-h-96 shadow-lg relative flex flex-col">
+    <div class="bg-neutral-950 rounded-lg w-full md:w-96 min-h-96 shadow-lg relative flex flex-col">
       <i class="absolute pi pi-circle-fill text-white blur-[90px] -z-10 text-[6rem] animate-[pulse_10s_ease-in-out_infinite]"></i>
       <i class="absolute pi pi-circle-fill text-white blur-[70px] -z-10 text-[4rem] -bottom-2 -right-2 animate-[pulse_8s_ease-in-out_infinite]"></i>
 
@@ -173,16 +173,16 @@ const pageType = ref("login")
         <transition name="fade-window">
           <!-- LOGIN -->
           <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center gap-4">
-            <button disabled :href="config.discord_auth" class="bg-violet-700 disabled:cursor-not-allowed disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            <button disabled :href="config.discord_auth" class="bg-violet-700 disabled:cursor-not-allowed disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-discord absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Discord</span>
             </button>
-            <TelegramLogin disabled class="!w-5/6 disabled:cursor-not-allowed" />
-            <button disabled class="bg-neutral-100 text-black disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            <TelegramLogin disabled class="md:!w-5/6 disabled:cursor-not-allowed" />
+            <button disabled class="bg-neutral-100 text-black disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-google absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Google</span>
             </button>
-            <button disabled class="bg-neutral-800 disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-5/6 flex justify-start items-center px-3">
+            <button disabled class="bg-neutral-800 disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-github absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Github</span>
             </button>
