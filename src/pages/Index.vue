@@ -14,7 +14,7 @@ const endSubtitleTexts = [
 const isBlinking = ref(true);
 
 onMounted(() => {
-  if (window.screenX < 780) {
+  if (window.innerWidth < 780) {
     currentSubtitleText.value += endSubtitleTexts[0];
     return;
   }
