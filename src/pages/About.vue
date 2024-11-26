@@ -58,20 +58,25 @@ onUnmounted(() => {
           <p class="text-neutral-500">}</p>
         </div>
       </CategoryAbout>
-      <CategoryAbout icon="pi-list-check" title="todo.idk">
+      <CategoryAbout icon="pi-list-check" title="todo.db">
         <div class="relative">
           <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
           <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
             <TodoAboutComponent title="Оформить личный кабинет" status="incomplete" />
             <TodoAboutComponent title="Заняться _about" status="processing" />
+            <TodoAboutComponent title="Сделать в _about todo list" status="completed" />
             <TodoAboutComponent title="Сделать в _about краткую инфу" status="completed" />
             <TodoAboutComponent title="Сделать в _about своё datetime" status="completed" />
           </div>
         </div>
       </CategoryAbout>
     </div>
-    <div>
-
+    <div class="flex flex-col gap-4 flex-1">
+      <CategoryAbout v-for="i in [1, 2, 3, 4, 5, 6]" icon="pi-book" title="later.txt">
+        <div>
+          <p class="underline decoration-orange-400/75 decoration-2 text-neutral-200">Тут определённо будет ещё что-то</p>
+        </div>
+      </CategoryAbout>
     </div>
   </div>
 </template>
