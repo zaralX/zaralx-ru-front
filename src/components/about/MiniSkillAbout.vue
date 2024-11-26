@@ -32,7 +32,7 @@ const props = defineProps({
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute h-full rounded-xl left-to-r-anim"></div>
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute left-8 h-full opacity-50 rounded-xl left-to-r-anim"></div>
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute left-20 h-full opacity-25 rounded-xl left-to-r-anim"></div>
-        <p class="text-xs px-2 py-0.5 absolute z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{{props.name}}</p>
+        <p class="font-onest text-xs px-2 py-0.5 absolute z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{{props.name}}</p>
       </div>
     </div>
   </div>
