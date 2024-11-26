@@ -29,42 +29,42 @@ const skills = ref([
   {
     title: "Языки программирования",
     main: [
-      {color: "#e8b208", name: "Javascript", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#ed4444", name: "Java", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#c88904", name: "Python", icon: "/img/logos/javascript.svg", subtitle: "Inactive"},
+      {color: "#e8b208", name: "Javascript", icon: "devicon-javascript-plain", subtitle: "Active"},
+      {color: "#ed4444", name: "Java", icon: "devicon-java-plain", subtitle: "Active"},
+      {color: "#c88904", name: "Python", icon: "devicon-python-plain", subtitle: "Inactive"},
     ],
     low: [
-      {color: "#7d22cc", name: "PHP", percent: 30, icon: "/img/logos/javascript.svg"},
-      {color: "#5c248e", name: "C#", percent: 40, icon: "/img/logos/javascript.svg"},
-      {color: "#0283c5", name: "Typescript", percent: 60, icon: "/img/logos/javascript.svg"},
-      {color: "#d77606", name: "Rust", percent: 15, icon: "/img/logos/javascript.svg"},
-      {color: "#3183a8", name: "C++", percent: 15, icon: "/img/logos/javascript.svg"},
+      {color: "#7d22cc", name: "PHP", percent: 30, icon: "devicon-php-plain"},
+      {color: "#5c248e", name: "C#", percent: 40, icon: "devicon-csharp-plain"},
+      {color: "#0283c5", name: "Typescript", percent: 60, icon: "devicon-typescript-plain"},
+      {color: "#d77606", name: "Rust", percent: 15, icon: "devicon-rust-plain"},
+      {color: "#3183a8", name: "C++", percent: 15, icon: "devicon-cplusplus-plain"},
     ],
     basic: [
-      {color: "#d77606", name: "HTML", icon: "/img/logos/javascript.svg"},
-      {color: "#0283c5", name: "CSS", icon: "/img/logos/javascript.svg"},
-      {color: "#5b5b5b", name: "SQL", icon: "/img/logos/javascript.svg"},
+      {color: "#d77606", name: "HTML", icon: "devicon-html5-plain"},
+      {color: "#0283c5", name: "CSS", icon: "devicon-css3-plain"},
+      {color: "#5b5b5b", name: "SQL", icon: "devicon-sqlite-plain"},
     ]
   },
   {
     title: "Frontend",
     main: [
-      {color: "#32d368", name: "Vue", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#1daee7", name: "Tailwind", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#32d368", name: "Vue", icon: "devicon-vuejs-plain", subtitle: "Active"},
+      {color: "#1daee7", name: "Tailwind", icon: "devicon-tailwindcss-plain", subtitle: "Active"},
     ],
     low: [
-      {color: "#00b3ff", name: "React", percent: 30, icon: "/img/logos/javascript.svg"},
-      {color: "#00e341", name: "Nuxt", percent: 15, icon: "/img/logos/javascript.svg"},
+      {color: "#00b3ff", name: "React", percent: 30, icon: "devicon-react-plain"},
+      {color: "#00e341", name: "Nuxt", percent: 15, icon: "devicon-nuxtjs-plain"},
     ],
     basic: [
-      {color: "#c202e0", name: "Vite", icon: "/img/logos/javascript.svg"},
+      {color: "#c202e0", name: "Vite", icon: "devicon-vite-plain"},
     ]
   },
   {
     title: "Backend",
     main: [
-      {color: "#777777", name: "Fastify", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#707070", name: "Express", icon: "/img/logos/javascript.svg", subtitle: "Inactive"},
+      {color: "#777777", name: "Fastify", icon: "devicon-fastify-plain", subtitle: "Active"},
+      {color: "#707070", name: "Express", icon: "devicon-express-original", subtitle: "Inactive"},
     ],
     low: [],
     basic: []
@@ -72,18 +72,18 @@ const skills = ref([
   {
     title: "Прочее",
     main: [
-      {color: "#008cff", name: "Docker", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#ff5900", name: "Git", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#ffcc00", name: "CI/CD", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#ff6200", name: "Linux", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#dc5510", name: "Bukkit", icon: "/img/logos/javascript.svg", subtitle: "Active"},
-      {color: "#00c7e0", name: "Electron", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#008cff", name: "Docker", icon: "devicon-docker-plain", subtitle: "Active"},
+      {color: "#ff5900", name: "Git", icon: "devicon-git-plain", subtitle: "Active"},
+      {color: "#ffcc00", name: "CI/CD", icon: "devicon-circleci-plain", subtitle: "Active"},
+      {color: "#ff6200", name: "Linux", icon: "devicon-linux-plain", subtitle: "Active"},
+      {color: "#dc5510", name: "Bukkit", icon: "/img/logos/bukkit.png", subtitle: "Active"},
+      {color: "#00c7e0", name: "Electron", icon: "devicon-electron-original", subtitle: "Active"},
     ],
     low: [],
     basic: [
-      {color: "#004f67", name: "MySql", icon: "/img/logos/javascript.svg"},
-      {color: "#02567b", name: "SQLite", icon: "/img/logos/javascript.svg"},
-      {color: "#336690", name: "Postgresql", icon: "/img/logos/javascript.svg"},
+      {color: "#004f67", name: "MySql", icon: "devicon-mysql-plain"},
+      {color: "#02567b", name: "SQLite", icon: "devicon-sqlite-plain"},
+      {color: "#336690", name: "Postgresql", icon: "devicon-postgresql-plain"},
     ]
   }
 ])

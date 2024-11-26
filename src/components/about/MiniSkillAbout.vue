@@ -25,7 +25,7 @@ const props = defineProps({
     </div>
   </div>
   <div v-else-if="low">
-    <div class="flex items-center gap-1">
+    <div class="flex items-center gap-1 devicon-circleci-plain">
       <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
       <i v-else :class="props.icon"></i>
       <div class="w-full rounded-xl bg-neutral-800 relative h-5 overflow-hidden">
@@ -38,7 +38,7 @@ const props = defineProps({
   </div>
   <div v-else class="bg-[rgb(19,19,19)] rounded-md border-[3px] border-neutral-800 relative pt-6 overflow-hidden">
     <div class="absolute top-0 flex items-center gap-1 p-2">
-      <img v-if="!props.icon.startsWith('devicon')" class="w-6 aspect-square" :src="props.icon" alt="icon">
+      <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
       <i v-else :class="props.icon"></i>
       <p>{{props.name}}</p>
     </div>
