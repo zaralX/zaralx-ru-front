@@ -39,9 +39,14 @@ export default {
                 'fira': ['"Fira Code"', "none"],
                 'onest': ['"Onest"', "none"],
             },
+            animation: {
+                "clip-fluid": "clip-fluid 4s ease-in-out infinite"
+            }
         },
     },
     darkMode: 'class',
-    plugins: [],
+    plugins: [
+        require("tailwindcss-animation-delay"),
+    ],
 }
 

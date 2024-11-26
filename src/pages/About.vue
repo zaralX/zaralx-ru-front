@@ -3,6 +3,7 @@
 import CategoryAbout from "../components/about/CategoryAbout.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import TodoAboutComponent from "../components/about/TodoAboutComponent.vue";
+import MiniSkillAbout from "../components/about/MiniSkillAbout.vue";
 
 const datetime = ref({
   unix: 0
@@ -72,9 +73,56 @@ onUnmounted(() => {
       </CategoryAbout>
     </div>
     <div class="flex flex-col gap-4 flex-1">
-      <CategoryAbout v-for="i in [1, 2, 3, 4, 5, 6]" icon="pi-book" title="later.txt">
+      <CategoryAbout icon="pi-list" title="skills.md" inclass="overflow-y-scroll rounded-r-lg max-h-[42rem]">
         <div>
-          <p class="underline decoration-orange-400/75 decoration-2 text-neutral-200">Тут определённо будет ещё что-то</p>
+          <div>
+            <p class="font-onest text-xl mb-2">Языки программирования</p>
+            <!-- load colors-->
+            <div class="bg-yellow-500 bg-yellow-600 bg-red-500 bg-purple-700 bg-pink-600 bg-sky-600 bg-amber-600 bg-sky-400"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Javascript" subtitle="Active" color="yellow-500" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Java" subtitle="Active" color="red-500" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Python" subtitle="Inactive" color="yellow-600" />
+            </div>
+            <div class="flex flex-col gap-2 mt-2">
+              <MiniSkillAbout low percent="w-[30%]" icon="/img/logos/javascript.svg" name="PHP" subtitle="Inactive" color="purple-700" />
+              <MiniSkillAbout low percent="w-[40%]" icon="/img/logos/javascript.svg" name="C#" subtitle="Inactive" color="pink-600" />
+              <MiniSkillAbout low percent="w-[60%]" icon="/img/logos/javascript.svg" name="Typescript" subtitle="Inactive" color="sky-600" />
+              <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="Rust" subtitle="Inactive" color="amber-600" />
+              <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="C++" subtitle="Inactive" color="sky-400" />
+            </div>
+
+            <p class="font-onest text-xl mb-2 mt-4">Frontend</p>
+            <!-- load colors-->
+            <div class="bg-emerald-500 bg-blue-500 bg-sky-500 bg-emerald-600"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Vue" subtitle="Active" color="emerald-500" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Tailwind" subtitle="Active" color="blue-500" />
+            </div>
+            <div class="flex flex-col gap-2 mt-2">
+              <MiniSkillAbout low percent="w-[50%]" icon="/img/logos/javascript.svg" name="React" subtitle="Inactive" color="sky-500" />
+              <MiniSkillAbout low percent="w-[20%]" icon="/img/logos/javascript.svg" name="Nuxt" subtitle="Inactive" color="emerald-600" />
+            </div>
+
+
+            <p class="font-onest text-xl mb-2 mt-4">Backend</p>
+            <!-- load colors-->
+            <div class="bg-neutral-500"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Fastify" subtitle="Active" color="neutral-500" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Express" subtitle="Inactive" color="neutral-500" />
+            </div>
+
+            <p class="font-onest text-xl mb-2 mt-4">Прочее</p>
+            <!-- load colors-->
+            <div class="bg-blue-600 bg-orange-600 bg-orange-500 bg-yellow-500"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Docker" subtitle="Active" color="blue-600" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Git" subtitle="Active" color="orange-600" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="CI/CD" subtitle="Active" color="orange-500" />
+              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Linux" subtitle="Active" color="yellow-500" />
+            </div>
+          </div>
         </div>
       </CategoryAbout>
     </div>
