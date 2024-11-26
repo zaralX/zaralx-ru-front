@@ -78,7 +78,7 @@ onUnmounted(() => {
           <div>
             <p class="font-onest text-xl mb-2">Языки программирования</p>
             <!-- load colors-->
-            <div class="bg-yellow-500 bg-yellow-600 bg-red-500 bg-purple-700 bg-pink-600 bg-sky-600 bg-amber-600 bg-sky-400"></div>
+            <div class="bg-yellow-500 bg-yellow-600 bg-red-500 bg-purple-700 bg-pink-600 bg-sky-600 bg-amber-600 bg-sky-400 bg-orange-500 bg-blue-500"></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               <MiniSkillAbout icon="/img/logos/javascript.svg" name="Javascript" subtitle="Active" color="yellow-500" />
               <MiniSkillAbout icon="/img/logos/javascript.svg" name="Java" subtitle="Active" color="red-500" />
@@ -90,6 +90,10 @@ onUnmounted(() => {
               <MiniSkillAbout low percent="w-[60%]" icon="/img/logos/javascript.svg" name="Typescript" subtitle="Inactive" color="sky-600" />
               <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="Rust" subtitle="Inactive" color="amber-600" />
               <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="C++" subtitle="Inactive" color="sky-400" />
+              <div class="flex gap-2 mt-2">
+                <MiniSkillAbout basic icon="/img/logos/javascript.svg" name="HTML" subtitle="Inactive" color="orange-500" />
+                <MiniSkillAbout basic icon="/img/logos/javascript.svg" name="CSS" subtitle="Inactive" color="blue-500" />
+              </div>
             </div>
 
             <p class="font-onest text-xl mb-2 mt-4">Frontend</p>

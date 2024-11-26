@@ -6,13 +6,24 @@ const props = defineProps({
   subtitle: String,
   percent: {type: String, default: 'w-[50%]'},
   low: {type: Boolean, default: false},
+  basic: {type: Boolean, default: false},
   color: {type:String, default:'sky-400'},
 })
 
 </script>
 
 <template>
-  <div v-if="low">
+  <div v-if="basic">
+    <div :class="'bg-' + props.color" class="flex items-center gap-1 rounded-lg px-2 py-1 border-[2px] bg-opacity-25 border-neutral-800 relative">
+      <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400"></i>
+      <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400 blur-sm"></i>
+      <img class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <div class="h-full w-full rounded-xl text-xs">
+        {{props.name}}
+      </div>
+    </div>
+  </div>
+  <div v-else-if="low">
     <div class="flex items-center gap-1">
       <img class="w-5 aspect-square" :src="props.icon" alt="icon">
       <div class="w-full rounded-xl bg-neutral-800 relative h-5 overflow-hidden">
