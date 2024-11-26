@@ -2,6 +2,7 @@
 
 import CategoryAbout from "../components/about/CategoryAbout.vue";
 import {onMounted, onUnmounted, ref} from "vue";
+import TodoAboutComponent from "../components/about/TodoAboutComponent.vue";
 
 const datetime = ref({
   unix: 0
@@ -32,8 +33,8 @@ onUnmounted(() => {
 <!--  <p>Я – программист-самоучка с 4-летним опытом разработки. За это время я освоил широкий спектр языков программирования и фреймворков, применяя их на практике в создании различных проектов. Мой опыт включает как работу над коммерческими проектами, так и разработку собственных решений, что позволило мне глубже погрузиться в мир программирования и постоянно совершенствовать свои навыки.</p>-->
 <!--  <h1 class="mt-4 text-base opacity-75 text-sky-300">// TODO: Добавить скиллы, и сделать страницу интересней</h1>-->
 <!--</div>-->
-  <div class="md:px-32 xl:px-64 py-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
-    <div class="flex flex-col gap-4">
+  <div class="md:px-32 xl:px-64 py-8 grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1">
+    <div class="flex flex-col gap-4 flex-1">
       <CategoryAbout icon="pi-address-book" title="profile.md">
         <div class="flex gap-4">
           <div class="w-20 aspect-square">
@@ -55,6 +56,17 @@ onUnmounted(() => {
           <p>    <span class="text-amber-400">"utc"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"UTC+8"</span></p>
           <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
           <p class="text-neutral-500">}</p>
+        </div>
+      </CategoryAbout>
+      <CategoryAbout icon="pi-list-check" title="todo.idk">
+        <div class="relative">
+          <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
+          <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
+            <TodoAboutComponent title="Оформить личный кабинет" status="incomplete" />
+            <TodoAboutComponent title="Заняться _about" status="processing" />
+            <TodoAboutComponent title="Сделать в _about краткую инфу" status="completed" />
+            <TodoAboutComponent title="Сделать в _about своё datetime" status="completed" />
+          </div>
         </div>
       </CategoryAbout>
     </div>
