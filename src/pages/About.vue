@@ -4,6 +4,7 @@ import CategoryAbout from "../components/about/CategoryAbout.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import TodoAboutComponent from "../components/about/TodoAboutComponent.vue";
 import MiniSkillAbout from "../components/about/MiniSkillAbout.vue";
+import SkillTypeBlockAbout from "../components/about/SkillTypeBlockAbout.vue";
 
 const datetime = ref({
   unix: 0
@@ -23,6 +24,69 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(updater.value)
 })
+
+const skills = ref([
+  {
+    title: "Языки программирования",
+    main: [
+      {color: "#e8b208", name: "Javascript", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#ed4444", name: "Java", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#c88904", name: "Python", icon: "/img/logos/javascript.svg", subtitle: "Inactive"},
+    ],
+    low: [
+      {color: "#7d22cc", name: "PHP", percent: 30, icon: "/img/logos/javascript.svg"},
+      {color: "#5c248e", name: "C#", percent: 40, icon: "/img/logos/javascript.svg"},
+      {color: "#0283c5", name: "Typescript", percent: 60, icon: "/img/logos/javascript.svg"},
+      {color: "#d77606", name: "Rust", percent: 15, icon: "/img/logos/javascript.svg"},
+      {color: "#3183a8", name: "C++", percent: 15, icon: "/img/logos/javascript.svg"},
+    ],
+    basic: [
+      {color: "#d77606", name: "HTML", icon: "/img/logos/javascript.svg"},
+      {color: "#0283c5", name: "CSS", icon: "/img/logos/javascript.svg"},
+      {color: "#5b5b5b", name: "SQL", icon: "/img/logos/javascript.svg"},
+    ]
+  },
+  {
+    title: "Frontend",
+    main: [
+      {color: "#32d368", name: "Vue", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#1daee7", name: "Tailwind", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+    ],
+    low: [
+      {color: "#00b3ff", name: "React", percent: 30, icon: "/img/logos/javascript.svg"},
+      {color: "#00e341", name: "Nuxt", percent: 15, icon: "/img/logos/javascript.svg"},
+    ],
+    basic: [
+      {color: "#c202e0", name: "Vite", icon: "/img/logos/javascript.svg"},
+    ]
+  },
+  {
+    title: "Backend",
+    main: [
+      {color: "#777777", name: "Fastify", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#707070", name: "Express", icon: "/img/logos/javascript.svg", subtitle: "Inactive"},
+    ],
+    low: [],
+    basic: []
+  },
+  {
+    title: "Прочее",
+    main: [
+      {color: "#008cff", name: "Docker", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#ff5900", name: "Git", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#ffcc00", name: "CI/CD", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#ff6200", name: "Linux", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#dc5510", name: "Bukkit", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+      {color: "#00c7e0", name: "Electron", icon: "/img/logos/javascript.svg", subtitle: "Active"},
+    ],
+    low: [],
+    basic: [
+      {color: "#004f67", name: "MySql", icon: "/img/logos/javascript.svg"},
+      {color: "#02567b", name: "SQLite", icon: "/img/logos/javascript.svg"},
+      {color: "#336690", name: "Postgresql", icon: "/img/logos/javascript.svg"},
+    ]
+  }
+])
 </script>
 
 <template>
@@ -64,7 +128,9 @@ onUnmounted(() => {
           <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
           <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
             <TodoAboutComponent title="Оформить личный кабинет" status="incomplete" />
-            <TodoAboutComponent title="Заняться _about" status="processing" />
+            <TodoAboutComponent title="Доработать список в skills.md" status="incomplete" />
+            <TodoAboutComponent title="Заняться _about" status="completed" />
+            <TodoAboutComponent title="Сделать в _about skills" status="completed" />
             <TodoAboutComponent title="Сделать в _about todo list" status="completed" />
             <TodoAboutComponent title="Сделать в _about краткую инфу" status="completed" />
             <TodoAboutComponent title="Сделать в _about своё datetime" status="completed" />
@@ -75,57 +141,14 @@ onUnmounted(() => {
     <div class="flex flex-col gap-4 flex-1">
       <CategoryAbout icon="pi-list" title="skills.md" inclass="overflow-y-scroll rounded-r-lg max-h-[42rem]">
         <div>
-          <div>
-            <p class="font-onest text-xl mb-2">Языки программирования</p>
-            <!-- load colors-->
-            <div class="bg-yellow-500 bg-yellow-600 bg-red-500 bg-purple-700 bg-pink-600 bg-sky-600 bg-amber-600 bg-sky-400 bg-orange-500 bg-blue-500"></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Javascript" subtitle="Active" color="yellow-500" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Java" subtitle="Active" color="red-500" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Python" subtitle="Inactive" color="yellow-600" />
-            </div>
-            <div class="flex flex-col gap-2 mt-2">
-              <MiniSkillAbout low percent="w-[30%]" icon="/img/logos/javascript.svg" name="PHP" subtitle="Inactive" color="purple-700" />
-              <MiniSkillAbout low percent="w-[40%]" icon="/img/logos/javascript.svg" name="C#" subtitle="Inactive" color="pink-600" />
-              <MiniSkillAbout low percent="w-[60%]" icon="/img/logos/javascript.svg" name="Typescript" subtitle="Inactive" color="sky-600" />
-              <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="Rust" subtitle="Inactive" color="amber-600" />
-              <MiniSkillAbout low percent="w-[15%]" icon="/img/logos/javascript.svg" name="C++" subtitle="Inactive" color="sky-400" />
-              <div class="flex gap-2 mt-2">
-                <MiniSkillAbout basic icon="/img/logos/javascript.svg" name="HTML" subtitle="Inactive" color="orange-500" />
-                <MiniSkillAbout basic icon="/img/logos/javascript.svg" name="CSS" subtitle="Inactive" color="blue-500" />
-              </div>
-            </div>
-
-            <p class="font-onest text-xl mb-2 mt-4">Frontend</p>
-            <!-- load colors-->
-            <div class="bg-emerald-500 bg-blue-500 bg-sky-500 bg-emerald-600"></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Vue" subtitle="Active" color="emerald-500" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Tailwind" subtitle="Active" color="blue-500" />
-            </div>
-            <div class="flex flex-col gap-2 mt-2">
-              <MiniSkillAbout low percent="w-[50%]" icon="/img/logos/javascript.svg" name="React" subtitle="Inactive" color="sky-500" />
-              <MiniSkillAbout low percent="w-[20%]" icon="/img/logos/javascript.svg" name="Nuxt" subtitle="Inactive" color="emerald-600" />
-            </div>
-
-
-            <p class="font-onest text-xl mb-2 mt-4">Backend</p>
-            <!-- load colors-->
-            <div class="bg-neutral-500"></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Fastify" subtitle="Active" color="neutral-500" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Express" subtitle="Inactive" color="neutral-500" />
-            </div>
-
-            <p class="font-onest text-xl mb-2 mt-4">Прочее</p>
-            <!-- load colors-->
-            <div class="bg-blue-600 bg-orange-600 bg-orange-500 bg-yellow-500"></div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Docker" subtitle="Active" color="blue-600" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Git" subtitle="Active" color="orange-600" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="CI/CD" subtitle="Active" color="orange-500" />
-              <MiniSkillAbout icon="/img/logos/javascript.svg" name="Linux" subtitle="Active" color="yellow-500" />
-            </div>
+          <div class="flex flex-col gap-2 md:gap-4">
+            <SkillTypeBlockAbout
+                v-for="skillType in skills"
+                :title="skillType.title"
+                :main="skillType.main"
+                :low="skillType.low"
+                :basic="skillType.basic"
+            />
           </div>
         </div>
       </CategoryAbout>
