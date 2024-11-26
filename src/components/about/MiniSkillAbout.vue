@@ -17,7 +17,8 @@ const props = defineProps({
     <div :style="{'background-color': props.color + '50'}" class="flex items-center gap-1 rounded-lg px-2 py-1 border-[2px] border-neutral-800 relative">
       <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400"></i>
       <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400 blur-sm"></i>
-      <img class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <i v-else :class="props.icon"></i>
       <div class="h-full w-full rounded-xl text-xs">
         {{props.name}}
       </div>
@@ -25,7 +26,8 @@ const props = defineProps({
   </div>
   <div v-else-if="low">
     <div class="flex items-center gap-1">
-      <img class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <i v-else :class="props.icon"></i>
       <div class="w-full rounded-xl bg-neutral-800 relative h-5 overflow-hidden">
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute h-full rounded-xl left-to-r-anim"></div>
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute left-8 h-full opacity-50 rounded-xl left-to-r-anim"></div>
@@ -36,7 +38,8 @@ const props = defineProps({
   </div>
   <div v-else class="bg-[rgb(19,19,19)] rounded-md border-[3px] border-neutral-800 relative pt-6 overflow-hidden">
     <div class="absolute top-0 flex items-center gap-1 p-2">
-      <img class="w-6 aspect-square" :src="props.icon" alt="icon">
+      <img v-if="!props.icon.startsWith('devicon')" class="w-6 aspect-square" :src="props.icon" alt="icon">
+      <i v-else :class="props.icon"></i>
       <p>{{props.name}}</p>
     </div>
     <div class="bottom-to-t-anim">
