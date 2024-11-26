@@ -13,7 +13,7 @@ onMounted(() => {
   updater.value = setInterval(() => {
     datetime.value = {
       unix: Date.now(),
-      string: new Date(Date.now()).toUTCString(),
+      string: new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toUTCString().replace(' GMT', ''),
     }
   }, 1)
 })
@@ -36,23 +36,24 @@ onUnmounted(() => {
     <div class="flex flex-col gap-4">
       <CategoryAbout icon="pi-address-book" title="profile.md">
         <div class="flex gap-4">
-          <div class="w-24 aspect-square">
-            <div class="group/avatar w-24 h-24">
-              <img class="transition-all duration-500 group-hover/avatar:rounded-[50%] absolute w-24 aspect-square rounded-lg shadow-lg blur z-0" src="/img/profile.jpg" alt="profile">
-              <img class="transition-all duration-500 group-hover/avatar:rounded-[50%] w-24 aspect-square rounded-lg shadow-lg absolute z-10" src="/img/profile.jpg" alt="profile">
+          <div class="w-20 aspect-square">
+            <div class="group/avatar w-20 h-20">
+              <img class="transition-all duration-500 group-hover/avatar:rounded-[50%] absolute w-20 aspect-square rounded-lg shadow-lg blur z-0" src="/img/profile.jpg" alt="profile">
+              <img class="transition-all duration-500 group-hover/avatar:rounded-[50%] w-20 aspect-square rounded-lg shadow-lg absolute z-10" src="/img/profile.jpg" alt="profile">
             </div>
           </div>
-          <div>
-            <p class="font-onest font-semibold text-2xl text-neutral-200 relative">Привет! Я <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 inline-block text-transparent bg-clip-text animate-gradient">@zaralx</span><i class="right-8 pi pi-circle-fill blur-2xl text-3xl absolute text-amber-600 animate-[pulse_4s_cubic-bezier(0.6,0.2,0.5,1)_infinite]"></i></p>
+          <div class="flex flex-col">
+            <p class="font-onest font-semibold text-xl md:text-2xl text-neutral-200 relative flex-1">Привет! Я <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 inline-block text-transparent bg-clip-text animate-gradient">@zaralx</span><i class="right-8 pi pi-circle-fill blur-2xl text-3xl absolute text-amber-600 animate-[pulse_4s_cubic-bezier(0.6,0.2,0.5,1)_infinite]"></i></p>
+            <p class="text-neutral-200/50 text-xs sm:text-sm xl:text-base">В моём опыте широкий спектр языков программирования и фреймворков, которые я постоянно применяю.</p>
           </div>
         </div>
       </CategoryAbout>
       <CategoryAbout icon="pi-clock" title="datetime.json">
-        <div class="bg-neutral-950/20 rounded-md p-2">
+        <div class="bg-neutral-950/20 rounded-md p-2 text-xs sm:text-base md:text-sm xl:text-base">
           <p class="text-neutral-500">{</p>
           <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
-          <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
           <p>    <span class="text-amber-400">"utc"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"UTC+8"</span></p>
+          <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
           <p class="text-neutral-500">}</p>
         </div>
       </CategoryAbout>
