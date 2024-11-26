@@ -37,6 +37,7 @@ export default {
                 'montserrat': ['Montserrat', "none"],
                 'rubik': ['Rubik', "none"],
                 'fira': ['"Fira Code"', "none"],
+                'onest': ['"Onest"', "none"],
             },
         },
     },

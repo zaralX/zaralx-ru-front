@@ -22,6 +22,10 @@ body {
     background-color: rgb(63, 63, 63);
 }
 
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(80, 80, 80);
+}
+
 h1 {
     @apply text-4xl font-medium;
 }
