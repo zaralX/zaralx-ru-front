@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="w-full rounded-lg bg-neutral-900 group">
+  <div class="w-full rounded-lg bg-neutral-900 group shadow-lg">
     <div class="w-full rounded-lg bg-gradient-to-tr from-neutral-700/20 to-neutral-800/40 p-[3px]">
       <div class="bg-neutral-900 rounded-md p-2 md:p-4">
         <div class="flex items-center gap-2 md:gap-4 opacity-50">

@@ -1,13 +1,25 @@
 <script setup>
 
 import CategoryAbout from "../components/about/CategoryAbout.vue";
-import {ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
-const code = ref({
-  "string": "some string",
-  "number": 0,
-  "boolean": true,
-  "array": [1,2,"hello"],
+const datetime = ref({
+  unix: 0
+})
+
+const updater = ref(null)
+
+onMounted(() => {
+  updater.value = setInterval(() => {
+    datetime.value = {
+      unix: Date.now(),
+      string: new Date(Date.now()).toUTCString(),
+    }
+  }, 1)
+})
+
+onUnmounted(() => {
+  clearInterval(updater.value)
 })
 </script>
 
@@ -22,9 +34,13 @@ const code = ref({
 <!--</div>-->
   <div class="md:px-32 xl:px-64 py-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
     <div class="flex flex-col gap-4">
-      <CategoryAbout title="someinfo.json">
-        <div class="bg-neutral-950/20 rounded-md">
-          {{code.value}}
+      <CategoryAbout icon="pi-clock" title="datetime.json">
+        <div class="bg-neutral-950/20 rounded-md p-2">
+          <p class="text-neutral-500">{</p>
+          <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
+          <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
+          <p>    <span class="text-amber-400">"utc"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"UTC+8"</span><span class="text-neutral-500">,</span></p>
+          <p class="text-neutral-500">}</p>
         </div>
       </CategoryAbout>
     </div>
