@@ -25,13 +25,13 @@ const props = defineProps({
     </div>
   </div>
   <div v-else-if="low">
-    <div class="flex items-center gap-1 devicon-circleci-plain">
+    <div class="flex items-center gap-1">
       <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
       <i v-else :class="props.icon"></i>
       <div class="w-full rounded-xl bg-neutral-800 relative h-5 overflow-hidden">
         <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute h-full rounded-xl left-to-r-anim"></div>
-        <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute left-8 h-full opacity-50 rounded-xl left-to-r-anim"></div>
-        <div :style="{'background-color': props.color, width: props.percent + '%'}" class="absolute left-20 h-full opacity-25 rounded-xl left-to-r-anim"></div>
+        <div :style="{'background-color': props.color, right: 90 - props.percent + '%'}" class="absolute w-full h-full opacity-50 rounded-xl left-to-r-anim"></div>
+        <div :style="{'background-color': props.color, right: 75 - props.percent + '%'}" class="absolute w-full h-full opacity-25 rounded-xl left-to-r-anim"></div>
         <p class="font-onest text-xs px-2 py-0.5 absolute z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{{props.name}}</p>
       </div>
     </div>
