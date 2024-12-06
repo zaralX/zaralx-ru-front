@@ -215,7 +215,7 @@ function stopGame() {
 }
 
 function saveRecord() {
-  if (best.value > last.value) return;
+  if (parseInt(best.value) > parseInt(last.value)) return;
 
   lastBest.value = best.value;
   best.value = last.value;
@@ -226,6 +226,7 @@ function restartGame() {
   snakePositions.value = [{x: Math.floor(grid.w / 2), y: Math.floor(grid.h / 2)}];
   foodPositions.value = [];
   createFood();
+  lastBest.value = best.value;
 }
 
 function startGame() {
@@ -277,7 +278,10 @@ onUnmounted(() => {
           <div class="flex items-center gap-2">
             <i class="pi pi-crown text-sm"></i>
             <p>Ваш рекорд:</p>
-            <p class="font-bold">{{ best }}</p>
+            <p class="font-bold">
+              <span :class="parseInt(lastBest) !== parseInt(best) ? 'text-green-400 animate-pulse' : ''">{{ best }}</span> 
+              <span v-if="parseInt(lastBest) !== parseInt(best)" class="line-through decoration-2 font-medium text-sm text-red-500">{{ lastBest }}</span>
+            </p>
           </div>
           <div class="flex items-center gap-2">
             <i class="pi pi-play text-sm"></i>
