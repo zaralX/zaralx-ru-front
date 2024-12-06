@@ -117,7 +117,7 @@ const skills = ref([
       <CategoryAbout icon="pi-clock" title="datetime.json">
         <div class="bg-neutral-950/20 rounded-md p-2 text-xs sm:text-base md:text-sm xl:text-base">
           <p class="text-neutral-500">{</p>
-          <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
+          <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400 relative group-hover:bg-neutral-500/10 group-hover:ring-4 group-hover:ring-neutral-500/10 rounded-md transition-all duration-500">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
           <p>    <span class="text-amber-400">"utc"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"UTC+8"</span></p>
           <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
           <p class="text-neutral-500">}</p>
