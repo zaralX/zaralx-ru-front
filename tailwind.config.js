@@ -1,3 +1,5 @@
+import animDelay from 'tailwindcss-animation-delay'
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -46,7 +48,7 @@ export default {
     },
     darkMode: 'class',
     plugins: [
-        require("tailwindcss-animation-delay"),
+        animDelay,
     ],
 }
 
