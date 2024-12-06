@@ -1,8 +1,20 @@
 <script setup>
-import {onMounted, onUnmounted, ref} from "vue";
+import {inject, onMounted, onUnmounted, ref} from "vue";
+
+const $cookies = inject('$cookies');
 
 const grid = {w: 8, h: 15};
 const snakeWindow = ref({w: 256, h: 480});
+
+if (!$cookies.get('snake-best')) {
+  $cookies.set('snake-best', 0)
+}
+const best = ref($cookies.get('snake-best') ?? 0);
+if (!$cookies.get('snake-last')) {
+  $cookies.set('snake-last', 0)
+}
+const last = ref($cookies.get('snake-last') ?? 0);
+const lastBest = ref($cookies.get('snake-best') ?? 0);
 
 const cellSize = snakeWindow.value.w / grid.w;
 const segmentPadding = 0.2 * cellSize; // отступ для уменьшения сегментов змейки
@@ -164,6 +176,7 @@ function keydown(event) {
   let newDirection = currentDirection;
   console.log(event)
   switch (event.code) {
+    case "KeyR": startGame(); break;
     case "ArrowUp":
     case "KeyW":
       newDirection = "top";
@@ -195,7 +208,18 @@ function keydown(event) {
 }
 
 function stopGame() {
+  last.value = snakePositions.value.length;
+  $cookies.set('snake-last', last.value);
+  saveRecord()
   gameStarted.value = false;
+}
+
+function saveRecord() {
+  if (best.value > last.value) return;
+
+  lastBest.value = best.value;
+  best.value = last.value;
+  $cookies.set('snake-best', best.value);
 }
 
 function restartGame() {
@@ -253,12 +277,12 @@ onUnmounted(() => {
           <div class="flex items-center gap-2">
             <i class="pi pi-crown text-sm"></i>
             <p>Ваш рекорд:</p>
-            <p class="font-bold">0</p>
+            <p class="font-bold">{{ best }}</p>
           </div>
           <div class="flex items-center gap-2">
             <i class="pi pi-play text-sm"></i>
             <p>Последняя попытка:</p>
-            <p class="font-bold">0</p>
+            <p class="font-bold">{{ last }}</p>
           </div>
         </div>
         <div class="mb-20 flex flex-col items-center gap-2">
@@ -290,7 +314,7 @@ onUnmounted(() => {
     </transition>
     <transition name="slide-fade">
       <Button v-if="!gameStarted" @click="startGame"
-              class="absolute bottom-10 bg-red-500 rounded-lg shadow-lg py-1 px-4 text-black font-medium">Start
+              class="absolute bottom-10 bg-red-500 rounded-lg shadow-lg py-1 px-4 text-black font-medium">Start [R]
       </Button>
     </transition>
   </div>
@@ -298,11 +322,11 @@ onUnmounted(() => {
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,
@@ -312,11 +336,11 @@ onUnmounted(() => {
 }
 
 .fade-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .fade-enter-from,
