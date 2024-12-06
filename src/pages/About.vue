@@ -114,7 +114,7 @@ const skills = ref([
           </div>
         </div>
       </CategoryAbout>
-      <CategoryAbout icon="pi-clock" title="datetime.json">
+      <CategoryAbout delay="300" icon="pi-clock" title="datetime.json">
         <div class="bg-neutral-950/20 rounded-md p-2 text-xs sm:text-base md:text-sm xl:text-base">
           <p class="text-neutral-500">{</p>
           <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400 relative group-hover:bg-neutral-500/10 group-hover:ring-4 group-hover:ring-neutral-500/10 rounded-md transition-all duration-500">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
@@ -123,7 +123,7 @@ const skills = ref([
           <p class="text-neutral-500">}</p>
         </div>
       </CategoryAbout>
-      <CategoryAbout icon="pi-list-check" title="todo.db">
+      <CategoryAbout delay="600" icon="pi-list-check" title="todo.db">
         <div class="relative">
           <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
           <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
@@ -139,7 +139,7 @@ const skills = ref([
       </CategoryAbout>
     </div>
     <div class="flex flex-col gap-4 flex-1">
-      <CategoryAbout icon="pi-list" title="skills.md" inclass="overflow-y-scroll rounded-r-lg max-h-[42rem]">
+      <CategoryAbout delay="900" icon="pi-list" title="skills.md" inclass="overflow-y-scroll rounded-r-lg max-h-[42rem]">
         <div>
           <div class="flex flex-col gap-2 md:gap-4">
             <SkillTypeBlockAbout

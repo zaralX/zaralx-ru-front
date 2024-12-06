@@ -6,6 +6,7 @@ const useUser = defineStore('userStore', () => {
     const User = ref(null)
     const UserLoading = ref(true)
     const UserLoaded = ref(false)
+    const AboutPageShowcased = ref(false)
 
     async function UpdateUser() {
         const response = await http.post('/users/@me');
@@ -46,6 +47,7 @@ const useUser = defineStore('userStore', () => {
         User,
         UserLoading,
         UserLoaded,
+        AboutPageShowcased
     }
 })
 
