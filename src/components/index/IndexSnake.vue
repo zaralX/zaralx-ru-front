@@ -105,13 +105,13 @@ function move() {
       newPosition.x < 0 || newPosition.y < 0 ||
       newPosition.x >= grid.w || newPosition.y >= grid.h
   ) {
-    restartGame();
+    stopGame()
     return;
   }
 
   for (const snakePos of snakePositions.value) {
     if (snakePos.x === newPosition.x && snakePos.y === newPosition.y) {
-      restartGame();
+      stopGame()
       return;
     }
   }
@@ -162,7 +162,7 @@ function createFood() {
 function keydown(event) {
   const currentDirection = direction.value;
   let newDirection = currentDirection;
-console.log(event)
+  console.log(event)
   switch (event.code) {
     case "ArrowUp":
     case "KeyW":
@@ -192,6 +192,10 @@ console.log(event)
   }
 
   direction.value = newDirection;
+}
+
+function stopGame() {
+  gameStarted.value = false;
 }
 
 function restartGame() {
@@ -231,9 +235,63 @@ onUnmounted(() => {
 
 <template>
   <div class="relative w-full h-full flex justify-center items-center">
-    <canvas ref="canvas" :width="snakeWindow.w" :height="snakeWindow.h" class="w-full h-full"></canvas>
+    <canvas ref="canvas" :width="snakeWindow.w" :height="snakeWindow.h"
+            class="w-full h-full transition-all duration-500 delay-100"
+            :class="gameStarted ? 'opacity-100' : 'opacity-0'"></canvas>
+    <transition name="fade">
+      <div v-if="!gameStarted" class="absolute font-rubik w-full h-full flex flex-col justify-center items-center p-4">
+        <div class="text-2xl text-nowrap flex justify-center items-center"><i class="pi pi-tablet text-lg"></i>  
+          <p class="w-full h-full">
+            Snake Game
+          </p>
+            <i class="pi pi-tablet text-lg"></i>
+        </div>
+
+        <div class="w-10/12 h-px bg-neutral-800 my-2"></div>
+
+        <div class="w-full h-full text-lg">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-crown text-sm"></i>
+            <p>Ваш рекорд:</p>
+            <p class="font-bold">0</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="pi pi-play text-sm"></i>
+            <p>Последняя попытка:</p>
+            <p class="font-bold">0</p>
+          </div>
+        </div>
+        <div class="mb-20 flex flex-col items-center gap-2">
+          <p class="text-center">Управление</p>
+          <div class="flex gap-2">
+            <div class="flex flex-col">
+              <div class="flex justify-center">
+                <div class="px-5 snake-key rounded-t-md !border-b-0">W</div>
+              </div>
+              <div class="flex">
+                <div class="snake-key rounded-l-md !border-r-0 ">A</div>
+                <div class="snake-key !border-t-0 !border-l-0 !border-r-0 aspect-square w-10 flex justify-center items-center ">S</div>
+                <div class="snake-key rounded-r-md !border-l-0 ">D</div>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex justify-center">
+                <div class="px-5 snake-key rounded-t-md !border-b-0 "><i class="pi pi-arrow-up"></i></div>
+              </div>
+              <div class="flex">
+                <div class="snake-key rounded-l-md !border-r-0 "><i class="pi pi-arrow-left"></i></div>
+                <div class="snake-key !border-t-0 !border-l-0 !border-r-0 aspect-square w-10 flex justify-center items-center "><i class="pi pi-arrow-down"></i></div>
+                <div class="snake-key rounded-r-md !border-l-0 "><i class="pi pi-arrow-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
     <transition name="slide-fade">
-      <Button v-if="!gameStarted" @click="startGame" class="absolute bottom-10 bg-red-500 rounded-lg shadow-lg py-1 px-4 text-black font-medium">Start</Button>
+      <Button v-if="!gameStarted" @click="startGame"
+              class="absolute bottom-10 bg-red-500 rounded-lg shadow-lg py-1 px-4 text-black font-medium">Start
+      </Button>
     </transition>
   </div>
 </template>
@@ -251,5 +309,22 @@ onUnmounted(() => {
 .slide-fade-leave-to {
   transform: translateY(20px);
   opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.snake-key {
+  @apply border-2 w-10 h-10 flex justify-center items-center border-neutral-500 text-neutral-500 cursor-pointer duration-200 hover:bg-neutral-800 active:text-neutral-400 active:border-neutral-400;
 }
 </style>
