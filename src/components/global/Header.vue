@@ -9,12 +9,11 @@ const links = [
   { name: "_home", to: "/" },
   { name: "_about", to: "/about" },
   { name: "_projects", to: "/projects" },
+  { name: "_tools", to: "/tools" },
 ];
 
 const linksInvisible = [
-  { name: "_home", to: "/" },
-  { name: "_about", to: "/about" },
-  { name: "_projects", to: "/projects" },
+  ...links,
   { name: "_login", to: "/login" },
 ];
 
