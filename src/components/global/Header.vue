@@ -11,7 +11,7 @@ const links = [
   { name: "_projects", to: "/projects" },
 ];
 
-const linksIvisible = [
+const linksInvisible = [
   { name: "_home", to: "/" },
   { name: "_about", to: "/about" },
   { name: "_projects", to: "/projects" },
@@ -43,7 +43,7 @@ const updateActiveLink = () => {
       let { offsetLeft, offsetWidth } = currentLink.$el; // Используем $el для доступа к DOM
       console.log(offsetLeft, offsetWidth)
       let found = false;
-      for (const link of linksIvisible) {
+      for (const link of linksInvisible) {
         if (link.to === "/login" || route.fullPath.startsWith("/cabinet")) {
           found = true;
           break;
@@ -72,7 +72,7 @@ const updateActiveLink = () => {
 watch(
     () => route.fullPath,
     () => {
-      const activeIndex = linksIvisible.findIndex(link => {
+      const activeIndex = linksInvisible.findIndex(link => {
         if (link.to === "/login") {
           return link.to === "/login" || route.fullPath.startsWith("/cabinet");
         }
