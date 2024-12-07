@@ -15,7 +15,7 @@ watch(input, (newValue) => {
 </script>
 
 <template>
-  <ToolCompact title="Base64 decode">
+  <ToolCompact title="Base64 encode">
     <template #main>
       <div class="flex flex-col h-full">
         <div class="h-full flex flex-col">
