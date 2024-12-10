@@ -26,6 +26,10 @@ initDark()
     <EmptyLayout v-if="isEmptyLayout" />
     <MainLayout v-else>
 
+      <template v-slot:default>
+        <router-view />
+      </template>
+
       <template v-slot:header>
         <Header></Header>
       </template>
