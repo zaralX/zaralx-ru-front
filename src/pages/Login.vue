@@ -169,23 +169,22 @@ const pageType = ref("login")
       </div>
 
       <div class="flex-1 relative">
-        <p class="text-red-500 text-center font-semibold absolute z-10 w-full text-xl mt-6">АВТОРИЗАЦИЯ В РАЗРАБОТКЕ</p>
         <transition name="fade-window">
           <!-- LOGIN -->
           <div v-if="pageType === 'login'" class="absolute px-2 py-8 w-full h-full bg-neutral-950 transition-all transform rounded-b-lg flex flex-col items-center justify-center gap-4">
-            <button disabled :href="config.discord_auth" class="bg-violet-700 disabled:cursor-not-allowed disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
+            <a :href="config.discord_auth" class="bg-violet-700 disabled:cursor-not-allowed disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
               <i class="pi pi-discord absolute text-lg"></i>
               <span class="text-center w-full">Войти с помощью Discord</span>
-            </button>
-            <TelegramLogin disabled class="md:!w-5/6 disabled:cursor-not-allowed" />
-            <button disabled class="bg-neutral-100 text-black disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
-              <i class="pi pi-google absolute text-lg"></i>
-              <span class="text-center w-full">Войти с помощью Google</span>
-            </button>
-            <button disabled class="bg-neutral-800 disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">
-              <i class="pi pi-github absolute text-lg"></i>
-              <span class="text-center w-full">Войти с помощью Github</span>
-            </button>
+            </a>
+            <TelegramLogin class="md:!w-5/6 disabled:cursor-not-allowed" />
+<!--            <button disabled class="bg-neutral-100 text-black disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-200 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">-->
+<!--              <i class="pi pi-google absolute text-lg"></i>-->
+<!--              <span class="text-center w-full">Войти с помощью Google</span>-->
+<!--            </button>-->
+<!--            <button disabled class="bg-neutral-800 disabled:opacity-75 disabled:cursor-not-allowed enabled:hover:bg-neutral-900 transition-all duration-100 py-2 rounded-lg w-full md:w-5/6 flex justify-start items-center px-3">-->
+<!--              <i class="pi pi-github absolute text-lg"></i>-->
+<!--              <span class="text-center w-full">Войти с помощью Github</span>-->
+<!--            </button>-->
 <!--            <div class="flex-1 flex flex-col gap-4">-->
 <!--              <Input name="Никнейм или почта" max="255" placeholder="Введите никнейм"/>-->
 <!--              <Input name="Пароль" placeholder="Введите никнейм"/>-->

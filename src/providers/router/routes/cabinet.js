@@ -3,7 +3,7 @@ export default [
         name: 'CabinetPage',
         path: '/cabinet',
         meta: {
-            layout: 'basic'
+            layout: 'cabinet'
         },
         component: () => import('/src/pages/cabinet/Cabinet.vue')
     }
