@@ -1,3 +1,5 @@
+import animDelay from 'tailwindcss-animation-delay'
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -39,9 +41,14 @@ export default {
                 'fira': ['"Fira Code"', "none"],
                 'onest': ['"Onest"', "none"],
             },
+            animation: {
+                "clip-fluid": "clip-fluid 4s ease-in-out infinite"
+            }
         },
     },
     darkMode: 'class',
-    plugins: [],
+    plugins: [
+        animDelay,
+    ],
 }
 

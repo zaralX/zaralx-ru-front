@@ -3,6 +3,8 @@
 import CategoryAbout from "../components/about/CategoryAbout.vue";
 import {onMounted, onUnmounted, ref} from "vue";
 import TodoAboutComponent from "../components/about/TodoAboutComponent.vue";
+import MiniSkillAbout from "../components/about/MiniSkillAbout.vue";
+import SkillTypeBlockAbout from "../components/about/SkillTypeBlockAbout.vue";
 
 const datetime = ref({
   unix: 0
@@ -22,6 +24,69 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(updater.value)
 })
+
+const skills = ref([
+  {
+    title: "Языки программирования",
+    main: [
+      {color: "#e8b208", name: "Javascript", icon: "devicon-javascript-plain", subtitle: "Active"},
+      {color: "#ed4444", name: "Java", icon: "devicon-java-plain", subtitle: "Active"},
+      {color: "#c88904", name: "Python", icon: "devicon-python-plain", subtitle: "Inactive"},
+    ],
+    low: [
+      {color: "#7d22cc", name: "PHP", percent: 30, icon: "devicon-php-plain"},
+      {color: "#5c248e", name: "C#", percent: 40, icon: "devicon-csharp-plain"},
+      {color: "#0283c5", name: "Typescript", percent: 60, icon: "devicon-typescript-plain"},
+      {color: "#d77606", name: "Rust", percent: 15, icon: "devicon-rust-plain"},
+      {color: "#3183a8", name: "C++", percent: 15, icon: "devicon-cplusplus-plain"},
+    ],
+    basic: [
+      {color: "#d77606", name: "HTML", icon: "devicon-html5-plain"},
+      {color: "#0283c5", name: "CSS", icon: "devicon-css3-plain"},
+      {color: "#5b5b5b", name: "SQL", icon: "devicon-sqlite-plain"},
+    ]
+  },
+  {
+    title: "Frontend",
+    main: [
+      {color: "#32d368", name: "Vue", icon: "devicon-vuejs-plain", subtitle: "Active"},
+      {color: "#1daee7", name: "Tailwind", icon: "devicon-tailwindcss-plain", subtitle: "Active"},
+    ],
+    low: [
+      {color: "#00b3ff", name: "React", percent: 30, icon: "devicon-react-plain"},
+      {color: "#00e341", name: "Nuxt", percent: 15, icon: "devicon-nuxtjs-plain"},
+    ],
+    basic: [
+      {color: "#c202e0", name: "Vite", icon: "devicon-vite-plain"},
+    ]
+  },
+  {
+    title: "Backend",
+    main: [
+      {color: "#777777", name: "Fastify", icon: "devicon-fastify-plain", subtitle: "Active"},
+      {color: "#707070", name: "Express", icon: "devicon-express-original", subtitle: "Inactive"},
+    ],
+    low: [],
+    basic: []
+  },
+  {
+    title: "Прочее",
+    main: [
+      {color: "#008cff", name: "Docker", icon: "devicon-docker-plain", subtitle: "Active"},
+      {color: "#ff5900", name: "Git", icon: "devicon-git-plain", subtitle: "Active"},
+      {color: "#ffcc00", name: "CI/CD", icon: "devicon-circleci-plain", subtitle: "Active"},
+      {color: "#ff6200", name: "Linux", icon: "devicon-linux-plain", subtitle: "Active"},
+      {color: "#dc5510", name: "Bukkit", icon: "/img/logos/bukkit.png", subtitle: "Active"},
+      {color: "#00c7e0", name: "Electron", icon: "devicon-electron-original", subtitle: "Active"},
+    ],
+    low: [],
+    basic: [
+      {color: "#004f67", name: "MySql", icon: "devicon-mysql-plain"},
+      {color: "#02567b", name: "SQLite", icon: "devicon-sqlite-plain"},
+      {color: "#336690", name: "Postgresql", icon: "devicon-postgresql-plain"},
+    ]
+  }
+])
 </script>
 
 <template>
@@ -44,26 +109,28 @@ onUnmounted(() => {
             </div>
           </div>
           <div class="flex flex-col">
-            <p class="font-onest font-semibold text-xl md:text-2xl text-neutral-200 relative flex-1">Привет! Я <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 inline-block text-transparent bg-clip-text animate-gradient">@zaralx</span><i class="right-8 pi pi-circle-fill blur-2xl text-3xl absolute text-amber-600 animate-[pulse_4s_cubic-bezier(0.6,0.2,0.5,1)_infinite]"></i></p>
+            <p class="font-onest font-semibold text-xl md:text-2xl text-neutral-200 relative flex-1">Привет! Я <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 inline-block text-transparent bg-clip-text animate-gradient">@zaralx</span><i class="left-32 md:left-40 pi pi-circle-fill blur-2xl text-3xl absolute text-amber-600 animate-[pulse_4s_cubic-bezier(0.6,0.2,0.5,1)_infinite]"></i></p>
             <p class="text-neutral-200/50 text-xs sm:text-sm xl:text-base">В моём опыте широкий спектр языков программирования и фреймворков, которые я постоянно применяю.</p>
           </div>
         </div>
       </CategoryAbout>
-      <CategoryAbout icon="pi-clock" title="datetime.json">
+      <CategoryAbout delay="300" icon="pi-clock" title="datetime.json">
         <div class="bg-neutral-950/20 rounded-md p-2 text-xs sm:text-base md:text-sm xl:text-base">
           <p class="text-neutral-500">{</p>
-          <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
+          <p>    <span class="text-amber-400">"string"</span><span class="text-neutral-400">:</span> <span class="text-amber-400 relative group-hover:bg-neutral-500/10 group-hover:ring-4 group-hover:ring-neutral-500/10 rounded-md transition-all duration-500">"{{datetime.string}}"</span><span class="text-neutral-500">,</span></p>
           <p>    <span class="text-amber-400">"utc"</span><span class="text-neutral-400">:</span> <span class="text-amber-400">"UTC+8"</span></p>
           <p>    <span class="text-amber-400">"millis"</span><span class="text-neutral-400">:</span> <span class="text-orange-400">{{datetime.unix}}</span><span class="text-neutral-500">,</span></p>
           <p class="text-neutral-500">}</p>
         </div>
       </CategoryAbout>
-      <CategoryAbout icon="pi-list-check" title="todo.db">
+      <CategoryAbout delay="600" icon="pi-list-check" title="todo.db">
         <div class="relative">
           <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
           <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
             <TodoAboutComponent title="Оформить личный кабинет" status="incomplete" />
-            <TodoAboutComponent title="Заняться _about" status="processing" />
+            <TodoAboutComponent title="Доработать список в skills.md" status="incomplete" />
+            <TodoAboutComponent title="Заняться _about" status="completed" />
+            <TodoAboutComponent title="Сделать в _about skills" status="completed" />
             <TodoAboutComponent title="Сделать в _about todo list" status="completed" />
             <TodoAboutComponent title="Сделать в _about краткую инфу" status="completed" />
             <TodoAboutComponent title="Сделать в _about своё datetime" status="completed" />
@@ -72,9 +139,17 @@ onUnmounted(() => {
       </CategoryAbout>
     </div>
     <div class="flex flex-col gap-4 flex-1">
-      <CategoryAbout v-for="i in [1, 2, 3, 4, 5, 6]" icon="pi-book" title="later.txt">
+      <CategoryAbout delay="900" icon="pi-list" title="skills.md" inclass="overflow-y-scroll rounded-r-lg max-h-[42rem]">
         <div>
-          <p class="underline decoration-orange-400/75 decoration-2 text-neutral-200">Тут определённо будет ещё что-то</p>
+          <div class="flex flex-col gap-2 md:gap-4">
+            <SkillTypeBlockAbout
+                v-for="skillType in skills"
+                :title="skillType.title"
+                :main="skillType.main"
+                :low="skillType.low"
+                :basic="skillType.basic"
+            />
+          </div>
         </div>
       </CategoryAbout>
     </div>

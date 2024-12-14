@@ -9,12 +9,11 @@ const links = [
   { name: "_home", to: "/" },
   { name: "_about", to: "/about" },
   { name: "_projects", to: "/projects" },
+  { name: "_tools", to: "/tools" },
 ];
 
-const linksIvisible = [
-  { name: "_home", to: "/" },
-  { name: "_about", to: "/about" },
-  { name: "_projects", to: "/projects" },
+const linksInvisible = [
+  ...links,
   { name: "_login", to: "/login" },
 ];
 
@@ -43,7 +42,7 @@ const updateActiveLink = () => {
       let { offsetLeft, offsetWidth } = currentLink.$el; // Используем $el для доступа к DOM
       console.log(offsetLeft, offsetWidth)
       let found = false;
-      for (const link of linksIvisible) {
+      for (const link of linksInvisible) {
         if (link.to === "/login" || route.fullPath.startsWith("/cabinet")) {
           found = true;
           break;
@@ -72,7 +71,7 @@ const updateActiveLink = () => {
 watch(
     () => route.fullPath,
     () => {
-      const activeIndex = linksIvisible.findIndex(link => {
+      const activeIndex = linksInvisible.findIndex(link => {
         if (link.to === "/login") {
           return link.to === "/login" || route.fullPath.startsWith("/cabinet");
         }
@@ -111,9 +110,6 @@ onUnmounted(() => {
         >
           {{ link.name }}
         </router-link>
-        <a href="https://old.zaralx.ru/buy" class="flex items-center justify-center border-border-third-light dark:border-border-third-dark transition-all duration-300 border-b-2 border-border-main-light dark:border-border-main-dark py-2">
-          _buy
-        </a>
       </div>
     </div>
   </div>
@@ -139,9 +135,6 @@ onUnmounted(() => {
       >
         {{ link.name }}
       </router-link>
-      <a href="https://old.zaralx.ru/buy" class="flex items-center justify-center border-r-2 border-border-main-light dark:border-border-main-dark relative transition-all duration-300 z-10 shadow-[0_0_8px_2px_24px]">
-        _buy
-      </a>
     </nav>
 
     <router-link :class="route.fullPath === '/login' || route.fullPath.startsWith('/cabinet') ? 'text-white bg-black/[.05]' : ''" :to="store().UserLoaded ? '/cabinet' : '/login'" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">
