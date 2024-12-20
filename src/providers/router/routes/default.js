@@ -40,6 +40,14 @@ export default [
         component: () => import('/src/pages/Giveaway.vue')
     },
     {
+        name: 'Test',
+        path: '/test',
+        meta: {
+            layout: 'empty'
+        },
+        component: () => import('/src/pages/test/Test.vue')
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFoundPage',
         meta: {
