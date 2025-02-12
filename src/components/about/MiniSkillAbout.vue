@@ -19,7 +19,7 @@ const randomDelay = () => Math.floor(Math.random() * 500) + 100
     <div :style="{'background-color': props.color + '50'}" class="flex items-center gap-1 rounded-lg px-2 py-1 border-[2px] border-neutral-800 relative">
       <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400"></i>
       <i class="pi pi-check-circle -top-1 -left-1 absolute text-xs text-green-400 blur-sm"></i>
-      <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
+      <img v-if="!props.icon.startsWith('devicon')" class="w-4 aspect-square" :src="props.icon" alt="icon">
       <i v-else :class="props.icon"></i>
       <div class="h-full w-full rounded-xl text-xs">
         {{props.name}}
@@ -38,7 +38,7 @@ const randomDelay = () => Math.floor(Math.random() * 500) + 100
       </div>
     </div>
   </div>
-  <div v-else class="bg-[rgb(19,19,19)] rounded-md border-[3px] border-neutral-800 relative pt-6 overflow-hidden">
+  <div v-else :class="props.subtitle === 'Inactive' ? 'opacity-75' : ''" class="bg-[rgb(19,19,19)] rounded-md border-[3px] border-neutral-800 relative pt-6 overflow-hidden">
     <div class="absolute top-0 flex items-center gap-1 p-2">
       <img v-if="!props.icon.startsWith('devicon')" class="w-5 aspect-square" :src="props.icon" alt="icon">
       <i v-else :class="props.icon"></i>

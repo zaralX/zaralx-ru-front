@@ -37,8 +37,8 @@ const skills = ref([
       {color: "#7d22cc", name: "PHP", percent: 30, icon: "devicon-php-plain"},
       {color: "#5c248e", name: "C#", percent: 40, icon: "devicon-csharp-plain"},
       {color: "#0283c5", name: "Typescript", percent: 60, icon: "devicon-typescript-plain"},
-      {color: "#d77606", name: "Rust", percent: 15, icon: "devicon-rust-plain"},
-      {color: "#3183a8", name: "C++", percent: 15, icon: "devicon-cplusplus-plain"},
+      {color: "#d77606", name: "Rust", percent: 50, icon: "devicon-rust-plain"},
+      {color: "#3183a8", name: "C++", percent: 20, icon: "devicon-cplusplus-plain"},
     ],
     basic: [
       {color: "#d77606", name: "HTML", icon: "devicon-html5-plain"},
@@ -49,12 +49,12 @@ const skills = ref([
   {
     title: "Frontend",
     main: [
+      {color: "#1daf4f", name: "Nuxt", icon: "devicon-nuxtjs-plain", subtitle: "Active"},
       {color: "#32d368", name: "Vue", icon: "devicon-vuejs-plain", subtitle: "Active"},
       {color: "#1daee7", name: "Tailwind", icon: "devicon-tailwindcss-plain", subtitle: "Active"},
     ],
     low: [
       {color: "#00b3ff", name: "React", percent: 30, icon: "devicon-react-plain"},
-      {color: "#00e341", name: "Nuxt", percent: 15, icon: "devicon-nuxtjs-plain"},
     ],
     basic: [
       {color: "#c202e0", name: "Vite", icon: "devicon-vite-plain"},
@@ -77,13 +77,15 @@ const skills = ref([
       {color: "#ffcc00", name: "CI/CD", icon: "devicon-circleci-plain", subtitle: "Active"},
       {color: "#ff6200", name: "Linux", icon: "devicon-linux-plain", subtitle: "Active"},
       {color: "#dc5510", name: "Bukkit", icon: "/img/logos/bukkit.png", subtitle: "Active"},
-      {color: "#00c7e0", name: "Electron", icon: "devicon-electron-original", subtitle: "Active"},
+      {color: "#00c7e0", name: "Electron", icon: "devicon-electron-original", subtitle: "Inactive"},
+      {color: "#00c7e0", name: "Tauri v2", icon: "devicon-tauri-plain", subtitle: "Active"},
     ],
     low: [],
     basic: [
       {color: "#004f67", name: "MySql", icon: "devicon-mysql-plain"},
       {color: "#02567b", name: "SQLite", icon: "devicon-sqlite-plain"},
       {color: "#336690", name: "Postgresql", icon: "devicon-postgresql-plain"},
+      {color: "#336690", name: "NMS", icon: "/img/logos/bukkit.png"},
     ]
   }
 ])
@@ -128,7 +130,7 @@ const skills = ref([
           <div class="absolute w-1 h-full left-4 border-r-2 border-dotted border-neutral-500"></div>
           <div class="flex flex-col gap-2 z-20 max-h-48 overflow-y-scroll">
             <TodoAboutComponent title="Оформить личный кабинет" status="incomplete" />
-            <TodoAboutComponent title="Доработать список в skills.md" status="incomplete" />
+            <TodoAboutComponent title="Доработать список в skills.md" status="completed" />
             <TodoAboutComponent title="Заняться _about" status="completed" />
             <TodoAboutComponent title="Сделать в _about skills" status="completed" />
             <TodoAboutComponent title="Сделать в _about todo list" status="completed" />
