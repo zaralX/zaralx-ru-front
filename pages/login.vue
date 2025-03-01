@@ -144,11 +144,6 @@ const pageType = ref("login")
 </script>
 
 <template>
-<!--  <button class="absolute" @click="() => {if (pageType === 'login') {-->
-<!--    pageType = 'register';-->
-<!--  } else {-->
-<!--    pageType = 'login';-->
-<!--  }}">toggle</button>-->
   <div class="flex-1 w-full h-full flex justify-center items-center">
     <div class="bg-neutral-950 rounded-lg w-full md:w-96 min-h-96 shadow-lg relative flex flex-col">
       <i class="absolute pi pi-circle-fill text-white blur-[90px] -z-10 text-[6rem] animate-[pulse_10s_ease-in-out_infinite]"></i>
