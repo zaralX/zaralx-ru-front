@@ -72,4 +72,6 @@ h1 {
     --color-bg-third-dark: #111111;
     --color-border-inside-dark: #968060;
     --color-border-inside-more-dark: #d5d0a1;
+
+    --animate-clip-fluid: clip-fluid 4s ease-in-out infinite;
 }

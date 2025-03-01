@@ -4,7 +4,7 @@ const props = defineProps({
   name: String,
   icon: String,
   subtitle: String,
-  percent: {type: String, default: '50'},
+  percent: {type: Number, default: 50},
   low: {type: Boolean, default: false},
   basic: {type: Boolean, default: false},
   color: {type:String, default:'sky-400'},
