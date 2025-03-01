@@ -1,5 +1,7 @@
 <script setup>
 
+import Base64encodeToolCompact from "~/components/tools/compacts/Base64encodeToolCompact.vue";
+import Base64decodeToolCompact from "~/components/tools/compacts/Base64decodeToolCompact.vue";
 </script>
 
 <template>

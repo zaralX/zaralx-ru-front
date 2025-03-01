@@ -1,6 +1,5 @@
 <script setup>
 import {ref, computed, onMounted} from "vue";
-import {router} from "../../src/providers/router/index.js";
 import {useRoute} from "vue-router";
 
 const props = defineProps({
@@ -97,21 +96,24 @@ const updatePosition = () => {
     myDiv.value.style.transform = divStyle.value.transform;
   }
 };
-window.addEventListener('resize', updatePosition);
 
 onMounted(() => {
+  window.addEventListener('resize', updatePosition);
   updatePosition();
 });
 
 const route = useRoute()
+
+// TODO: я убрал router.push({
+// name: 'ProjectsPage',
+//     params: { projectId: project.id},
+// });
+// Надо будет чето другое сделать
 </script>
 
 <template>
   <transition>
-    <div @click="openedFull = false; router.push({
-        name: 'ProjectsPage',
-        params: { projectId: null},
-        });" v-if="openedFull" class="fixed w-screen h-screen top-0 left-0 bg-black/[.5] z-30">
+    <div @click="openedFull = false;" v-if="openedFull" class="fixed w-screen h-screen top-0 left-0 bg-black/[.5] z-30">
       <button><i class="pi pi-times p-2 lg:p-4 lg:text-2xl text-lg hover:opacity-100 opacity-75 transition-all duration-200"></i></button>
     </div>
   </transition>
@@ -122,10 +124,7 @@ const route = useRoute()
     </div>
     <div
         ref="myDiv"
-        @click="openedFull = true; router.push({
-        name: 'ProjectsPage',
-        params: { projectId: project.id},
-        }); updatePosition()"
+        @click="openedFull = true; updatePosition()"
         :class="openedFull ? 'fixed z-40 duration-500 w-full h-screen top-0 lg:top-auto left-0 lg:left-auto lg:w-1/2 lg:h-5/6' : 'hover:-translate-y-1 hover:ring-1 cursor-pointer'"
         :style="divStyle"
         class="bg-bg-second-dark border border-slate-700/[.4] shadow-lg hover:shadow-[0_5px_8px_2px_rgba(0,0,0,0.25)] transition-all duration-200 transform ring-amber-600 rounded-xl flex flex-col"
