@@ -1,12 +1,27 @@
-FROM node:lts-alpine AS build-stage
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+ARG NODE_VERSION=20.16.0
 
-FROM nginx:stable-alpine
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM node:${NODE_VERSION}-slim as base
+
+ARG PORT=3000
+
+ENV NODE_ENV=production
+
+WORKDIR /src
+
+FROM base as build
+
+COPY --link package.json package-lock.json ./
+RUN npm install
+
+COPY --link . .
+
+RUN npm run build
+RUN npm prune
+
+FROM base
+
+ENV PORT=$PORT
+
+COPY --from=build /src/.output /src/.output
+
+CMD [ "node", ".output/server/index.mjs" ]
