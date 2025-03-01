@@ -19,7 +19,7 @@ const props = defineProps({
       </div>
     </div>
     <div class="w-6 h-6 relative" v-if="props.status === 'completed'">
-      <div class="absolute blur-sm w-6 h-6 border-2 border-green-500 bg-green-500 rounded-md flex justify-center items-center text-xs">
+      <div class="absolute blur-xs w-6 h-6 border-2 border-green-500 bg-green-500 rounded-md flex justify-center items-center text-xs">
         <i class="pi pi-check"></i>
       </div>
       <div class="absolute w-6 h-6 border-2 border-green-500 z-10 bg-green-500 rounded-md flex justify-center items-center text-xs">
