@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+import {config} from "~/config/config";
 
 // Создаем экземпляр axios
 export const http: AxiosInstance = axios.create({
-    baseURL: import.meta.dev ? "http://localhost:3000/" : "https://api.zaralx.ru/",
+    baseURL: config.api,
     withCredentials: true,
     timeout: 15000,
 });

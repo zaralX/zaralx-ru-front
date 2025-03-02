@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import Input from "~/components/global/Input.vue";
-import {config} from "../src/providers/config/config.js";
+import {config} from "~/config/config.js";
 import TelegramLogin from "~/components/auth/TelegramLogin.vue";
 
 const firstLoadTexts = [

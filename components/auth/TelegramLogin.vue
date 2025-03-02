@@ -1,5 +1,5 @@
 <script setup>
-import {config} from "~/src/providers/config/config.js";
+import {config} from "~/config/config.js";
 
 const botId = '8031549593';
 const redirectUrl = config.api + 'auth/telegram/login';
