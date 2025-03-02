@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import {ref, onMounted, nextTick, watch, onUnmounted} from "vue";
 
-const {UserLoaded} = useUser();
+const {userLoaded} = useUser();
 
 const route = useRoute();
 const links = [
@@ -94,11 +94,11 @@ onUnmounted(() => {
 <template>
   <div v-if="mobileMenu" class="fixed w-screen h-screen top-0 left-0 z-20">
     <div :class="mobileMenu ? 'top-0' : '-top-full'" class="absolute w-screen h-screen bg-bg-second-light dark:bg-bg-second-dark transition-all duration-200 ease-out pt-16">
-      <router-link @click="mobileMenu = false" to="/pages/login" class="flex items-center justify-center border-border-third-light dark:border-border-third-dark transition-all duration-300 border-b-2 border-border-main-light dark:border-border-main-dark py-2 text-border-inside-light dark:text-border-inside-dark text-2xl">
+      <NuxtLink @click="mobileMenu = false" to="/pages/login" class="flex items-center justify-center border-border-third-light dark:border-border-third-dark transition-all duration-300 border-b-2 border-border-main-light dark:border-border-main-dark py-2 text-border-inside-light dark:text-border-inside-dark text-2xl">
         login($me)
-      </router-link>
+      </NuxtLink>
       <div class="text-2xl flex flex-col text-border-inside-light dark:text-border-inside-dark">
-        <router-link
+        <NuxtLink
             v-for="link in links"
             :to="link.to"
             class="flex items-center justify-center border-border-third-light dark:border-border-third-dark transition-all duration-300 border-b-2 border-border-main-light dark:border-border-main-dark py-2"
@@ -106,7 +106,7 @@ onUnmounted(() => {
             @click="mobileMenu = false"
         >
           {{ link.name }}
-        </router-link>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -121,7 +121,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Используем ref для сохранения ссылок -->
-      <router-link
+      <NuxtLink
           v-for="(link, index) in links"
           :key="link.to"
           :to="link.to"
@@ -131,13 +131,13 @@ onUnmounted(() => {
           v-slot="{ el }"
       >
         {{ link.name }}
-      </router-link>
+      </NuxtLink>
     </nav>
 
-    <router-link :class="route.fullPath === '/login' || route.fullPath.startsWith('/cabinet') ? 'text-white bg-black/[.05]' : ''" :to="UserLoaded ? '/cabinet' : '/login'" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">
+    <NuxtLink :class="route.fullPath === '/login' || route.fullPath.startsWith('/cabinet') ? 'text-white bg-black/[.05]' : ''" :to="userLoaded ? '/cabinet' : '/login'" key="/login" ref="linkLoginRef" class="px-4 md:min-w-64 h-full hidden md:flex items-center justify-center gap-4 cursor-pointer">
 <!--      <div @click="_toggleDark()" class="flex justify-start items-center text-2xl grow cursor-pointer p-2"><i class="pi" :class="dark ? 'pi-sun' : 'pi-moon'"></i></div>-->
-      <div>{{ UserLoaded ? '_cabinet' : 'login($me)' }}</div>
-    </router-link>
+      <div>{{ userLoaded ? '_cabinet' : 'login($me)' }}</div>
+    </NuxtLink>
     <div @click="mobileMenu = !mobileMenu" class="px-8 grow h-full flex md:hidden items-center justify-end active:text-amber-500 duration-100 transition-all">
       <i v-if="!mobileMenu" class="pi pi-bars"></i>
       <i v-if="mobileMenu" class="pi pi-times"></i>

@@ -1,31 +1,18 @@
 <script setup>
 import {computed, onMounted, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {loginDiscord} from "../../../src/providers/api/auth/index.js";
-import store from "../../../src/providers/store/index.js";
+import {loginDiscord} from "~/composables/useHttp.js";
 
 const auth_title = ref("Ожидание")
-// useRouter().push({query: {}});
-const UserLoading = computed(() => store().UserLoading);
-
-function waitForUserLoadingToComplete() {
-  return new Promise((resolve) => {
-    const stopWatching = watch(UserLoading, (newValue) => {
-      if (!newValue) {
-        stopWatching(); // Остановить наблюдение, когда условие выполнено
-        resolve();
-      }
-    });
-  });
-}
+const {userLoading, user} = useUser();
 
 const route = useRoute();
 onMounted(async () => {
-  await waitForUserLoadingToComplete();
+  console.log(user.value, userLoading.value)
   const code = route.query.code
   auth_title.value = "Отправка запроса на авторизацию"
   try {
-    const loginData = await loginDiscord(code, store().User)
+    const loginData = await loginDiscord(code, user.value)
     auth_title.value = loginData.message;
 
     if (loginData.ok) {

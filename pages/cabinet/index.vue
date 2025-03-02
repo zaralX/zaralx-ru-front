@@ -1,6 +1,10 @@
 <script setup>
 import TelegramLogin from "~/components/auth/TelegramLogin.vue";
 
+definePageMeta({
+  layout: 'cabinet',
+})
+
 const {Logout, Delete, User} = useUser();
 
 function gotoDiscord() {

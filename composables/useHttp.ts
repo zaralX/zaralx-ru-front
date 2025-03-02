@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 // Создаем экземпляр axios
 export const http: AxiosInstance = axios.create({
-    baseURL:  "http://localhost:3001/",
+    baseURL: import.meta.dev ? "http://localhost:3000/" : "https://api.zaralx.ru/",
     withCredentials: true,
     timeout: 15000,
 });
@@ -33,6 +33,18 @@ export async function loginDiscord(code: string, userData: object) {
         const response = await http.post(`auth/discord/login`, {code, user: userData})
         return {ok: true, ...response.data};
     } catch (e: any) {
+        return {ok: false, ...e};
+    }
+}
+
+export async function loginTelegram(hash: string, userData: object) {
+    console.log(hash, userData);
+    try {
+        const data = JSON.parse(atob(hash));
+        data.user = userData;
+        const response = await http.post(`auth/telegram/login`, data)
+        return {ok: true, ...response.data};
+    } catch (e) {
         return {ok: false, ...e};
     }
 }

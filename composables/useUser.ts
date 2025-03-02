@@ -46,5 +46,7 @@ export const useUser = () => {
         Logout,
         Delete,
         aboutPageShowcased,
+        userLoaded,
+        userLoading
     };
 };
