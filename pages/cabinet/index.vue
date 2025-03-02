@@ -5,7 +5,7 @@ definePageMeta({
   layout: 'cabinet',
 })
 
-const {Logout, Delete, User} = useUser();
+const {Logout, Delete, user} = useUser();
 
 function gotoDiscord() {
   window.location.href = ""
@@ -25,11 +25,11 @@ function gotoDiscord() {
     </button>
     Привязка аккаунтов
     <div class="max-w-72">
-      <button @click="gotoDiscord()" :disabled="User?.discordId" class="bg-violet-700 disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg flex w-full justify-start items-center px-3">
+      <button @click="gotoDiscord()" :disabled="user?.discordId" class="bg-violet-700 disabled:opacity-75 enabled:hover:bg-violet-800 transition-all duration-100 py-2 rounded-lg flex w-full justify-start items-center px-3">
         <i class="pi pi-discord text-lg"></i>
         <span class="text-center w-full">Привязать Discord</span>
       </button>
-      <TelegramLogin :disabled="User?.telegramId">Привязать Telegram</TelegramLogin>
+      <TelegramLogin :disabled="user?.telegramId">Привязать Telegram</TelegramLogin>
     </div>
   </div>
 </template>
