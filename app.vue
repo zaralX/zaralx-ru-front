@@ -1,5 +1,4 @@
 <script setup>
-import {initDark} from "./src/providers/theme/index.js";
 import {useUser} from "~/composables/useUser.js";
 
 const {RefreshData} = useUser()
@@ -7,8 +6,6 @@ const {RefreshData} = useUser()
 onMounted(async () => {
   await RefreshData();
 })
-
-initDark()
 </script>
 
 <template>
