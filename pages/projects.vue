@@ -224,7 +224,7 @@ const route = useRoute()
 </script>
 
 <template>
-<div class="flex-grow flex h-full">
+<div class="flex-1 flex overflow-hidden">
   <div class="w-64 hidden md:block flex-shrink-0">
     <div class="h-10 flex items-center gap-2 px-4 border-b-2 border-border-main-light dark:border-border-main-dark text-border-inside-more-light dark:text-border-inside-more-dark">
       <i class="pi pi-sort-down-fill text-xs"></i>

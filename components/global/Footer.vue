@@ -16,7 +16,7 @@ const socials = [
 </script>
 
 <template>
-  <div class="h-12 md:h-16 border-t-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center text-border-inside-light dark:text-border-inside-dark font-[450] text-lg">
+  <div class="min-h-12 md:min-h-16 border-t-2 border-border-main-light dark:border-border-main-dark flex justify-center items-center text-border-inside-light dark:text-border-inside-dark font-[450] text-lg">
     <div class="px-4 h-full hidden md:flex items-center bg-bg-main-dark">find me in:</div>
 
     <nav class="bg-bg-main-dark relative grow border-x-2 border-border-main-light dark:border-border-main-dark h-full flex">
