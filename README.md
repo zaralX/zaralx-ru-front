@@ -43,6 +43,7 @@
 
 ### Built With
 
+- **[Nuxt](https://nuxt.com/)** — the intuitive vue framework
 - **[Vue.js](https://vuejs.org/)** — the foundation for the user interface
 - **[TailwindCSS](https://tailwindcss.com/)** — styling and customization
 - **[Pinia](https://pinia.vuejs.org/)** — state management
