@@ -1,8 +1,8 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import {config} from "~/config/config";
 
 // Создаем экземпляр axios
-export const http: AxiosInstance = axios.create({
+export const http = axios.create({
     baseURL: config.api,
     withCredentials: true,
     timeout: 15000,
