@@ -326,6 +326,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+@reference "tailwindcss";
 .slide-fade-enter-active {
   transition: all 0.5s ease-out;
 }
@@ -352,7 +353,6 @@ onUnmounted(() => {
 .fade-leave-to {
   opacity: 0;
 }
-@reference "tailwindcss";
 
 .snake-key {
   @apply border-2 w-10 h-10 flex justify-center items-center border-neutral-500 text-neutral-500 cursor-pointer duration-200 hover:bg-neutral-800 active:text-neutral-400 active:border-neutral-400;
