@@ -11,7 +11,7 @@ onMounted(async () => {
 <template>
   <div class="text-white font-fira w-full min-h-[100vh]">
 
-    <div class="fixed top-0 left-0 w-full h-[100vh] bg-bg-main-light -z-10 transition-all"/>
+    <div class="fixed top-0 left-0 w-full h-[100vh] bg-bg-main-dark -z-10 transition-all"/>
 
     <NuxtLayout>
       <NuxtPage />

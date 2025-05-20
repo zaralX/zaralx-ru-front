@@ -67,12 +67,12 @@ h1 {
     --font-fira: "Fira Code", sans-serif;
     --font-onest: "Onest", sans-serif;
 
-    --color-border-main-dark: #3D2D1E;
+    --color-border-main-dark: #2d2d2d;
     --color-bg-main-dark: #191919;
     --color-bg-second-dark: #151515;
     --color-bg-third-dark: #111111;
-    --color-border-inside-dark: #968060;
-    --color-border-inside-more-dark: #d5d0a1;
+    --color-border-inside-dark: #b27f56;
+    --color-border-inside-more-dark: #c5a490;
 
     --animate-clip-fluid: clip-fluid 4s ease-in-out infinite;
 }

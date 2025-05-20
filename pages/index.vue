@@ -2,6 +2,7 @@
 import IndexCodeLine from "~/components/index/IndexCodeLine.vue";
 import IndexSnake from "~/components/index/IndexSnake.vue";
 import {onMounted, ref} from "vue";
+import ContributionGraph from "~/components/charts/ContributionGraph.vue";
 
 const currentSubtitleText = ref("> ");
 const endSubtitleTexts = [
@@ -65,11 +66,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="relative">
 <!--    <div class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808009_1px,transparent_1px),linear-gradient(to_bottom,#80808009_1px,transparent_1px)] bg-[size:32px_32px] -z-10">-->
 
 <!--    </div>-->
     <IndexLive />
+    <div class="fixed bottom-16 right-0 z-10">
+      <ContributionGraph />
+    </div>
     <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
       <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
         <div>
@@ -78,7 +82,6 @@ onMounted(() => {
           <p class="text-5xl md:text-7xl font-[450] mb-4">zaralX</p>
           <p class="text-2xl md:text-4xl font-[450] text-red-500 typewriter text-wrap"><span>{{ currentSubtitleText }}</span>
             <span :class="isBlinking ? '' : 'hidden'">_</span></p>
-          <a class="mt-4 flex justify-center items-center gap-2 bg-neutral-800 hover:bg-neutral-700 rounded-md px-2 py-1 duration-200 transition-all max-w-64" href="https://old.zaralx.ru"><i class="pi pi-arrow-left"></i> <p class="grow text-center">На старый сайт</p></a>
         </div>
         <div class="text-sm md:text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
           <IndexCodeLine line="1">

@@ -5,6 +5,7 @@ import {onMounted, onUnmounted, ref} from "vue";
 import TodoAboutComponent from "~/components/about/TodoAboutComponent.vue";
 import MiniSkillAbout from "~/components/about/MiniSkillAbout.vue";
 import SkillTypeBlockAbout from "~/components/about/SkillTypeBlockAbout.vue";
+import ContributionGraph from "~/components/charts/ContributionGraph.vue";
 
 const datetime = ref({
   unix: 0
