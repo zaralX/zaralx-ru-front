@@ -43,6 +43,7 @@
 
 ### Built With
 
+- **[Nuxt](https://nuxt.com/)** — the intuitive vue framework
 - **[Vue.js](https://vuejs.org/)** — the foundation for the user interface
 - **[TailwindCSS](https://tailwindcss.com/)** — styling and customization
 - **[Pinia](https://pinia.vuejs.org/)** — state management
@@ -78,7 +79,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 - Telegram: <a href="https://t.me/zWork1">@zWork1</a>
-- Email: zaralx@example.com
+- Email: admin@zaralx.ru
 - GitHub: <a href="https://github.com/zaralX">zaralX</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
