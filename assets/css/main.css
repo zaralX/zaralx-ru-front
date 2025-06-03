@@ -61,6 +61,19 @@ h1 {
     }
 }
 
+@keyframes meteor {
+    0% {
+        transform: translate(0, 0) rotate(-135deg);
+    }
+    70% {
+        opacity: var(--o);
+    }
+    100% {
+        transform: translate(var(--d), var(--d)) rotate(-135deg);
+        opacity: 0;
+    }
+}
+
 @theme {
     --font-montserrat: "Montserrat", sans-serif;
     --font-rubik: "Rubik", sans-serif;
@@ -75,4 +88,5 @@ h1 {
     --color-border-inside-more-dark: #c5a490;
 
     --animate-clip-fluid: clip-fluid 4s ease-in-out infinite;
+    --animate-meteor: meteor 1s linear infinite;
 }

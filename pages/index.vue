@@ -66,15 +66,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative">
+  <div>
 <!--    <div class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808009_1px,transparent_1px),linear-gradient(to_bottom,#80808009_1px,transparent_1px)] bg-[size:32px_32px] -z-10">-->
 
 <!--    </div>-->
-    <IndexLive />
+<!--    <IndexLive />-->
+    <IndexMeteors />
+
     <div class="fixed bottom-16 right-0 z-10">
       <ContributionGraph />
     </div>
-    <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2">
+    <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2 z-10 sticky">
       <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
         <div>
           <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
