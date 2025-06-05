@@ -3,6 +3,9 @@ import IndexCodeLine from "~/components/index/IndexCodeLine.vue";
 import IndexSnake from "~/components/index/IndexSnake.vue";
 import {onMounted, ref} from "vue";
 import ContributionGraph from "~/components/charts/ContributionGraph.vue";
+import {http} from "~/composables/useHttp.js";
+
+const contributions = ref({activity: {}, commits: []})
 
 const currentSubtitleText = ref("> ");
 const endSubtitleTexts = [
@@ -19,7 +22,7 @@ const endSubtitleTexts = [
 ].sort( () => .5 - Math.random() );
 const isBlinking = ref(true);
 
-onMounted(() => {
+onMounted(async () => {
   if (window.innerWidth < 780) {
     currentSubtitleText.value += endSubtitleTexts[0];
     return;
@@ -62,6 +65,9 @@ onMounted(() => {
       }
     }
   }, 100);
+
+  const data = (await http.get("/git/activity")).data;
+  contributions.value = data
 });
 </script>
 
@@ -71,10 +77,10 @@ onMounted(() => {
 
 <!--    </div>-->
 <!--    <IndexLive />-->
-    <IndexMeteors />
+    <IndexMeteors v-model="contributions.commits" />
 
     <div class="fixed bottom-16 right-0 z-10">
-      <ContributionGraph />
+      <ContributionGraph v-model="contributions.activity" />
     </div>
     <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2 z-10 sticky">
       <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">

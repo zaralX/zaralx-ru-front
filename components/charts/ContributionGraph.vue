@@ -2,7 +2,7 @@
 import dayjs from "dayjs";
 import { http } from "~/composables/useHttp";
 
-const calendar = ref({})
+const calendar = defineModel()
 
 const months = ref<string[]>([])
 const contributions = ref({})
@@ -12,9 +12,12 @@ onMounted(() => {
   refresh()
 })
 
+watch(calendar, () => {
+  refresh()
+})
+
 async function refresh() {
   loading.value = true
-  calendar.value = (await http.get("/git/activity")).data
   months.value = []
   contributions.value = {}
   const firstDay = Object.keys(calendar.value)[0];
