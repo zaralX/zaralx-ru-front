@@ -69,4 +69,7 @@ onMounted(() => {
 });
 
 watch(() => props.number, setStyles, { immediate: true });
+watch(commits, () => {
+  setStyles();
+});
 </script>
