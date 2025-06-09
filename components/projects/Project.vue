@@ -8,6 +8,8 @@ const props = defineProps({
   opened: {type: Boolean, default: false},
 });
 
+const projectDiv = useTemplateRef("projectDiv");
+
 const tagsFiltered = computed(() => {
   return props.project.tags.map(tag => {
     const tagData = props.tags.find(el => el.key === tag);
@@ -81,7 +83,7 @@ const divStyle = computed(() => {
 
     // Вычисляем смещение относительно видимой области
     const translateX = (viewportWidth - width) / 2 - left + bodyRect.left;
-    const translateY = - top + bodyRect.top - (viewportHeight - height) / 6;
+    const translateY = - top + bodyRect.top - (viewportHeight - height) / 6 - projectDiv.value.parentElement.scrollTop;
 
     return {
       transform: `translate(${translateX}px, ${translateY}px)`
@@ -117,7 +119,7 @@ const route = useRoute()
       <button><i class="pi pi-times p-2 lg:p-4 lg:text-2xl text-lg hover:opacity-100 opacity-75 transition-all duration-200"></i></button>
     </div>
   </transition>
-  <div>
+  <div ref="projectDiv">
     <div class="flex gap-2 text-sm md:text-base">
       <p class="font-bold text-orange-500">{{ project.name }}</p>
       <p class="text-slate-500 truncate">// {{ project.type }}</p>

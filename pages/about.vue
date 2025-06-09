@@ -37,14 +37,14 @@ const skills = ref([
     low: [
       {color: "#7d22cc", name: "PHP", percent: 30, icon: "devicon-php-plain"},
       {color: "#5c248e", name: "C#", percent: 40, icon: "devicon-csharp-plain"},
-      {color: "#0283c5", name: "Typescript", percent: 60, icon: "devicon-typescript-plain"},
-      {color: "#d77606", name: "Rust", percent: 50, icon: "devicon-rust-plain"},
+      {color: "#d77606", name: "Rust", percent: 75, icon: "devicon-rust-plain"},
       {color: "#3183a8", name: "C++", percent: 20, icon: "devicon-cplusplus-plain"},
     ],
     basic: [
       {color: "#d77606", name: "HTML", icon: "devicon-html5-plain"},
       {color: "#0283c5", name: "CSS", icon: "devicon-css3-plain"},
       {color: "#5b5b5b", name: "SQL", icon: "devicon-sqlite-plain"},
+      {color: "#0283c5", name: "Typescript", icon: "devicon-typescript-plain"},
     ]
   },
   {
@@ -87,6 +87,7 @@ const skills = ref([
       {color: "#02567b", name: "SQLite", icon: "devicon-sqlite-plain"},
       {color: "#336690", name: "Postgresql", icon: "devicon-postgresql-plain"},
       {color: "#336690", name: "NMS", icon: "/img/logos/bukkit.png"},
+      {color: "#4d78a4", name: "Rest API", icon: "devicon-djangorest-plain"},
     ]
   }
 ])

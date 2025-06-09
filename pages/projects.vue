@@ -144,8 +144,8 @@ const projects = [
   },
   {
     id: 7,
-    name: "FreshMarket",
-    description: "Маркетплейс в игре Minecraft который предоставляет продажу и покупку товаров.",
+    name: "FreshMarket v1",
+    description: "Маркетплейс в игре Minecraft который предоставляет продажу и покупку товаров. [Закрыто]",
     type: "_marketplace",
     image: "/img/projects/freshmarket-banner.gif",
     tags: ["minecraft", "website"],
@@ -156,15 +156,15 @@ const projects = [
         link: "https://www.youtube.com/watch?v=RVah56XIITM"
       },
       {
-        type: "website",
-        link: "https://spx.zaralx.ru"
-      }
+        type: "buy-tg",
+        link: "https://zWork1.t.me/"
+      },
     ]
   },
   {
     id: 8,
     name: "Image Service",
-    description: "API которое предоставляет minecraft иконки предметов, а так же майнкрафт скины",
+    description: "API которое предоставляет minecraft иконки предметов, а так же майнкрафт скины [Закрыто, используйте assets.zaralx.ru]",
     type: "_minecraft_icons",
     image: "/img/projects/xis-banner.png",
     tags: ["minecraft", "website"],
@@ -190,7 +190,45 @@ const projects = [
         link: "https://github.com/zaralX/minecast-launcher-updates/releases/latest"
       }
     ]
-  }
+  },
+  {
+    id: 10,
+    name: "FreshMarket v2",
+    description: "Первый в мире майнкрафт маркетплейс.",
+    type: "_marketplace",
+    image: "/img/projects/freshmarket_v2.png",
+    tags: ["minecraft", "website"],
+    date: "2025-04-13",
+    links: [
+      {
+        type: "youtube",
+        link: "https://www.youtube.com/live/fpkmOKHlDxc"
+      },
+      {
+        type: "buy-tg",
+        link: "https://zWork1.t.me/"
+      },
+    ]
+  },
+  {
+    id: 11,
+    name: "zaralX Assets",
+    description: "API которое предоставляет minecraft иконки предметов, майнкрафт скины и локализацию",
+    type: "_minecraft_assets",
+    image: "/img/projects/assets_zaralx.png",
+    tags: ["minecraft", "website", "source"],
+    date: "2025-05-01",
+    links: [
+      {
+        type: "website",
+        link: "https://assets.zaralx.ru"
+      },
+      {
+        type: "source-github",
+        link: "https://github.com/zaralX/zaralx-assets"
+      }
+    ]
+  },
 ]
 
 const visibleProjects = ref(projects)
