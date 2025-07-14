@@ -7,4 +7,3 @@ services:
       - stack.env
     ports:
       - "${SERVER_PORT:-3000}:${PORT:-3000}"
-    network_mode: "host"
