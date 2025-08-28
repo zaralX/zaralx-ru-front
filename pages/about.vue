@@ -31,7 +31,7 @@ const skills = ref([
     title: "Языки программирования",
     main: [
       {color: "#e8b208", name: "Javascript", icon: "devicon-javascript-plain", subtitle: "Active"},
-      {color: "#ed4444", name: "Java", icon: "devicon-java-plain", subtitle: "Active"},
+      {color: "#ed4444", name: "Kotlin", icon: "devicon-kotlin-plain", subtitle: "Active"},
       {color: "#c88904", name: "Python", icon: "devicon-python-plain", subtitle: "Inactive"},
     ],
     low: [
@@ -39,6 +39,8 @@ const skills = ref([
       {color: "#5c248e", name: "C#", percent: 40, icon: "devicon-csharp-plain"},
       {color: "#d77606", name: "Rust", percent: 75, icon: "devicon-rust-plain"},
       {color: "#3183a8", name: "C++", percent: 20, icon: "devicon-cplusplus-plain"},
+      {color: "#3183a8", name: "Go", percent: 25, icon: "devicon-go-original-wordmark"},
+      {color: "#3183a8", name: "Java", percent: 95, icon: "devicon-java-plain"},
     ],
     basic: [
       {color: "#d77606", name: "HTML", icon: "devicon-html5-plain"},
@@ -81,13 +83,16 @@ const skills = ref([
       {color: "#00c7e0", name: "Electron", icon: "devicon-electron-original", subtitle: "Inactive"},
       {color: "#00c7e0", name: "Tauri v2", icon: "devicon-tauri-plain", subtitle: "Active"},
     ],
-    low: [],
+    low: [
+      {color: "#4ea940", name: "MongoDB", icon: "devicon-mongodb-plain", percent: 10},
+    ],
     basic: [
       {color: "#004f67", name: "MySql", icon: "devicon-mysql-plain"},
       {color: "#02567b", name: "SQLite", icon: "devicon-sqlite-plain"},
       {color: "#336690", name: "Postgresql", icon: "devicon-postgresql-plain"},
       {color: "#336690", name: "NMS", icon: "/img/logos/bukkit.png"},
       {color: "#4d78a4", name: "Rest API", icon: "devicon-djangorest-plain"},
+      {color: "#20bb4d", name: "Folia", icon: "devicon-apache-plain"},
     ]
   }
 ])
