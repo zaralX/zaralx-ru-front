@@ -1,6 +1,5 @@
-@import "primeicons/primeicons.css";
-@import "devicon/devicon.min.css";
-@import "tailwindcss";
+@import "../../../node_modules/devicon/devicon.min.css";
+@import "./tailwind.css";
 
 body {
     font-family: 'Montserrat', Helvetica, Arial, sans-serif;

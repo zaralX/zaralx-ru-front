@@ -1,5 +1,5 @@
 <script setup>
-import {useUser} from "~/composables/useUser.js";
+import {useUser} from "~/composables/useUser";
 
 const {RefreshData} = useUser()
 
@@ -9,13 +9,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="text-white font-fira w-full min-h-[100vh]">
-
-    <div class="fixed top-0 left-0 w-full h-[100vh] bg-bg-main-dark -z-10 transition-all"/>
-
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+  <div>
+    <NuxtLoadingIndicator :throttle="10" color="#009DFF" error-color="#ff0000" />
+    <ShTooltipProvider>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </ShTooltipProvider>
+    <ShToaster
+        position="bottom-left"
+        rich-colors
+        close-button
+    />
   </div>
 </template>
 
