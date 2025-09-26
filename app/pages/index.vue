@@ -15,8 +15,8 @@
         <p class="text-neutral-400">Эффективность одного, талант многих.</p>
         <p class="bg-gradient-to-t from-red-600 to-rose-500 text-transparent bg-clip-text">Зачем искать где-то ещё?</p>
       </div>
-      <p class="text-neutral-400 w-96 text-center font-medium bg-black/20 rounded-lg p-4">В моём опыте широкий спектр языков программирования и фреймворков, которые я постоянно применяю. Люблю создавать уникальные и интересные проекты для людей.</p>
-      <div class="rounded-3xl p-px bg-gradient-to-r from-neutral-700 to-neutral-800">
+      <p class="text-neutral-400 w-96 text-center font-medium bg-black/20 rounded-lg p-4 shadow-md">В моём опыте широкий спектр языков программирования и фреймворков, которые я постоянно применяю. Люблю создавать уникальные и интересные проекты для людей.</p>
+      <div class="rounded-3xl p-px bg-gradient-to-r from-neutral-700 to-neutral-800 shadow-md">
         <div class="bg-neutral-900 px-4 py-1 flex items-center gap-2 rounded-[calc(theme(borderRadius.3xl)-1px)]">
           <div class="w-2 h-2 bg-green-500 rounded-full"></div>
           <div class="w-2 h-2 bg-green-500 rounded-full absolute animate-ping"></div>
@@ -52,6 +52,17 @@
           Связаться со мной
         </span>
       </a>
+    </div>
+
+    <div class="md:w-[640px] xl:w-[1080px] mt-16">
+      <p class="text-2xl font-montserrat font-semibold text-center bg-gradient-to-b from-white/25 to-neutral-400 bg-clip-text text-transparent">Проекты</p>
+      <div class="h-px w-11/12 mt-1 bg-gradient-to-r from-transparent via-neutral-500 to-transparent"></div>
+      <div class="grid grid-cols-2 gap-4 my-2">
+        <div class="bg-neutral-950 opacity-20 w-full h-64 rounded-lg"></div>
+        <div class="bg-neutral-950 opacity-20 w-full h-64 rounded-lg"></div>
+        <div class="bg-neutral-950 opacity-20 w-full h-64 rounded-lg"></div>
+        <div class="bg-neutral-950 opacity-20 w-full h-64 rounded-lg"></div>
+      </div>
     </div>
   </div>
 </div>
