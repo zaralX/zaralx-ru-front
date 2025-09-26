@@ -9,7 +9,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="bg-neutral-900">
     <NuxtLoadingIndicator :throttle="10" color="#009DFF" error-color="#ff0000" />
     <ShTooltipProvider>
       <NuxtLayout>

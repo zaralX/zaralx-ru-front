@@ -1,147 +1,58 @@
-<script setup>
-import IndexCodeLine from "~/components/index/IndexCodeLine.vue";
-import IndexSnake from "~/components/index/IndexSnake.vue";
-import {onMounted, ref} from "vue";
-import ContributionGraph from "~/components/charts/ContributionGraph.vue";
-import {http} from "~/composables/useHttp.js";
-
-const contributions = ref({activity: {}, commits: []})
-
-const currentSubtitleText = ref("> ");
-const endSubtitleTexts = [
-  "Создаю всё и везде!",
-  "Чуточку инфлюенсер",
-  "Пишу под Minecraft",
-  "Frontend-мастер",
-  "Backend-волшебник",
-  "Java разработчик",
-  "QA тестировщик",
-  "Web-мастер 🕸️",
-  "Дизайню по настроению 🎨",
-  "Залетай в Telegram! 🔥"
-].sort( () => .5 - Math.random() );
-const isBlinking = ref(true);
-
-onMounted(async () => {
-  if (window.innerWidth < 780) {
-    currentSubtitleText.value += endSubtitleTexts[0];
-    return;
-  }
-  let textIndex = 0;
-  let index = 0;
-  let blinker = 0;
-  let waitSwitch = 0;
-  let clearing = false;
-
-  // Таймер для анимации печати
-  const typingInterval = setInterval(() => {
-    if (clearing) {
-      index--;
-      if (index < -2) {
-        clearing = false;
-        index = 0;
-        textIndex++;
-        if (endSubtitleTexts.length <= textIndex) {
-          textIndex = 0;
-        }
-      }
-    }
-    if (index < endSubtitleTexts[textIndex].length) {
-      currentSubtitleText.value = "> " + endSubtitleTexts[textIndex].substring(0, index+1);
-      if (!clearing) {
-        index++;
-      }
-    } else {
-      blinker++;
-      if (blinker > 3) {
-        blinker = 0;
-        isBlinking.value = !isBlinking.value;
-      }
-      waitSwitch++;
-      if (waitSwitch > 20) {
-        clearing = true;
-        isBlinking.value = true;
-        waitSwitch = 0;
-      }
-    }
-  }, 100);
-
-  const data = (await http.get("/git/activity")).data;
-  contributions.value = data
-});
+<script setup lang="ts">
 </script>
 
 <template>
-  <div>
-<!--    <div class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808009_1px,transparent_1px),linear-gradient(to_bottom,#80808009_1px,transparent_1px)] bg-[size:32px_32px] -z-10">-->
+<div>
+  <div class="bg-[radial-gradient(circle,var(--tw-gradient-from)_1px,transparent_1px)] bg-[length:16px_16px] [background-position:center_center] [background-color:var(--tw-gradient-to)] from-neutral-800 to-transparent absolute top-0 left-0 h-screen w-full z-0 opacity-50"></div>
+  <IndexMeteors />
+  <div class="absolute z-10 top-16 left-1/2 w-96 h-96 bg-neutral-500 transform -translate-x-1/2 rounded-full blur-[200px] opacity-75"></div>
+  <div class="z-20 flex flex-col items-center justify-center text-white relative space-y-8">
+    <div class="flex flex-col items-center justify-center space-y-2">
+      <div class="w-24 h-24 rounded-full overflow-hidden mt-32">
+        <img class="w-full h-full" src="/author.png" alt="">
+      </div>
+      <div class="font-geist text-3xl text-center font-medium">
+        <p class="text-neutral-400">Эффективность одного, талант многих.</p>
+        <p class="bg-gradient-to-t from-red-600 to-rose-500 text-transparent bg-clip-text">Зачем искать где-то ещё?</p>
+      </div>
+      <p class="text-neutral-400 w-96 text-center font-medium bg-black/20 rounded-lg p-4">В моём опыте широкий спектр языков программирования и фреймворков, которые я постоянно применяю. Люблю создавать уникальные и интересные проекты для людей.</p>
+      <div class="rounded-3xl p-px bg-gradient-to-r from-neutral-700 to-neutral-800">
+        <div class="bg-neutral-900 px-4 py-1 flex items-center gap-2 rounded-[calc(theme(borderRadius.3xl)-1px)]">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-green-500 rounded-full absolute animate-ping"></div>
+          <p class="text-green-500 font-medium text-sm">Открыт для новых возможностей</p>
+        </div>
+      </div>
 
-<!--    </div>-->
-<!--    <IndexLive />-->
-    <IndexMeteors v-model="contributions.commits" />
-
-    <div class="fixed bottom-16 right-0 z-10">
-      <ContributionGraph v-model="contributions.activity" />
+      <div class="flex gap-2">
+        <a href="https://github.com/zaralx" target="_blank" class="flex justify-center items-center p-2 text-neutral-400 hover:text-neutral-300 transition">
+          <Icon name="mdi:github" size="32"/>
+        </a>
+        <a href="https://t.me/underzaral" target="_blank" class="flex justify-center items-center p-2 text-neutral-400 hover:text-neutral-300 transition">
+          <Icon name="ic:baseline-telegram" size="32"/>
+        </a>
+        <a href="https://www.youtube.com/@zaralx" target="_blank" class="flex justify-center items-center p-2 text-neutral-400 hover:text-neutral-300 transition">
+          <Icon name="mdi:youtube" size="32"/>
+        </a>
+        <a href="https://discord.com/users/459745638507347979" target="_blank" class="flex justify-center items-center p-2 text-neutral-400 hover:text-neutral-300 transition">
+          <Icon name="ic:baseline-discord" size="32"/>
+        </a>
+      </div>
     </div>
-    <div class="lg:px-32 xl:px-64 my-8 md:my-16 min-h-full h-full grid lg:grid-cols-2 gap-2 z-10 sticky">
-      <div class="px-4 md:px-0 min-h-96 flex flex-col justify-center lg:justify-start items-center lg:items-end gap-16 lg:gap-0 lg:grid grid-rows-2 py-16">
-        <div>
-          <p class="text-lg font-[450] text-white/[.9]">Привет, я:</p>
-          <i class="absolute pi pi-circle-fill text-white blur-3xl -z-10 text-sm md:text-[3rem] light-line opacity-0 transform"></i>
-          <p class="text-5xl md:text-7xl font-[450] mb-4">zaralX</p>
-          <p class="text-2xl md:text-4xl font-[450] text-red-500 typewriter text-wrap"><span>{{ currentSubtitleText }}</span>
-            <span :class="isBlinking ? '' : 'hidden'">_</span></p>
+
+    <div>
+      <a href="https://zWork1.t.me/" class="group relative inline-flex items-center overflow-hidden transition rounded-md px-8 py-1 bg-neutral-800" shortcuts="⌘,O" data-state="closed" data-grace-area-trigger="">
+        <div class="absolute inset-0 flex items-center [container-type:inline-size]">
+          <div class="absolute size-[100cqw] animate-spin bg-[conic-gradient(from_0_at_50%_50%,rgba(230,0,118,0.5)_0deg,transparent_60deg,transparent_300deg,rgba(230,0,118,0.5)_360deg)] opacity-0 transition duration-300 group-hover:opacity-100"></div>
         </div>
-        <div class="text-sm md:text-lg text-border-inside-light dark:text-border-inside-dark flex flex-col justify-end select-none">
-          <IndexCodeLine line="1">
-            <p class="">// приветствую на сайте,</p>
-          </IndexCodeLine>
-          <IndexCodeLine line="2">
-            <p class="">// хотите написать мне?</p>
-          </IndexCodeLine>
-          <IndexCodeLine line="3">
-            <a href="https://t.me/zWork1" class="hover:bg-white/[.05] duration-100">
-              <span class="text-red-500">const</span>
-              <span class="text-orange-400"> tgLink</span>
-              <span class="text-white"> =</span>
-              <span class="text-yellow-300"> "https://t.me/zWork1"</span></a>
-          </IndexCodeLine>
-        </div>
-      </div>
-      <div class="hidden lg:flex justify-center">
-        <div class="bg-bg-second-light dark:bg-bg-second-dark h-[32rem] rounded-lg shadow p-4 flex items-center gap-4">
-          <div class="min-w-64 min-h-[30rem] bg-bg-third-light dark:bg-bg-third-dark shadow-[0_0_8px_2px_rgba(15,15,15,0.6)] rounded-lg">
-            <IndexSnake />
-          </div>
-          <!--      Ну да, это змейка. А что?-->
-          <!--      <br>-->
-          <!--      Сайт в разработке если что.-->
-        </div>
-      </div>
+        <div class="absolute inset-0.5 bg-neutral-900 sm:bg-neutral-900/80 sm:backdrop-blur-md rounded-md"></div>
+        <div class="absolute bottom-0 left-1/2 h-1/3 w-4/5 -translate-x-1/2 bg-white/10 opacity-50 blur-md transition-all duration-500 group-hover:h-2/3 group-hover:opacity-100 rounded-md"></div>
+        <span class="relative flex items-center justify-center gap-2 bg-gradient-to-b group-hover:from-pink-500 group-hover:to-rose-500 from-white/25 to-white bg-clip-text text-lg font-medium text-transparent duration-200">
+          <Icon name="lucide:mail" class="text-white/80 group-hover:text-pink-500 transition-all duration-200" />
+          Связаться со мной
+        </span>
+      </a>
     </div>
   </div>
+</div>
 </template>
-
-<style scoped>
-.light-line {
-  animation: light-line 2s linear;
-}
-
-@keyframes light-line {
-  0% {
-    transform: scale(0.4);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0;
-    transform: translateX(-100px) translateY(10px) scale(0.25);
-  }
-  55% {
-    opacity: 1;
-    transform: translateX(100px) translateY(10px) scale(0.7);
-  }
-  100% {
-    transform: translateX(300px) translateY(10px) scale(0.25);
-    opacity: 0;
-  }
-}
-</style>

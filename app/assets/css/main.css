@@ -2,7 +2,7 @@
 @import "./tailwind.css";
 
 body {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Onest', Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -78,6 +78,7 @@ h1 {
     --font-rubik: "Rubik", sans-serif;
     --font-fira: "Fira Code", sans-serif;
     --font-onest: "Onest", sans-serif;
+    --font-geist: "Geist", sans-serif;
 
     --color-border-main-dark: #2d2d2d;
     --color-bg-main-dark: #191919;
