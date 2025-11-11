@@ -15,6 +15,7 @@
     <ExperimentsCubeParticles />
     <ExperimentsCubeParticlesSpawner />
     <Experiments3dSpinningText />
+    <ExperimentsPerspectiveCube />
   </div>
 </div>
 </template>
