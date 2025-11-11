@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import ExperimentCard from "~/components/experiments/ExperimentCard.vue";
-import {animate, random, set} from "animejs"; // v4+ имеет только именованные экспорты
+import {animate, random, set} from "animejs";
 
 const container = ref<HTMLDivElement | null>(null)
 const squares = ref<HTMLElement[]>([])

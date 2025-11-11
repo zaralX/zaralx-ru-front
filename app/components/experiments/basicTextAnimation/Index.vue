@@ -4,7 +4,7 @@ import ExperimentCard from "~/components/experiments/ExperimentCard.vue";
 import { animate, stagger, splitText } from 'animejs';
 
 onMounted(() => {
-  const { chars } = splitText('h2', { words: false, chars: true });
+  const { chars } = splitText('#experiment-basic-text-animation', { words: false, chars: true });
 
   animate(chars, {
     // Property keyframes
@@ -29,7 +29,7 @@ onMounted(() => {
   <ExperimentCard>
     <div class="relative flex items-center justify-center h-full text-orange-500">
       <div class="square-grid -z-10"></div>
-      <h2 class="text-2xl">ANIME.JS TEST</h2>
+      <h2 id="experiment-basic-text-animation" class="text-2xl">ANIME.JS TEST</h2>
       <h3 class="text-2xl absolute opacity-50">ANIME.JS TEST</h3>
     </div>
   </ExperimentCard>
