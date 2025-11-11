@@ -3,7 +3,6 @@
 
 <template>
 <div>
-  Remake starts here
-  <ShButton />
+  <IndexMainPart />
 </div>
 </template>
