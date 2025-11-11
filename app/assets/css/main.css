@@ -4,3 +4,16 @@ body {
     font-family: 'Golos Text', Helvetica, Arial, sans-serif;
     @apply bg-stone-950 text-white;
 }
+
+.square-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+            linear-gradient(to right, rgba(var(--rgb-current-1, 255, 0, 0), 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(var(--rgb-current-1, 255, 0, 0), 0.4) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+    box-shadow: inset 0 0 0 1px rgba(var(--rgb-current-1, 255, 0, 0), 0.8);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
