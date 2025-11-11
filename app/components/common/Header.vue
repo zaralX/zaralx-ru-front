@@ -8,11 +8,20 @@ onMounted(() => {
 </script>
 
 <template>
-<div class="flex">
-  <div id="header-title" class="p-2 rounded-lg font-unbounded">ZARALX.RU</div>
-  <div class="flex-1">
+<div class="flex items-center">
+  <NuxtLink to="/" id="header-title" class="p-2 rounded-lg font-unbounded group w-32">
+    <p class="absolute blur group-hover:opacity-100 opacity-0 select-none duration-1000 group-hover:animate-[light-shake_1s_ease-in-out]">ZARALX.RU</p>
+    <p class="group-hover:animate-[light-shake_1s_ease-in-out]">ZARALX.RU</p>
+  </NuxtLink>
+  <div class="flex-1 flex items-center justify-center gap-4">
+    <NuxtLink to="/experiments">
+      <ShButton variant="ghost">Проекты</ShButton>
+    </NuxtLink>
+    <NuxtLink to="/experiments">
+      <ShButton variant="ghost">Эксперименты</ShButton>
+    </NuxtLink>
   </div>
-  <div class="flex items-center text-lg gap-4">
+  <div class="flex items-center text-lg gap-4 w-32">
     <a href="https://github.com/zaralX" target="_blank" class="text-stone-400 hover:text-stone-200 duration-200">
       <Icon name="lucide:github" />
     </a>
