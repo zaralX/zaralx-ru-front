@@ -34,10 +34,23 @@
         <p class="text-stone-500 italic text-sm mt-2">Готов воплощать идеи - от концепции до рабочего решения.</p>
       </div>
 
-      <div class="w-full max-h-96 overflow-hidden relative">
-        <div class="w-96 mr-0 ml-auto -translate-y-12">
-          <img src="/img/developer.png" alt="" class="absolute blur">
-          <img src="/img/developer.png" alt="" class="relative">
+      <div>
+        <div class="w-full max-h-64 relative overflow-hidden">
+          <div class="w-64 mr-0 ml-auto -translate-y-8 grayscale-25">
+            <img src="/img/developer.png" alt="" class="absolute blur">
+            <img src="/img/developer.png" alt="" class="relative">
+          </div>
+        </div>
+        <div class="w-64 mr-0 ml-auto h-px bg-red-500 relative">
+          <div class="w-full h-1 -translate-y-0.5 bg-red-500 blur">
+
+          </div>
+        </div>
+        <div class="w-full max-h-64 relative overflow-hidden opacity-50 scale-y-[-1]">
+          <div class="w-64 mr-0 ml-auto -translate-y-8 grayscale-50">
+            <img src="/img/developer.png" alt="" class="absolute blur">
+            <img src="/img/developer.png" alt="" class="relative">
+          </div>
         </div>
       </div>
     </div>

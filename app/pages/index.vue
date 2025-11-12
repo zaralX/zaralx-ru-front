@@ -13,7 +13,7 @@ onMounted(() => {
       sync: 1,
       enter: 'max bottom',
       leave: 'min top',
-      // debug: true,
+      debug: true,
     })
   });
 })
@@ -28,6 +28,11 @@ onMounted(() => {
            style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
       </div>
       <AboutPart />
+      <div class="relative w-full h-32">
+        <div class="absolute inset-0 bg-stone-900 rotate-180 -translate-y-px"
+             style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
+        </div>
+      </div>
     </div>
   </div>
 </div>
