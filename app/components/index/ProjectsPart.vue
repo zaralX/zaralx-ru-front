@@ -23,8 +23,8 @@ onMounted(() => {
     ease: 'linear',
     autoplay: onScroll({
       sync: 1,
-      enter: 'max bottom',
-      leave: 'top+=300 top',
+      enter: 'max bottom-=300',
+      leave: 'top+=200 top',
       // debug: true,
     })
   });

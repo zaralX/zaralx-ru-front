@@ -62,6 +62,8 @@ const skills = [
 onMounted(() => {
   const $squares = utils.$('.square');
 
+  const x = useDevice().isDesktop ? 10 : 5
+
   function animateGrid() {
     animate($squares, {
       boxShadow: [
@@ -69,8 +71,8 @@ onMounted(() => {
         { to: '0 0 0rem 0 currentColor' }
       ],
       delay: stagger(100, {
-        grid: [10, 4],
-        from: utils.random(0, 10 * 4)
+        grid: [x, 4],
+        from: utils.random(0, x * 4)
       }),
       onComplete: animateGrid
     });
@@ -84,7 +86,7 @@ onMounted(() => {
 <div>
   <h2 class="font-unbounded text-center text-3xl -translate-y-12">Что по скиллам?</h2>
   <div class="w-full flex items-center justify-center">
-    <div class="grid grid-cols-10 gap-2">
+    <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
       <Tooltip v-for="skill in skills">
         <TooltipTrigger>
           <div class="square text-black bg-stone-900 w-16 h-16 rounded-sm flex justify-center items-center group" :style="{ color: skill.color }">
