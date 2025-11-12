@@ -25,7 +25,7 @@ onUnmounted(() => {
     </NuxtLink>
     <div class="flex-1 flex items-center justify-center">
       <div class="space-x-2 rounded-lg hidden sm:block" :class="{ 'backdrop-blur bg-black/50': scrollY > 0 }">
-        <NuxtLink to="/experiments">
+        <NuxtLink to="/projects">
           <ShButton variant="ghost">Проекты</ShButton>
         </NuxtLink>
         <NuxtLink to="/experiments">
