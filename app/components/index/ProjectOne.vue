@@ -32,25 +32,41 @@ onMounted(() => {
     })
   });
 
-  animate("#project-video-fm", {
-    rotateX: [-90, 0],
-    rotateY: [30, 0],
-    ease: 'inOutCirc',
-    duration: 5000,
-    alternate: true,
-    autoplay: onScroll({
-      sync: 1,
-      enter: 'max bottom',
-      leave: 'min top',
-      // debug: true,
-    })
-  });
+  if (useDevice()?.isDesktop) {
+    animate("#project-video-fm", {
+      rotateX: [-90, 0],
+      rotateY: [30, 0],
+      ease: 'inOutCirc',
+      duration: 5000,
+      alternate: true,
+      autoplay: onScroll({
+        sync: 1,
+        enter: 'max bottom',
+        leave: 'min top',
+        // debug: true,
+      })
+    });
+  } else {
+    animate("#project-video-fm", {
+      rotateX: [-90, 0],
+      rotateY: [30, 0],
+      ease: 'inOutCirc',
+      duration: 5000,
+      alternate: true,
+      autoplay: onScroll({
+        sync: 1,
+        enter: 'max bottom-=300',
+        leave: 'min top-=100',
+        // debug: true,
+      })
+    });
+  }
 })
 </script>
 
 <template>
 <div class="py-16 px-4 sm:px-8 md:px-32">
-  <div class="grid grid-cols-2 gap-4 md:gap-8 lg:gap-16">
+  <div class="space-y-4 lg:grid grid-cols-2 gap-4 md:gap-8 lg:gap-16">
     <div class="flex flex-col justify-center w-full text-stone-300">
       <h2 class="text-3xl font-unbounded bg-gradient-to-r from-blue-400 via-sky-300 to-sky-400 bg-size-[300%] text-transparent bg-clip-text animate-[animated-gradient_6s_ease_infinite_alternate]">FreshMarket</h2>
       <div class="max-w-152">
@@ -63,7 +79,7 @@ onMounted(() => {
         <div class="relative mt-2">
           <h3 class="font-unbounded z-20">Логика доставки</h3>
           <div id="project-line-fm" class="h-1 w-24 bg-sky-500 -translate-y-1.5 -translate-x-1 opacity-50"></div>
-          <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" class="absolute text-sky-500">
+          <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" class="absolute hidden md:block text-sky-500">
             <g fill="none" stroke="currentColor" stroke-width="2">
               <path d="
       M75,15
@@ -77,7 +93,7 @@ onMounted(() => {
     " />
             </g>
           </svg>
-          <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" class="absolute text-sky-500 blur-sm">
+          <svg viewBox="0 0 600 60" xmlns="http://www.w3.org/2000/svg" class="absolute hidden md:block text-sky-500 blur-sm">
             <g fill="none" stroke="currentColor" stroke-width="2">
               <path d="
       M75,15
@@ -91,8 +107,9 @@ onMounted(() => {
     " />
             </g>
           </svg>
-          <div class="w-full grid gap-2 grid-cols-4 text-sm relative text-sky-300">
+          <div class="w-full grid gap-2 grid-cols-2 md:grid-cols-4 text-sm relative text-sky-300">
             <div class="space-y-1">
+              <p class="md:hidden">1.</p>
               <div class="flex items-center gap-0.5 px-2 py-1 bg-stone-950 rounded-sm">
                 <Icon name="lucide:shopping-basket" />
                 <p>Сбор корзины</p>
@@ -103,6 +120,7 @@ onMounted(() => {
               </div>
             </div>
             <div class="space-y-1">
+              <p class="md:hidden">2.</p>
               <div class="flex items-center gap-0.5 px-2 py-1 bg-stone-950 rounded-sm">
                 <Icon name="lucide:banknote-arrow-down" />
                 <p>Оплата</p>
@@ -113,6 +131,7 @@ onMounted(() => {
               </div>
             </div>
             <div class="space-y-1">
+              <p class="md:hidden">3.</p>
               <div class="flex items-center gap-0.5 px-2 py-1 bg-stone-950 rounded-sm">
                 <Icon name="lucide:baggage-claim" />
                 <p>Сбор заказа</p>
@@ -123,6 +142,7 @@ onMounted(() => {
               </div>
             </div>
             <div class="space-y-1">
+              <p class="md:hidden">4.</p>
               <div class="flex items-center gap-0.5 px-2 py-1 bg-stone-950 rounded-sm">
                 <Icon name="lucide:handshake" />
                 <p>Подтверждение</p>

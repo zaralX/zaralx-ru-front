@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<div>
+<div class="px-4 sm:px-8 md:px-32">
   <div class="py-16 text-center">
     <h1 class="text-3xl font-unbounded">Experiments</h1>
     <p class="text-slate-400 text-lg">Здесь вы можете посмотреть на мои экспериментальные разработки :)</p>
