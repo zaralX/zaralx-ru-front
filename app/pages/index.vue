@@ -5,10 +5,10 @@ import SkillsPart from "~/components/index/SkillsPart.vue";
 
 onMounted(() => {
   animate('#index-1-overflow-triangle', {
-    y: '-25vh',
+    y: '-360px',
     duration: 2000,
     alternate: true,
-    ease: 'inOutQuad',
+    ease: 'linear',
     autoplay: onScroll({
       container: '#index-scroll-container',
       sync: 1,
@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-<div id="index-scroll-container overflow-y-scroll">
+<div id="index-scroll-container overflow-hidden">
   <IndexMainPart />
   <div class="h-screen">
     <div id="index-1-overflow-triangle" class="w-full h-32 absolute left-0 z-30">
@@ -36,7 +36,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div class="-translate-y-32">
+  <div class="-translate-y-[360px]">
     <SkillsPart />
   </div>
 </div>

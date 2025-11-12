@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {animate, stagger, utils} from 'animejs';
+import ExperimentCard from "~/components/experiments/ExperimentCard.vue";
 
 onMounted(() => {
   const $squares = utils.$('.square');
@@ -15,8 +16,8 @@ onMounted(() => {
         { to: '0 0 0rem 0 currentColor' }
       ],
       delay: stagger(100, {
-        grid: [11, 4],
-        from: utils.random(0, 11 * 4)
+        grid: [12, 5],
+        from: utils.random(0, 12 * 5)
       }),
       onComplete: animateGrid
     });
@@ -27,16 +28,16 @@ onMounted(() => {
 </script>
 
 <template>
-<div>
-  <h2 class="font-unbounded text-center text-3xl -translate-y-12">Что по скиллам?</h2>
-  <div class="w-full flex items-center">
-    <div class="grid grid-cols-11">
-      <div v-for="i in 11 * 4" class="square bg-white w-8 h-8"></div>
+  <ExperimentCard>
+    <div class="relative w-full h-full overflow-hidden flex justify-center items-center text-orange-500">
+      <div class="square-grid -z-10"></div>
+      <div class="grid grid-cols-12">
+        <div v-for="i in 12 * 5" class="square bg-orange-500 w-8 h-8"></div>
+      </div>
     </div>
-  </div>
-</div>
+  </ExperimentCard>
 </template>
 
-<style scoped>
+<style>
 
 </style>
