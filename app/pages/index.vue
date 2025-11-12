@@ -2,10 +2,23 @@
 import { animate, onScroll } from 'animejs';
 import AboutPart from "~/components/index/AboutPart.vue";
 import SkillsPart from "~/components/index/SkillsPart.vue";
+import ProjectsPart from "~/components/index/ProjectsPart.vue";
 
 onMounted(() => {
   animate('#index-1-overflow-triangle', {
     y: '-360px',
+    duration: 2000,
+    alternate: true,
+    ease: 'linear',
+    autoplay: onScroll({
+      sync: 1,
+      enter: 'max bottom',
+      leave: 'min top',
+    })
+  });
+
+  animate('#index-1-skills-separator', {
+    opacity: 0,
     duration: 2000,
     alternate: true,
     ease: 'linear',
@@ -37,14 +50,17 @@ onMounted(() => {
   </div>
   <div class="-translate-y-[360px]">
     <SkillsPart />
-    <div class="mt-16">
-      <div style="animation-delay: 50ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
-      <div style="animation-delay: 240ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
+    <div id="index-1-skills-separator">
+      <div class="mt-16">
+        <div style="animation-delay: 50ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
+        <div style="animation-delay: 240ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
+      </div>
+      <div class="rotate-180 -translate-y-">
+        <div style="animation-delay: 130ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
+        <div style="animation-delay: 200ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
+      </div>
     </div>
-    <div class="rotate-180 -translate-y-">
-      <div style="animation-delay: 130ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
-      <div style="animation-delay: 200ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
-    </div>
+    <ProjectsPart />
   </div>
 </div>
 </template>
