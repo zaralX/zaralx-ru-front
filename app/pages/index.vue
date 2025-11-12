@@ -10,7 +10,6 @@ onMounted(() => {
     alternate: true,
     ease: 'linear',
     autoplay: onScroll({
-      container: '#index-scroll-container',
       sync: 1,
       enter: 'max bottom',
       leave: 'min top',
@@ -21,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-<div id="index-scroll-container overflow-hidden">
+<div id="index-scroll-container">
   <IndexMainPart />
   <div class="h-screen">
     <div id="index-1-overflow-triangle" class="w-full h-32 absolute left-0 z-30">
@@ -38,6 +37,14 @@ onMounted(() => {
   </div>
   <div class="-translate-y-[360px]">
     <SkillsPart />
+    <div class="mt-16">
+      <div style="animation-delay: 50ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
+      <div style="animation-delay: 240ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
+    </div>
+    <div class="rotate-180 -translate-y-">
+      <div style="animation-delay: 130ms" class="bg-stone-800 w-full h-32 animate-clip-fluid-reverse absolute opacity-50"></div>
+      <div style="animation-delay: 200ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
+    </div>
   </div>
 </div>
 </template>

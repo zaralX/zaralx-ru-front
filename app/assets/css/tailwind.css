@@ -6,6 +6,8 @@
 @theme {
     --font-golos: "Golos", sans-serif;
     --font-unbounded: "Unbounded", sans-serif;
+    --animate-clip-fluid: clip-fluid 4s ease-in-out infinite alternate;
+    --animate-clip-fluid-reverse: clip-fluid 4s ease-in-out infinite alternate-reverse;
 }
 
 @theme inline {
