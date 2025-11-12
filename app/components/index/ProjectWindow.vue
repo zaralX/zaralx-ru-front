@@ -18,21 +18,27 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 onMounted(() => {
-  animate('#' + props.id, {
-    // translateX: () => [random(10, 20) * random(10, 20), 0],
-    opacity: [0, 1],
-    ease: 'easeIn',
-    duration: 750,
+  const rect = document.getElementById("index-projects-container")!.getBoundingClientRect()
+  console.log(rect.width)
+
+  const draggable = createDraggable('#' + props.id, {
+    trigger: '#' + props.id + '-trigger',
+    container: '#index-projects-container',
+    containerPadding: 32
   });
 
+  draggable.x = (random(0, 1) == 0 ? -1 : 1) * (rect.width + random(0, 500))
+  draggable.y = (random(0, 1) == 0 ? -1 : 1) * (rect.height + random(0, 500))
+
+  draggable.animateInView(4000, 0)
 
 })
 </script>
 
 <template>
   <div>
-    <div :id="id" :class="{ '-translate-x-full': xFull }" class="opacity-0 absolute aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group hover:-translate-y-2 duration-200" :style="{ transform: `translateY(${translateY})`, zIndex: z }">
-      <div class="flex items-center text-stone-400 px-1">
+    <div :id="id" class="absolute select-none aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group -translate-1/2">
+      <div :id="`${id}-trigger`" class="flex items-center text-stone-400 px-1">
         <div class="flex items-center gap-1 flex-1">
           <Icon name="lucide:folder" />
           <p class="text-sm">Проект такой то</p>
@@ -41,7 +47,7 @@ onMounted(() => {
           <Icon name="lucide:x" />
         </div>
       </div>
-      <img class="h-full rounded-sm" src="/img/fillers/1.png" alt="">
+      <img draggable="false" class="h-full rounded-sm select-none" src="/img/fillers/1.png" alt="">
     </div>
   </div>
 </template>
