@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { animate, onScroll } from 'animejs';
 import AboutPart from "~/components/index/AboutPart.vue";
+import SkillsPart from "~/components/index/SkillsPart.vue";
 
 onMounted(() => {
   animate('#index-1-overflow-triangle', {
-    y: '-200%',
+    y: '-25vh',
     duration: 2000,
     alternate: true,
     ease: 'inOutQuad',
@@ -13,7 +14,7 @@ onMounted(() => {
       sync: 1,
       enter: 'max bottom',
       leave: 'min top',
-      debug: true,
+      // debug: true,
     })
   });
 })
@@ -34,6 +35,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
+  </div>
+  <div class="-translate-y-32">
+    <SkillsPart />
   </div>
 </div>
 </template>

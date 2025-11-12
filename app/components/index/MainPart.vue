@@ -35,14 +35,14 @@ onMounted(() => {
   <div class="h-[75vh] min-h-96 relative overflow-hidden">
     <div class="absolute top-1/2 left-1/2 transform -translate-1/2">
       <div class="flex justify-center items-center">
-        <PerspectiveCube />
+        <PerspectiveCube :class="{ 'size-100': !$device.isDesktop }" />
       </div>
     </div>
     <div class="absolute top-1/2 left-1/2 transform -translate-1/2">
       <p id="index-hello" class="text-stone-400">Привет, я:</p>
-      <p id="index-title" class="text-5xl font-unbounded">zaralX</p>
+      <p id="index-title" class="text-3xl md:text-4xl lg:text-5xl font-unbounded">zaralX</p>
     </div>
-    <div class="absolute flex justify-center items-center w-full h-full" id="index-projects-container">
+    <div class="absolute hidden lg:flex justify-center items-center w-full h-full" id="index-projects-container">
 <!--      <div class="absolute w-full h-1 bg-stone-950 top-0 z-50 blur-sm"></div>-->
       <IndexProjectWindow id="index-project-1" />
       <IndexProjectWindow id="index-project-2" />
