@@ -45,9 +45,8 @@ onMounted(() => {
       </div>
       <div class="absolute hidden lg:flex justify-center items-center w-full h-full" id="index-projects-container">
         <!--      <div class="absolute w-full h-1 bg-stone-950 top-0 z-50 blur-sm"></div>-->
-        <IndexProjectWindow id="index-project-1" />
-        <IndexProjectWindow id="index-project-2" />
-        <IndexProjectWindow id="index-project-3" />
+        <IndexProjectWindow id="index-project-1" title="FreshMarket - Маркетплейс" img="/img/projects/freshmarket_v2_figma.webp" />
+        <IndexProjectWindow id="index-project-2" title="API с игровыми ассетами" img="/img/projects/zaralx_assets.webp" />
       </div>
     </div>
   </div>
