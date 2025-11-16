@@ -9,6 +9,8 @@ interface Props extends PrimitiveProps {
   translateY?: string
   xFull?: boolean
   id: string
+  title?: string
+  img?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -37,17 +39,17 @@ onMounted(() => {
 
 <template>
   <div>
-    <div :id="id" class="absolute select-none aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group -translate-1/2">
+    <div :id="id" style="transform: translateX(1000px) translateY(1000px);" class="absolute select-none aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group -translate-1/2">
       <div :id="`${id}-trigger`" class="flex items-center text-stone-400 px-1">
         <div class="flex items-center gap-1 flex-1">
           <Icon name="lucide:folder" />
-          <p class="text-sm">Проект такой то</p>
+          <p class="text-sm">{{title}}</p>
         </div>
         <div class="flex items-center">
           <Icon name="lucide:x" />
         </div>
       </div>
-      <img draggable="false" class="h-full rounded-sm select-none" src="/img/fillers/1.png" alt="">
+      <img draggable="false" class="h-full rounded-sm select-none" :src="img" alt="">
     </div>
   </div>
 </template>
