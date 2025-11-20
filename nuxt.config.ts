@@ -72,5 +72,5 @@ export default defineNuxtConfig({
         layoutTransition: {name: 'layout', mode: 'out-in'}
     },
 
-    modules: ['@nuxt/icon', 'shadcn-nuxt', '@nuxtjs/device'],
+    modules: ['@nuxt/icon', 'shadcn-nuxt', '@nuxtjs/device', '@nuxt/image'],
 })

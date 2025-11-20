@@ -37,8 +37,8 @@
       <div class="hidden md:block">
         <div class="w-full max-h-64 relative overflow-hidden">
           <div class="w-64 mr-0 ml-auto -translate-y-8 grayscale-25">
-            <img src="/img/developer.png" alt="" class="absolute blur">
-            <img src="/img/developer.png" alt="" class="relative">
+            <NuxtImg src="/img/developer.png" alt="" class="absolute blur" />
+            <NuxtImg src="/img/developer.png" alt="" class="relative" />
           </div>
         </div>
         <div class="w-64 mr-0 ml-auto h-px bg-stone-500 relative">
