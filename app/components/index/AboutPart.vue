@@ -41,8 +41,8 @@
             <img src="/img/developer.png" alt="" class="relative">
           </div>
         </div>
-        <div class="w-64 mr-0 ml-auto h-px bg-red-500 relative">
-          <div class="w-full h-1 -translate-y-0.5 bg-red-500 blur">
+        <div class="w-64 mr-0 ml-auto h-px bg-stone-500 relative">
+          <div class="w-full h-1 -translate-y-0.5 bg-stone-500 blur">
 
           </div>
         </div>

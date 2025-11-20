@@ -35,8 +35,9 @@ onMounted(() => {
 <template>
 <div id="index-scroll-container">
   <IndexMainPart />
-  <div class="h-screen">
-    <div id="index-1-overflow-triangle" class="w-full h-32 absolute left-0 z-30">
+<!--  400px orig | 540px orig | 900px orig-->
+  <div class="h-[400px] sm:h-[640px]">
+    <div id="index-1-overflow-triangle" class="w-full h-32 max-h-32 absolute left-0 z-30">
       <div class="absolute inset-0 bg-stone-900"
            style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
       </div>
@@ -48,7 +49,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div class="-translate-y-[360px]">
+  <div class="-translate-y-[0px]">
     <SkillsPart />
     <div id="index-1-skills-separator">
       <div class="mt-16">
