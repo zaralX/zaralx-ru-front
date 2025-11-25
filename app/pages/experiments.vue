@@ -17,6 +17,7 @@
     <Experiments3dSpinningText />
     <ExperimentsPerspectiveCube />
     <ExperimentsStaggerGlow />
+    <ExperimentsCryptoText />
   </div>
 </div>
 </template>

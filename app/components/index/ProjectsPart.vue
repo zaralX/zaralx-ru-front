@@ -2,6 +2,7 @@
 
 import {animate, onScroll} from "animejs";
 import ProjectOne from "~/components/index/ProjectOne.vue";
+import ProjectTwo from "~/components/index/ProjectTwo.vue";
 
 onMounted(() => {
   animate('#index-1-projects', {
@@ -18,6 +19,18 @@ onMounted(() => {
   });
   animate('#index-2-projects', {
     x: ["110%", 0],
+    duration: 2000,
+    alternate: true,
+    ease: 'linear',
+    autoplay: onScroll({
+      sync: 1,
+      enter: 'max bottom-=300',
+      leave: 'top+=200 top',
+      // debug: true,
+    })
+  });
+  animate('#index-3-projects', {
+    x: ["-110%", 0],
     duration: 2000,
     alternate: true,
     ease: 'linear',
@@ -48,6 +61,14 @@ onMounted(() => {
     </div>
     <div class="w-full h-full">
       <ProjectOne />
+    </div>
+  </div>
+  <div id="index-3-projects" class="bg-stone-900 w-full">
+    <div class="absolute inset-0 bg-stone-900 translate-x-[calc(100%-1px)] rotate-180"
+         style="clip-path: polygon(100% 0%, 90% 50%, 100% 100%);">
+    </div>
+    <div class="w-full h-full">
+      <ProjectTwo />
     </div>
   </div>
 </div>

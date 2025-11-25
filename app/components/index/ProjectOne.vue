@@ -159,7 +159,7 @@ onMounted(() => {
     <div class="flex items-center justify-end w-full">
       <div id="project-video-fm" class="bg-sky-500/50 p-1 rounded-sm relative">
         <div class="absolute w-full h-full bg-sky-500/50 blur top-0 left-0"></div>
-        <video src="/img/freshmarket-overview.mp4" class="rounded-sm relative" muted autoplay loop />
+        <video src="https://s3.zaralx.ru/zaralx_ru/freshmarket_review" class="rounded-sm relative" muted autoplay loop />
       </div>
     </div>
   </div>
