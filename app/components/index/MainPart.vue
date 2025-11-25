@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import { animate, random, splitText, stagger, svg, utils } from "animejs";
 import PerspectiveCube from "~/components/common/PerspectiveCube.vue";
+import LastEditionTime from "~/components/index/LastEditionTime.vue";
 
 function animateHello() {
   const { chars } = splitText('#index-hello', { chars: { wrap: 'clip' }});
@@ -42,6 +43,7 @@ onMounted(() => {
       <div class="absolute top-1/2 left-1/2 transform -translate-1/2">
         <p id="index-hello" class="text-stone-400">Привет, я:</p>
         <p id="index-title" class="text-3xl md:text-4xl lg:text-5xl font-unbounded">zaralX</p>
+        <p class="text-stone-400"><LastEditionTime /></p>
       </div>
       <div class="absolute hidden lg:flex justify-center items-center w-full h-full" id="index-projects-container">
         <!--      <div class="absolute w-full h-1 bg-stone-950 top-0 z-50 blur-sm"></div>-->
