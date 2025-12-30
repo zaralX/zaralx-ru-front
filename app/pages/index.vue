@@ -3,6 +3,7 @@ import { animate, onScroll } from 'animejs';
 import AboutPart from "~/components/index/AboutPart.vue";
 import SkillsPart from "~/components/index/SkillsPart.vue";
 import ProjectsPart from "~/components/index/ProjectsPart.vue";
+import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
 onMounted(() => {
   animate('#index-1-overflow-triangle', {
@@ -64,10 +65,18 @@ onMounted(() => {
     <ProjectsPart />
 
     <div class="h-full flex flex-col justify-center items-center">
-      <h1 class="text-center font-unbounded text-4xl mt-64">О НЕТ!</h1>
-      <p class="text-center opacity-50">Похоже это конец сайта.. <br> Я ещё не закончил его обновление, обязательно приходите позже!</p>
-      <div class="flex justify-center mt-4">
-        <ShButton as="a" href="https://old.zaralx.ru" target="_blank">Посмотреть старый сайт</ShButton>
+      <h1 class="text-center font-unbounded text-4xl mt-16">Cвязь со мной</h1>
+      <div class="mt-8 flex gap-4">
+        <a href="t.me/zWork1" target="_blank">
+          <BeautifulButton>
+            Написать в Telegram
+          </BeautifulButton>
+        </a>
+        <a href="mailto:looppersmail@gmail.com">
+          <BeautifulButton>
+            Написать на почту
+          </BeautifulButton>
+        </a>
       </div>
     </div>
   </div>

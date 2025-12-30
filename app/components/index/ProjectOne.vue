@@ -153,6 +153,11 @@ onMounted(() => {
               </div>
             </div>
           </div>
+          <div class="mt-3 absolute flex gap-2">
+            <ShButton as="a" target="_blank" href="https://fresh.zaralx.ru/" variant="ghost" class="bg-black/25" icon="lucide:external-link">
+              Сайт
+            </ShButton>
+          </div>
         </div>
       </div>
     </div>
