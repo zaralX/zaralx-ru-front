@@ -65,6 +65,11 @@ onMounted(() => {
         <p>
           Исследуйте таинственные подземелья, сражайтесь с толпами монстров и одержите победу над кровожадным боссом, чтобы получить более ценную и редкую амуницию, а также улучшайте её, чтобы стать сильнее.
         </p>
+        <div class="mt-3 flex gap-2">
+          <ShButton as="a" target="_blank" href="https://cristalix.gg" variant="ghost" class="bg-black/25 ml-auto mr-0" icon="lucide:external-link">
+            Сайт
+          </ShButton>
+        </div>
       </div>
     </div>
   </div>
