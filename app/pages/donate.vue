@@ -6,16 +6,15 @@ import RecentCard from "~/components/sponsors/RecentCard.vue";
 import type {Donation} from "~/types/donate";
 
 type Donator = {
-  id: number
   name: string
   value: number
 }
 
-const { data } = await useFetch("/api/donates");
+const { data } = await useFetch<{ recent: Donation[], top: Donator[] }>("/api/donates");
 
-const lastDonations = ref<Donation[]>(data.value)
+const lastDonations = ref<Donation[]>(data.value?.recent || [])
 
-const donators = ref<Donator[]>(data.value)
+const donators = ref<Donator[]>(data.value?.top || [])
 
 const lowest = computed(() => Math.min(...donators.value.map((d: Donator) => d.value)))
 const highest = computed(() => Math.max(...donators.value.map((d: Donator) => d.value)))
@@ -65,8 +64,8 @@ onMounted(async () => {
       <h1 class="text-3xl font-unbounded">Спонсоры</h1>
       <p class="text-slate-400 text-lg">Спасибо вам за поддержку, вы лучшие!</p>
     </div>
-    <div class="h-[50vh] grid grid-cols-3">
-      <div class="flex justify-center items-center">
+    <div class="md:h-[50vh] md:grid md:grid-cols-3">
+      <div class="justify-center items-center hidden md:flex">
         <div class="bg-stone-800 relative z-10 rounded-sm overflow-hidden border-1 border-blue-600 transform transition-all hover:rotate-y-15 hover:rotate-x-15 hover:-skew-3 hover:scale-115">
           <div class="bg-blue-600 p-2 font-semibold flex text-lg items-center">
             <NuxtImg class="w-8" src="https://cdn.prod.website-files.com/68a8369cf1325df8d6f45a0f/68ad8012c8e19135fcab9569_contact-icon-star.svg" />
@@ -86,7 +85,6 @@ onMounted(async () => {
       <div class="relative w-full h-full flex justify-center items-center">
         <p
             v-for="donator in positions"
-            :key="donator.id"
             class="absolute"
             :style="{
       transform: `translate(${donator.x}px, ${donator.y}px)`,
@@ -95,9 +93,9 @@ onMounted(async () => {
           {{ donator.name }}
         </p>
 
-        <ExperimentsParticleCircleComponent color="#FF6900" class="scale-300 pointer-events-none" :size="2" :radius="200" square />
+        <ExperimentsParticleCircleComponent color="#FF6900" class="md:scale-300 pointer-events-none" :size="2" :radius="200" square />
       </div>
-      <div class="flex justify-center items-center">
+      <div class="md:flex justify-center items-center space-y-2">
         <div class="bg-stone-800 relative z-10 min-w-48 rounded-sm overflow-hidden border-1 border-orange-600 transform transition-all hover:rotate-y-15 hover:rotate-x-15 hover:-skew-3 hover:scale-115">
           <div class="bg-orange-600 p-2 font-semibold flex text-lg items-center">
             <NuxtImg class="w-8" src="https://cdn.prod.website-files.com/68a8369cf1325df8d6f45a0f/68ad8012c8e19135fcab9569_contact-icon-star.svg" />
@@ -112,7 +110,21 @@ onMounted(async () => {
             </NuxtLink>
           </div>
         </div>
-        <div class="absolute bg-orange-600 w-48 h-32 rounded-sm blur-xl animate-pulse"></div>
+        <div class="hidden md:block absolute bg-orange-600 w-48 h-32 rounded-sm blur-xl animate-pulse"></div>
+        <div class="block md:hidden bg-stone-800 relative z-10 rounded-sm overflow-hidden border-1 border-blue-600 transform transition-all hover:rotate-y-15 hover:rotate-x-15 hover:-skew-3 hover:scale-115">
+          <div class="bg-blue-600 p-2 font-semibold flex text-lg items-center">
+            <NuxtImg class="w-8" src="https://cdn.prod.website-files.com/68a8369cf1325df8d6f45a0f/68ad8012c8e19135fcab9569_contact-icon-star.svg" />
+            Tribute
+          </div>
+          <div class="bg-stone-900 rounded-sm p-1 flex flex-col gap-1">
+            <NuxtLink to="https://t.me/tribute/app?startapp=dDuX" class="w-full">
+              <ShButton variant="ghost" icon="lucide-external-link" class="w-full">Международный донат</ShButton>
+            </NuxtLink>
+            <NuxtLink to="https://t.me/tribute/app?startapp=sKMw" class="w-full">
+              <ShButton variant="ghost" icon="lucide-external-link" class="w-full">Приватка</ShButton>
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </div>
     <div class="py-16 text-center">

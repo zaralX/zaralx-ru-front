@@ -3,11 +3,27 @@ import type {Donation} from "~/types/donate";
 export default defineEventHandler(async () => {
 
     const yokassaDonations = await getYoKassaDonations()
-    console.log(yokassaDonations)
-    return yokassaDonations
+    const customDonations = await getCustomDonations()
+
+    const donations = customDonations.concat(yokassaDonations)
+
+    const grouped = donations.reduce((acc, { name, value }) => {
+        acc[name] = (acc[name] || 0) + value;
+        return acc;
+    }, {} as Record<string, number>);
+
+    const top = Object.entries(grouped).map(([name, value]) => ({
+        name,
+        value
+    }));
+
+    return {
+        recent: customDonations.slice(0, 20).concat(yokassaDonations),
+        top: top
+    }
 });
 
-async function getYoKassaDonations(): Promise<Donation> {
+async function getYoKassaDonations(): Promise<Donation[]> {
     const shopId = process.env.YOOKASSA_SHOP_ID
     const secretKey = process.env.YOOKASSA_SECRET_KEY
 
@@ -23,13 +39,17 @@ async function getYoKassaDonations(): Promise<Donation> {
 
     const items = data?.items || []
 
-    const payments = items
-        .filter(p => !p.description)
-        .map(p => ({
+    return items
+        .filter((p: any) => !p.description)
+        .map((p: any) => ({
             name: "Аноним",
             value: Number(p.amount.value),
             currency: p.amount.currency
         }))
+}
 
-    return payments
+async function getCustomDonations(): Promise<Donation[]> {
+    const data: any = await $fetch('https://s3.zaralx.ru/zaralx_ru/custom_payments.json')
+
+    return data?.items || []
 }
