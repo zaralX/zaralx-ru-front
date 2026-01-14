@@ -1,5 +1,5 @@
 <template>
-  <div ref="container" class="inset-0 overflow-hidden">
+  <div ref="container" class="overflow-hidden">
     <canvas ref="canvas" class="w-full h-full"></canvas>
   </div>
 </template>
@@ -9,6 +9,10 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const props = defineProps({
   color: { type: String, default: '#ecf0f1' },
+  fps: { type: Number, default: 120 },
+  radius: { type: Number, default: 200 },
+  emitters: { type: Number, default: 360 },
+  size: { type: Number, default: 1 },
 })
 
 /* =======================
@@ -66,14 +70,14 @@ class Experience {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
 
-    this.fps = 120
+    this.fps = props.fps
     this.fpsInterval = 1000 / this.fps
     this.then = performance.now()
 
-    this.radius = 200
+    this.radius = props.radius
     this.emitters = []
 
-    for (let i = 0; i < 360; i++) {
+    for (let i = 0; i < props.emitters; i++) {
       this.emitters.push(new ParticleEmitter(0, this.radius))
     }
 
@@ -106,7 +110,7 @@ class Experience {
         ctx.arc(
             particle.position.x,
             emitter.position.y - particle.position.y,
-            1,
+            props.size,
             0,
             Math.PI * 2
         )
