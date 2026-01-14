@@ -15,8 +15,7 @@ onMounted(() => {
       autoplay: onScroll({
         sync: 1,
         enter: 'max top',
-        leave: 'max bottom',
-        debug: true
+        leave: 'max bottom'
       })
     });
   }
@@ -39,7 +38,6 @@ onMounted(() => {
 <template>
 <div id="index-scroll-container">
   <IndexMainPart />
-<!--  400px orig | 540px orig | 900px orig-->
   <div class="">
     <div class="w-full left-0 z-30 relative mb-32">
       <div v-for="i in 3" :id="`index-1-overflow-triangle-${i}`" class="absolute inset-0 opacity-75 -translate-y-32">
