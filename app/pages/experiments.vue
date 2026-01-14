@@ -18,6 +18,7 @@
     <ExperimentsPerspectiveCube />
     <ExperimentsStaggerGlow />
     <ExperimentsCryptoText />
+    <ExperimentsParticleCircle />
   </div>
 </div>
 </template>
