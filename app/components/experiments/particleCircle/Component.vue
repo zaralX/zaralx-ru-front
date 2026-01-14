@@ -13,6 +13,7 @@ const props = defineProps({
   radius: { type: Number, default: 200 },
   emitters: { type: Number, default: 360 },
   size: { type: Number, default: 1 },
+  square: { type: Boolean, default: false },
 })
 
 /* =======================
@@ -89,7 +90,7 @@ class Experience {
 
   resize () {
     this.canvas.width = window.innerWidth
-    this.canvas.height = window.innerHeight
+    this.canvas.height = props.square ? window.innerWidth : window.innerHeight
   }
 
   render () {
