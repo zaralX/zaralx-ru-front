@@ -6,17 +6,19 @@ import ProjectsPart from "~/components/index/ProjectsPart.vue";
 import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
 onMounted(() => {
-  animate('#index-1-overflow-triangle', {
-    y: '-360px',
-    duration: 2000,
-    alternate: true,
-    ease: 'linear',
-    autoplay: onScroll({
-      sync: 1,
-      enter: 'max bottom',
-      leave: 'min top',
-    })
-  });
+  for (let i = 1; i < 4; i++) {
+    animate('#index-1-overflow-triangle-'+i, {
+      y: `-${120*(i)}px`,
+      duration: 2000,
+      alternate: true,
+      ease: 'linear',
+      autoplay: onScroll({
+        sync: 1,
+        enter: 'max top',
+        leave: 'max bottom'
+      })
+    });
+  }
 
   animate('#index-1-skills-separator', {
     opacity: 0,
@@ -36,10 +38,15 @@ onMounted(() => {
 <template>
 <div id="index-scroll-container">
   <IndexMainPart />
-<!--  400px orig | 540px orig | 900px orig-->
-  <div class="h-[400px] sm:h-[640px]">
-    <div id="index-1-overflow-triangle" class="w-full h-32 max-h-32 absolute left-0 z-30">
-      <div class="absolute inset-0 bg-stone-900"
+  <div class="">
+    <div class="w-full left-0 z-30 relative mb-32">
+      <div v-for="i in 3" :id="`index-1-overflow-triangle-${i}`" class="absolute inset-0 opacity-75 -translate-y-32">
+        <div class="h-32 bg-stone-900"
+             style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
+        </div>
+        <div class="h-96 bg-stone-900"></div>
+      </div>
+      <div class="absolute inset-0 bg-stone-900 h-32 -translate-y-32"
            style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);">
       </div>
       <AboutPart />

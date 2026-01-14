@@ -28,6 +28,8 @@ const props = withDefaults(defineProps<Props>(), {
       :disabled="disabled"
   >
     <Icon v-if="props.icon" :name="props.icon"/>
-    <slot/>
+    <div class="w-full">
+      <slot/>
+    </div>
   </Primitive>
 </template>

@@ -28,6 +28,9 @@ onUnmounted(() => {
         <NuxtLink to="/projects">
           <ShButton variant="ghost">Проекты</ShButton>
         </NuxtLink>
+        <NuxtLink to="/donate">
+          <ShButton variant="ghost">Спонсоры</ShButton>
+        </NuxtLink>
         <NuxtLink to="/experiments">
           <ShButton variant="ghost">Эксперименты</ShButton>
         </NuxtLink>
