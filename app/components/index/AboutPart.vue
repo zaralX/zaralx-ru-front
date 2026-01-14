@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="bg-stone-900 h-auto mt-[127px] px-4 md:px-8 lg:px-32 xl:px-64 space-y-0 md:space-y-8">
+  <div class="bg-stone-900 h-auto mt-[127px] px-4 md:px-8 lg:px-32 xl:px-64 space-y-0 md:space-y-8 z-10 relative">
     <h2 class="font-unbounded text-center text-3xl -translate-y-12">Кто я?</h2>
 
     <div class="md:grid grid-cols-2 gap-4 text-stone-300">
