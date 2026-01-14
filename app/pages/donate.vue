@@ -93,7 +93,7 @@ onMounted(async () => {
           {{ donator.name }}
         </p>
 
-        <ExperimentsParticleCircleComponent color="#FF6900" class="md:scale-300 pointer-events-none" :size="2" :radius="200" square />
+        <ExperimentsParticleCircleComponent color="#FF6900" class="md:scale-300 pointer-events-none" :size="2" :radius="$device.isMobile ? 150 : 200" square />
       </div>
       <div class="md:flex justify-center items-center space-y-2">
         <div class="bg-stone-800 relative z-10 min-w-48 rounded-sm overflow-hidden border-1 border-orange-600 transform transition-all hover:rotate-y-15 hover:rotate-x-15 hover:-skew-3 hover:scale-115">
@@ -129,7 +129,7 @@ onMounted(async () => {
     </div>
     <div class="py-16 text-center">
       <h1 class="text-3xl font-unbounded -translate-y-8">Последние донаты</h1>
-      <div class="grid grid-cols-4 gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         <RecentCard v-for="donation in lastDonations" :name="donation.name" :amount="donation.value" />
       </div>
     </div>
