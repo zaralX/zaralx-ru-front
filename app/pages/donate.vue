@@ -5,6 +5,11 @@ import ExperimentsParticleCircleComponent from "~/components/experiments/particl
 import RecentCard from "~/components/sponsors/RecentCard.vue";
 import type {Donation} from "~/types/donate";
 
+useSeoMeta({
+  title: 'Спонсоры - zaralx.ru',
+  description: 'Спонсоры и поддержка проектов zaralX. Спасибо вам, вы лучшие!',
+})
+
 type Donator = {
   name: string
   value: number

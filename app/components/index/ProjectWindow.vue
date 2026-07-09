@@ -21,7 +21,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 onMounted(() => {
   const rect = document.getElementById("index-projects-container")!.getBoundingClientRect()
-  console.log(rect.width)
 
   const draggable = createDraggable('#' + props.id, {
     trigger: '#' + props.id + '-trigger',
@@ -39,7 +38,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div :id="id" style="transform: translateX(1000px) translateY(1000px);" class="absolute select-none aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group -translate-1/2">
+    <div :id="id" style="transform: translateX(1000px) translateY(1000px);" class="absolute select-none pointer-events-auto aspect-video bg-stone-900 p-1 rounded-md w-[25vw] space-y-1 shadow-md border border-white/10 group -translate-1/2">
       <div :id="`${id}-trigger`" class="flex items-center text-stone-400 px-1">
         <div class="flex items-center gap-1 flex-1">
           <Icon name="lucide:folder" />

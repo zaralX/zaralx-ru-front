@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { animate, random, splitText, stagger, svg, utils } from "animejs";
+import { animate, random, splitText, stagger } from "animejs";
 import PerspectiveCube from "~/components/common/PerspectiveCube.vue";
 import LastEditionTime from "~/components/index/LastEditionTime.vue";
+import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
 function animateHello() {
   const { chars } = splitText('#index-hello', { chars: { wrap: 'clip' }});
@@ -26,9 +27,19 @@ function animateTitle() {
   });
 }
 
+function animateIntro() {
+  animate(['#index-subtitle', '#index-cta', '#index-scroll-hint'], {
+    opacity: [0, 1],
+    duration: 600,
+    ease: 'out(3)',
+    delay: stagger(200, { start: 1300 }),
+  });
+}
+
 onMounted(() => {
   animateHello()
   animateTitle()
+  animateIntro()
 })
 </script>
 
@@ -40,17 +51,20 @@ onMounted(() => {
           <PerspectiveCube :class="{ 'size-100': !$device.isDesktop }" />
         </div>
       </div>
-      <div class="absolute top-1/2 left-1/2 transform -translate-1/2 flex items-center flex-col">
+      <div class="absolute top-1/2 left-1/2 transform -translate-1/2 flex items-center flex-col z-10">
         <div>
           <p id="index-hello" class="text-stone-400 text-left">Привет, я:</p>
           <p id="index-title" class="text-3xl md:text-4xl lg:text-5xl font-unbounded">zaralX</p>
         </div>
         <p class="bg-gradient-to-r from-stone-400 bg-size-[300%] via-stone-700 to-stone-400 inline-block text-transparent bg-clip-text animate-[animated-gradient_6s_ease_infinite_alternate] absolute text-nowrap translate-y-64 opacity-75 font-medium text-xs sm:text-sm md:text-normal"><LastEditionTime /></p>
       </div>
-      <div class="absolute hidden lg:flex justify-center items-center w-full h-full" id="index-projects-container">
-        <!--      <div class="absolute w-full h-1 bg-stone-950 top-0 z-50 blur-sm"></div>-->
+      <div class="absolute hidden lg:flex justify-between items-center px-32 w-full h-full pointer-events-none" id="index-projects-container">
         <IndexProjectWindow id="index-project-1" title="FreshMarket - Маркетплейс" img="/img/projects/freshmarket_v2_figma.webp" />
         <IndexProjectWindow id="index-project-2" title="API с игровыми ассетами" img="/img/projects/zaralx_assets.webp" />
+      </div>
+      <div id="index-scroll-hint" class="opacity-0 absolute bottom-2 left-0 right-0 flex flex-col items-center text-stone-500 pointer-events-none">
+        <p class="text-xs">листай</p>
+        <Icon name="lucide:chevron-down" class="animate-bounce text-xl" />
       </div>
     </div>
   </div>

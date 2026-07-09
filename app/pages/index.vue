@@ -5,6 +5,11 @@ import SkillsPart from "~/components/index/SkillsPart.vue";
 import ProjectsPart from "~/components/index/ProjectsPart.vue";
 import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
+useSeoMeta({
+  title: 'zaralx.ru - универсальный разработчик',
+  description: 'zaralX - универсальный разработчик, который готов реализовать вашу идею: веб, игровые моды, API и не только.',
+})
+
 onMounted(() => {
   for (let i = 1; i < 4; i++) {
     animate('#index-1-overflow-triangle-'+i, {
@@ -71,20 +76,33 @@ onMounted(() => {
     </div>
     <ProjectsPart />
 
-    <div class="h-full flex flex-col justify-center items-center">
-      <h1 class="text-center font-unbounded text-4xl mt-16">Cвязь со мной</h1>
-      <div class="mt-8 flex gap-4">
-        <a href="t.me/zWork1" target="_blank">
+    <div class="flex justify-center mt-12">
+      <NuxtLink to="/projects">
+        <BeautifulButton>
+          Все проекты
+          <Icon name="lucide:arrow-right" />
+        </BeautifulButton>
+      </NuxtLink>
+    </div>
+
+    <div id="contact" class="scroll-mt-24 h-full flex flex-col justify-center items-center">
+      <h1 class="text-center font-unbounded text-4xl mt-16">Связь со мной</h1>
+      <p class="text-stone-400 mt-3 text-center px-4">Открыт к интересным проектам и заказам - напишите, обсудим вашу идею.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 px-4">
+        <a href="https://t.me/zWork1" target="_blank">
           <BeautifulButton>
+            <Icon name="iconoir:telegram" />
             Написать в Telegram
           </BeautifulButton>
         </a>
-        <a href="mailto:looppersmail@gmail.com">
+        <a href="mailto:admin@zaralx.ru">
           <BeautifulButton>
+            <Icon name="lucide:mail" />
             Написать на почту
           </BeautifulButton>
         </a>
       </div>
+      <p class="text-stone-600 text-sm mt-6 pb-8 text-center px-4">Обычно отвечаю в течение дня</p>
     </div>
   </div>
 </div>

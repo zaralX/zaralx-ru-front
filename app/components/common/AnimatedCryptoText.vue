@@ -12,7 +12,6 @@ const shownChars = ref(0)
 const shownText = ref(generatePart(model.value?.length ?? 0))
 
 watch(model, () => {
-  console.log(model)
   shownChars.value = 0
   updateText()
   run()

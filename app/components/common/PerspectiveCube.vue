@@ -14,8 +14,11 @@ const props = withDefaults(defineProps<Props>(), {
   opacity: 0.1
 })
 
+const svgRef = ref<SVGSVGElement>()
+let rafId = 0
+
 onMounted(() => {
-  const $svg = document.querySelector('svg') as SVGSVGElement
+  const $svg = svgRef.value!
 
   const size = 50
   const cx = 152
@@ -82,15 +85,19 @@ onMounted(() => {
       edgeElements[idx].setAttribute("points", `${p1.x},${p1.y} ${p2.x},${p2.y}`)
     })
 
-    requestAnimationFrame(animateCube)
+    rafId = requestAnimationFrame(animateCube)
   }
 
   animateCube()
 })
+
+onBeforeUnmount(() => {
+  cancelAnimationFrame(rafId)
+})
 </script>
 
 <template>
-  <svg viewBox="0 0 304 112" :class="cn('size-200', props.class)">
+  <svg ref="svgRef" viewBox="0 0 304 112" :class="cn('size-200', props.class)">
     <g></g>
   </svg>
 </template>
