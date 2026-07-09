@@ -28,11 +28,11 @@ function animateTitle() {
 }
 
 function animateIntro() {
-  animate(['#index-subtitle', '#index-cta', '#index-scroll-hint'], {
+  animate('#index-scroll-hint', {
     opacity: [0, 1],
     duration: 600,
     ease: 'out(3)',
-    delay: stagger(200, { start: 1300 }),
+    delay: 1300,
   });
 }
 

@@ -28,6 +28,9 @@ defineProps<{
         {{ project.title }}
       </h2>
       <p class="text-stone-400 text-sm flex-1">{{ project.description }}</p>
+      <p v-if="project.review" class="text-stone-500 text-xs italic border-l-2 pl-2" :style="{ borderColor: project.accent }">
+        «{{ project.review }}» — заказчик
+      </p>
       <div class="flex flex-wrap gap-1.5">
         <span v-for="tag in project.tags" :key="tag"
               class="text-xs px-2 py-0.5 rounded-full bg-black/30 border border-stone-800 text-stone-400">

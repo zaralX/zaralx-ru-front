@@ -10,6 +10,7 @@ export interface Project {
     tags: string[]
     image?: string
     video?: string
+    review?: string
     gradient: string
     accent: string
     links: ProjectLink[]
