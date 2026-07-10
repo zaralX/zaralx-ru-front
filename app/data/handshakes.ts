@@ -18,7 +18,7 @@ export const handshakesSeed: HandshakePerson[] = [
         "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Vifoxy/full",
         "contacts": {
             "telegram": "@vifoxy",
-            "github": "Vifoxy",
+            "github": "vifox8",
             "site": "https://vifoxy.ru"
         },
         "via": [
