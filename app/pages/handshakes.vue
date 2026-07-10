@@ -3,16 +3,27 @@ import { animate, stagger, svg } from 'animejs'
 import type { HandshakePerson } from '~/types/handshake'
 import { handshakesSeed } from '~/data/handshakes'
 import PersonAvatar from '~/components/handshakes/PersonAvatar.vue'
+import {
+  Select as ShSelect,
+  SelectContent as ShSelectContent,
+  SelectItem as ShSelectItem,
+  SelectTrigger as ShSelectTrigger,
+} from '~/components/ui/select'
 
 useSeoMeta({
   title: 'Рукопожатия - zaralx.ru',
   description: 'Карта знакомств zaralX: кто с кем знаком и через сколько рукопожатий.',
 })
 
+const isDev = import.meta.dev
 const STORAGE_KEY = 'zaralx-handshakes'
 
 function cloneSeed(): HandshakePerson[] {
-  return handshakesSeed.map(p => ({ ...p, contacts: p.contacts ? { ...p.contacts } : undefined }))
+  return handshakesSeed.map(p => ({
+    ...p,
+    via: p.via ? [...p.via] : undefined,
+    contacts: p.contacts ? { ...p.contacts } : undefined,
+  }))
 }
 
 const persons = ref<HandshakePerson[]>(cloneSeed())
@@ -21,18 +32,28 @@ const viewport = ref<HTMLElement>()
 
 const byId = computed(() => new Map(persons.value.map(p => [p.id, p])))
 
+function viasOf(p: HandshakePerson): string[] {
+  return (p.via ?? []).filter(id => byId.value.has(id) && id !== p.id)
+}
+
+function primaryVia(p: HandshakePerson): string | undefined {
+  return viasOf(p)[0]
+}
+
+// дети по основной (первой) связи - по ним строится дерево
 const childrenOf = computed(() => {
   const m = new Map<string, HandshakePerson[]>()
   for (const p of persons.value) {
-    if (p.via && byId.value.has(p.via)) {
-      if (!m.has(p.via)) m.set(p.via, [])
-      m.get(p.via)!.push(p)
+    const via = primaryVia(p)
+    if (via) {
+      if (!m.has(via)) m.set(via, [])
+      m.get(via)!.push(p)
     }
   }
   return m
 })
 
-const roots = computed(() => persons.value.filter(p => !p.via || !byId.value.has(p.via)))
+const roots = computed(() => persons.value.filter(p => !primaryVia(p)))
 
 // --- Раскладка дерева ---
 const NODE_W = 128
@@ -40,18 +61,19 @@ const NODE_H = 116
 const LEVEL_H = 176
 const PAD = 56
 
-interface LaidNode { p: HandshakePerson; x: number; y: number; depth: number }
-interface LaidEdge { childId: string; x1: number; y1: number; x2: number; y2: number }
+interface LaidNode { p: HandshakePerson; x: number; y: number; depth: number; px: number; py: number }
+interface LaidEdge { id: string; childId: string; x1: number; y1: number; x2: number; y2: number }
 
 const layout = computed(() => {
   const nodes: LaidNode[] = []
   const pos = new Map<string, { x: number; y: number }>()
+  const depthOf = new Map<string, number>()
   const visited = new Set<string>()
   let cursor = 0
   let maxDepth = 0
 
   function place(p: HandshakePerson, depth: number): number {
-    if (visited.has(p.id)) return cursor * NODE_W
+    if (visited.has(p.id)) return pos.get(p.id)?.x ?? cursor * NODE_W
     visited.add(p.id)
     maxDepth = Math.max(maxDepth, depth)
     const kids = childrenOf.value.get(p.id) ?? []
@@ -64,29 +86,40 @@ const layout = computed(() => {
       x = (Math.min(...xs) + Math.max(...xs)) / 2
     }
     const y = depth * LEVEL_H
-    nodes.push({ p, x, y, depth })
+    nodes.push({ p, x, y, depth, px: 0, py: 0 })
     pos.set(p.id, { x, y })
+    depthOf.set(p.id, depth)
     return x
   }
 
   for (const r of roots.value) place(r, 0)
+  // страховка от циклов по основным связям - никого не теряем
+  for (const p of persons.value) if (!visited.has(p.id)) place(p, 0)
 
   const edges: LaidEdge[] = []
+  const extraEdges: LaidEdge[] = []
   for (const p of persons.value) {
-    if (!p.via) continue
-    const from = pos.get(p.via)
     const to = pos.get(p.id)
-    if (!from || !to) continue
-    edges.push({
-      childId: p.id,
-      x1: from.x + PAD, y1: from.y + PAD + 68,
-      x2: to.x + PAD, y2: to.y + PAD + 4,
+    if (!to) continue
+    viasOf(p).forEach((viaId, i) => {
+      const from = pos.get(viaId)
+      if (!from) return
+      const edge = {
+        id: `${viaId}->${p.id}`,
+        childId: p.id,
+        x1: from.x + PAD, y1: from.y + PAD + 68,
+        x2: to.x + PAD, y2: to.y + PAD + 4,
+      }
+      if (i === 0) edges.push(edge)
+      else extraEdges.push(edge)
     })
   }
 
   return {
     nodes: nodes.map(n => ({ ...n, px: n.x + PAD - NODE_W / 2, py: n.y + PAD })),
     edges,
+    extraEdges,
+    depthOf,
     width: Math.max(cursor * NODE_W, NODE_W) + PAD * 2,
     height: (maxDepth + 1) * LEVEL_H - (LEVEL_H - NODE_H) + PAD * 2,
   }
@@ -97,21 +130,133 @@ function edgePath(e: LaidEdge): string {
   return `M ${e.x1} ${e.y1} C ${e.x1} ${e.y1 + my}, ${e.x2} ${e.y2 - my}, ${e.x2} ${e.y2}`
 }
 
+// --- Перемещение и масштаб ---
+const zoom = ref(1)
+const pan = reactive({ x: 0, y: 0 })
+const MIN_ZOOM = 0.4
+const MAX_ZOOM = 2.5
+
+const canvasStyle = computed(() => ({
+  width: layout.value.width + 'px',
+  height: layout.value.height + 'px',
+  transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom.value})`,
+  transformOrigin: '0 0',
+}))
+
+function zoomAt(cx: number, cy: number, factor: number) {
+  const next = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, zoom.value * factor))
+  const k = next / zoom.value
+  pan.x = cx - (cx - pan.x) * k
+  pan.y = cy - (cy - pan.y) * k
+  zoom.value = next
+}
+
+function zoomFromCenter(factor: number) {
+  const vp = viewport.value
+  if (!vp) return
+  zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, factor)
+}
+
+function centerMap() {
+  const vp = viewport.value
+  if (!vp) return
+  zoom.value = 1
+  pan.x = (vp.clientWidth - layout.value.width) / 2
+  pan.y = Math.max((vp.clientHeight - layout.value.height) / 2, 16)
+}
+
+function onWheel(e: WheelEvent) {
+  const vp = viewport.value
+  if (!vp) return
+  const rect = vp.getBoundingClientRect()
+  zoomAt(e.clientX - rect.left, e.clientY - rect.top, Math.exp(-e.deltaY * 0.0015))
+}
+
+const pointers = new Map<number, { x: number; y: number }>()
+const panning = ref(false)
+let pinchDist = 0
+let suppressClick = false
+
+function pinchDistance(): number {
+  const [a, b] = [...pointers.values()]
+  return a && b ? Math.hypot(a.x - b.x, a.y - b.y) : 0
+}
+
+function onPointerDown(e: PointerEvent) {
+  if (pointers.size === 0) suppressClick = false
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+  panning.value = true
+  if (pointers.size === 2) pinchDist = pinchDistance()
+  window.addEventListener('pointermove', onPointerMove)
+  window.addEventListener('pointerup', onPointerUp)
+  window.addEventListener('pointercancel', onPointerUp)
+}
+
+function onPointerMove(e: PointerEvent) {
+  const prev = pointers.get(e.pointerId)
+  if (!prev) return
+  const cur = { x: e.clientX, y: e.clientY }
+  pointers.set(e.pointerId, cur)
+
+  if (pointers.size === 1) {
+    const dx = cur.x - prev.x
+    const dy = cur.y - prev.y
+    if (Math.abs(dx) + Math.abs(dy) > 2) suppressClick = true
+    pan.x += dx
+    pan.y += dy
+  } else if (pointers.size === 2) {
+    suppressClick = true
+    const vp = viewport.value
+    if (!vp) return
+    const next = pinchDistance()
+    if (pinchDist > 0 && next > 0) {
+      const [a, b] = [...pointers.values()]
+      const rect = vp.getBoundingClientRect()
+      zoomAt((a!.x + b!.x) / 2 - rect.left, (a!.y + b!.y) / 2 - rect.top, next / pinchDist)
+    }
+    pinchDist = next
+  }
+}
+
+function onPointerUp(e: PointerEvent) {
+  pointers.delete(e.pointerId)
+  if (pointers.size < 2) pinchDist = 0
+  if (pointers.size === 0) {
+    panning.value = false
+    window.removeEventListener('pointermove', onPointerMove)
+    window.removeEventListener('pointerup', onPointerUp)
+    window.removeEventListener('pointercancel', onPointerUp)
+  }
+}
+
+onUnmounted(() => {
+  window.removeEventListener('pointermove', onPointerMove)
+  window.removeEventListener('pointerup', onPointerUp)
+  window.removeEventListener('pointercancel', onPointerUp)
+})
+
 // --- Выделение и цепочка ---
 const selected = computed(() => selectedId.value ? byId.value.get(selectedId.value) ?? null : null)
 
 const chain = computed<HandshakePerson[]>(() => {
   const out: HandshakePerson[] = []
+  const seen = new Set<string>()
   let cur = selected.value
-  let guard = 0
-  while (cur && guard++ < 50) {
+  while (cur && !seen.has(cur.id)) {
+    seen.add(cur.id)
     out.unshift(cur)
-    cur = cur.via ? byId.value.get(cur.via) ?? null : null
+    const via = primaryVia(cur)
+    cur = via ? byId.value.get(via) ?? null : null
   }
   return out
 })
 
 const chainIds = computed(() => new Set(chain.value.map(p => p.id)))
+
+const otherVias = computed(() => {
+  if (!selected.value) return []
+  return viasOf(selected.value).slice(1).map(id => byId.value.get(id)!).filter(Boolean)
+})
 
 function handshakeWord(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return 'рукопожатие'
@@ -119,7 +264,12 @@ function handshakeWord(n: number): string {
   return 'рукопожатий'
 }
 
-const selectedDepth = computed(() => chain.value.length - 1)
+const selectedDepth = computed(() => selected.value ? layout.value.depthOf.get(selected.value.id) ?? 0 : 0)
+
+function onNodeClick(id: string) {
+  if (suppressClick) return
+  selectedId.value = selectedId.value === id ? null : id
+}
 
 // --- Контакты ---
 function telegramLink(v: string) { return 'https://t.me/' + v.replace(/^@/, '').replace(/^https?:\/\/t\.me\//, '') }
@@ -129,18 +279,23 @@ function githubLabel(v: string) { return v.replace(/^https?:\/\/github\.com\//, 
 function siteLink(v: string) { return /^https?:\/\//.test(v) ? v : 'https://' + v }
 function siteLabel(v: string) { try { return new URL(siteLink(v)).hostname } catch { return v } }
 
-// --- Форма добавления / редактирования ---
+// --- Форма добавления / редактирования (только dev) ---
 const formOpen = ref(false)
 const editId = ref<string | null>(null)
-const form = reactive({ name: '', image: '', telegram: '', github: '', site: '', note: '', via: '' })
+const form = reactive<{ name: string; image: string; telegram: string; github: string; site: string; note: string; via: string[] }>({
+  name: '', image: '', telegram: '', github: '', site: '', note: '', via: [],
+})
 
 function descendantIds(id: string): Set<string> {
   const out = new Set<string>()
   const queue = [id]
   while (queue.length) {
     const cur = queue.shift()!
-    for (const k of childrenOf.value.get(cur) ?? []) {
-      if (!out.has(k.id)) { out.add(k.id); queue.push(k.id) }
+    for (const p of persons.value) {
+      if (viasOf(p).includes(cur) && !out.has(p.id)) {
+        out.add(p.id)
+        queue.push(p.id)
+      }
     }
   }
   return out
@@ -153,9 +308,14 @@ const viaOptions = computed(() => {
   return persons.value.filter(p => !blocked.has(p.id))
 })
 
+const viaSelectionLabel = computed(() => {
+  if (!form.via.length) return 'Никого - корень карты'
+  return form.via.map(id => byId.value.get(id)?.name ?? '?').join(', ')
+})
+
 function openAdd(viaId?: string) {
   editId.value = null
-  Object.assign(form, { name: '', image: '', telegram: '', github: '', site: '', note: '', via: viaId ?? roots.value[0]?.id ?? '' })
+  Object.assign(form, { name: '', image: '', telegram: '', github: '', site: '', note: '', via: viaId ? [viaId] : roots.value[0] ? [roots.value[0].id] : [] })
   formOpen.value = true
 }
 
@@ -168,7 +328,7 @@ function openEdit(p: HandshakePerson) {
     github: p.contacts?.github ?? '',
     site: p.contacts?.site ?? '',
     note: p.note ?? '',
-    via: p.via ?? '',
+    via: viasOf(p),
   })
   formOpen.value = true
 }
@@ -187,14 +347,14 @@ function saveForm() {
     image: form.image.trim() || undefined,
     contacts: hasContacts ? contacts : undefined,
     note: form.note.trim() || undefined,
-    via: form.via || undefined,
+    via: form.via.length ? [...form.via] : undefined,
   }
   if (editId.value) {
     const p = byId.value.get(editId.value)
     if (p) Object.assign(p, payload)
     selectedId.value = editId.value
   } else {
-    const id = crypto.randomUUID()
+    const id = payload.name.toLowerCase()
     persons.value.push({ id, ...payload })
     selectedId.value = id
   }
@@ -202,29 +362,41 @@ function saveForm() {
 }
 
 function removePerson(p: HandshakePerson) {
-  if (!window.confirm(`Удалить «${p.name}» с карты? Его знакомые будут привязаны выше по цепочке.`)) return
-  for (const child of childrenOf.value.get(p.id) ?? []) child.via = p.via
+  if (!window.confirm(`Удалить \"${p.name}\" с карты? Его знакомые будут привязаны выше по цепочке.`)) return
+  const parentVias = viasOf(p)
+  for (const child of persons.value) {
+    if (!child.via?.includes(p.id)) continue
+    const merged = [...child.via.filter(id => id !== p.id), ...parentVias]
+    const unique = [...new Set(merged)].filter(id => id !== child.id)
+    child.via = unique.length ? unique : undefined
+  }
   persons.value = persons.value.filter(x => x.id !== p.id)
   selectedId.value = null
 }
 
-// --- Сохранение ---
+// --- Сохранение (только dev) ---
 const copied = ref(false)
 
+function normalize(arr: unknown): HandshakePerson[] | null {
+  if (!Array.isArray(arr) || !arr.length) return null
+  if (!arr.every(x => x && typeof x.id === 'string' && typeof x.name === 'string')) return null
+  return arr.map(p => ({
+    ...p,
+    // старый формат хранил одну связь строкой
+    via: typeof p.via === 'string' ? [p.via] : Array.isArray(p.via) ? p.via : undefined,
+  }))
+}
+
 onMounted(() => {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      const arr = JSON.parse(raw)
-      if (Array.isArray(arr) && arr.length && arr.every(x => x && typeof x.id === 'string' && typeof x.name === 'string')) {
-        persons.value = arr
-      }
-    }
-  } catch { /* битые данные - остаёмся на сиде */ }
+  if (isDev) {
+    try {
+      const stored = normalize(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null'))
+      if (stored) persons.value = stored
+    } catch { /* битые данные - остаёмся на сиде */ }
+  }
 
   nextTick(() => {
-    const vp = viewport.value
-    if (vp) vp.scrollTo({ left: (layout.value.width - vp.clientWidth) / 2 })
+    centerMap()
     try {
       animate('.hs-node', { opacity: [0, 1], duration: 500, ease: 'out(2)', delay: stagger(60) })
       animate(svg.createDrawable('.hs-edge'), { draw: '0 1', duration: 900, ease: 'out(2)', delay: stagger(80) })
@@ -233,7 +405,7 @@ onMounted(() => {
 })
 
 watch(persons, (v) => {
-  if (import.meta.client) localStorage.setItem(STORAGE_KEY, JSON.stringify(v))
+  if (isDev && import.meta.client) localStorage.setItem(STORAGE_KEY, JSON.stringify(v))
 }, { deep: true })
 
 async function exportJson() {
@@ -258,22 +430,27 @@ function resetMap() {
     </div>
 
     <div class="max-w-7xl mx-auto">
-      <div class="flex flex-wrap items-center gap-2 mb-3">
+      <div v-if="isDev" class="flex flex-wrap items-center gap-2 mb-3">
         <ShButton variant="ghost" class="bg-black/25" icon="lucide:user-plus" @click="openAdd()">Добавить человека</ShButton>
         <ShButton variant="ghost" class="bg-black/25" :icon="copied ? 'lucide:check' : 'lucide:copy'" @click="exportJson">
           {{ copied ? 'Скопировано!' : 'Экспорт JSON' }}
         </ShButton>
         <ShButton variant="ghost" class="bg-black/25" icon="lucide:rotate-ccw" @click="resetMap">Сбросить</ShButton>
-        <p class="text-stone-600 text-xs ml-auto">Изменения сохраняются в вашем браузере</p>
+        <p class="text-stone-600 text-xs ml-auto">Dev-режим: изменения сохраняются в браузере, "Экспорт" - чтобы вставить в data/handshakes.ts</p>
       </div>
 
       <div ref="viewport"
-           class="relative overflow-auto rounded-lg border border-stone-800 bg-stone-950/60 h-[65vh] min-h-96"
-           style="background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px;">
-        <div v-if="persons.length" class="relative mx-auto" :style="{ width: layout.width + 'px', height: layout.height + 'px' }">
+           class="relative overflow-hidden rounded-lg border border-stone-800 bg-stone-950/60 h-[65vh] min-h-96 select-none touch-none"
+           :class="panning ? 'cursor-grabbing' : 'cursor-grab'"
+           style="background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px;"
+           @wheel.prevent="onWheel"
+           @pointerdown="onPointerDown">
+        <div v-if="persons.length" class="absolute top-0 left-0" :style="canvasStyle">
           <svg class="absolute inset-0 pointer-events-none" :width="layout.width" :height="layout.height"
                :viewBox="`0 0 ${layout.width} ${layout.height}`" fill="none">
-            <path v-for="e in layout.edges" :key="e.childId" :d="edgePath(e)"
+            <path v-for="e in layout.extraEdges" :key="e.id" :d="edgePath(e)"
+                  stroke="#57534e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.7" />
+            <path v-for="e in layout.edges" :key="e.id" :d="edgePath(e)"
                   class="hs-edge transition-[stroke] duration-300"
                   :stroke="chainIds.has(e.childId) ? '#fb923c' : '#44403c'"
                   :stroke-width="chainIds.has(e.childId) ? 2 : 1.5" />
@@ -283,7 +460,7 @@ function resetMap() {
                   class="hs-node absolute flex flex-col items-center gap-1.5 cursor-pointer group transition-[left,top,opacity] duration-300"
                   :style="{ left: n.px + 'px', top: n.py + 'px', width: NODE_W + 'px' }"
                   :class="{ 'opacity-40': selectedId && !chainIds.has(n.p.id) }"
-                  @click="selectedId = selectedId === n.p.id ? null : n.p.id">
+                  @click="onNodeClick(n.p.id)">
             <div class="relative">
               <PersonAvatar :person="n.p"
                             class="ring-2 transition-all duration-300 group-hover:ring-orange-400/70 group-hover:shadow-[0_0_20px_rgba(251,146,60,0.25)]"
@@ -300,8 +477,37 @@ function resetMap() {
         <div v-else class="h-full flex flex-col items-center justify-center gap-3 text-stone-500">
           <Icon name="lucide:users" class="text-3xl" />
           <p>Карта пуста</p>
-          <ShButton variant="ghost" class="bg-black/25" icon="lucide:user-plus" @click="openAdd()">Добавить первого человека</ShButton>
+          <ShButton v-if="isDev" variant="ghost" class="bg-black/25" icon="lucide:user-plus" @click="openAdd()">Добавить первого человека</ShButton>
         </div>
+
+        <!-- Управление масштабом -->
+        <div class="absolute bottom-3 right-3 flex flex-col gap-1.5">
+          <button class="w-9 h-9 rounded-md bg-stone-900/90 border border-stone-700 text-stone-300 hover:text-white hover:border-stone-500 duration-200 flex items-center justify-center"
+                  aria-label="Приблизить" @click.stop="zoomFromCenter(1.25)" @pointerdown.stop>
+            <Icon name="lucide:plus" />
+          </button>
+          <button class="w-9 h-9 rounded-md bg-stone-900/90 border border-stone-700 text-stone-300 hover:text-white hover:border-stone-500 duration-200 flex items-center justify-center"
+                  aria-label="Отдалить" @click.stop="zoomFromCenter(0.8)" @pointerdown.stop>
+            <Icon name="lucide:minus" />
+          </button>
+          <button class="w-9 h-9 rounded-md bg-stone-900/90 border border-stone-700 text-stone-300 hover:text-white hover:border-stone-500 duration-200 flex items-center justify-center"
+                  aria-label="По центру" @click.stop="centerMap" @pointerdown.stop>
+            <Icon name="lucide:maximize" />
+          </button>
+        </div>
+        <p class="absolute bottom-3 left-3 text-stone-600 text-xs pointer-events-none hidden sm:block">
+          {{ Math.round(zoom * 100) }}% · колесо - масштаб, зажми и тяни - перемещение
+        </p>
+      </div>
+
+      <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-center rounded-lg border border-stone-800 bg-stone-950/60 px-4 py-3">
+        <p class="text-stone-400 text-sm">
+          Знаком со мной, но тебя нет на карте? Или хочешь изменить свою карточку?
+          <span class="text-stone-500">Напиши мне - добавлю связь.</span>
+        </p>
+        <ShButton as="a" href="https://t.me/zWork1" target="_blank" variant="ghost" class="bg-black/25 shrink-0" icon="iconoir:telegram">
+          Написать в Telegram
+        </ShButton>
       </div>
     </div>
 
@@ -331,6 +537,14 @@ function resetMap() {
           </template>
         </div>
 
+        <div v-if="otherVias.length" class="flex flex-wrap items-center gap-1 text-xs text-stone-500">
+          <span>Также знаком через:</span>
+          <template v-for="(p, i) in otherVias" :key="p.id">
+            <span v-if="i > 0" class="text-stone-700">·</span>
+            <button class="text-stone-400 hover:text-orange-400 duration-200" @click="selectedId = p.id">{{ p.name }}</button>
+          </template>
+        </div>
+
         <p v-if="selected.note" class="text-stone-400 text-sm italic">{{ selected.note }}</p>
 
         <div v-if="selected.contacts" class="space-y-1 text-sm">
@@ -348,7 +562,7 @@ function resetMap() {
           </a>
         </div>
 
-        <div class="flex flex-wrap gap-1 pt-1 border-t border-stone-800">
+        <div v-if="isDev" class="flex flex-wrap gap-1 pt-1 border-t border-stone-800">
           <ShButton variant="ghost" size="sm" icon="lucide:user-plus" @click="openAdd(selected.id)">Добавить знакомого</ShButton>
           <ShButton variant="ghost" size="sm" icon="lucide:pencil" @click="openEdit(selected)">Изменить</ShButton>
           <ShButton variant="ghost" size="sm" icon="lucide:trash-2" class="text-red-400/80" @click="removePerson(selected)">Удалить</ShButton>
@@ -356,9 +570,9 @@ function resetMap() {
       </div>
     </Transition>
 
-    <!-- Форма добавления / редактирования -->
+    <!-- Форма добавления / редактирования (только dev) -->
     <Transition name="hs-card">
-      <div v-if="formOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      <div v-if="isDev && formOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
            @click.self="formOpen = false">
         <div class="w-full max-w-md bg-stone-900 border border-stone-700 rounded-lg p-5 space-y-3 max-h-[90vh] overflow-y-auto">
           <div class="flex items-center justify-between">
@@ -379,12 +593,17 @@ function resetMap() {
           </div>
 
           <div>
-            <p class="text-stone-500 text-xs mb-1">Знаком через</p>
-            <select v-model="form.via"
-                    class="w-full bg-stone-950 border border-stone-700 rounded-md px-3 py-2 text-sm outline-none focus:border-orange-500/60 duration-200">
-              <option value="">Никого - корень карты</option>
-              <option v-for="p in viaOptions" :key="p.id" :value="p.id">{{ p.name }}</option>
-            </select>
+            <p class="text-stone-500 text-xs mb-1">Знаком через (первый в списке - основная связь)</p>
+            <ShSelect v-model="form.via" multiple>
+              <ShSelectTrigger class="w-full bg-stone-950 border-stone-700">
+                <span class="flex-1 text-left truncate" :class="form.via.length ? 'text-stone-200' : 'text-stone-500'">
+                  {{ viaSelectionLabel }}
+                </span>
+              </ShSelectTrigger>
+              <ShSelectContent>
+                <ShSelectItem v-for="p in viaOptions" :key="p.id" :value="p.id">{{ p.name }}</ShSelectItem>
+              </ShSelectContent>
+            </ShSelect>
           </div>
 
           <div>

@@ -11,7 +11,7 @@ const year = new Date().getFullYear()
       </div>
       <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-stone-400">
         <NuxtLink to="/projects" class="hover:text-stone-200 duration-200">Проекты</NuxtLink>
-        <NuxtLink to="/donate" class="hover:text-stone-200 duration-200">Спонсоры</NuxtLink>
+        <NuxtLink to="/handshakes" class="hover:text-stone-200 duration-200">Знакомства</NuxtLink>
         <NuxtLink to="/experiments" class="hover:text-stone-200 duration-200">Эксперименты</NuxtLink>
       </nav>
       <div class="flex-1 flex justify-center md:justify-end items-center gap-4 text-lg">

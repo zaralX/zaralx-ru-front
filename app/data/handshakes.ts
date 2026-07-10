@@ -2,34 +2,239 @@ import type { HandshakePerson } from "~/types/handshake";
 
 export const handshakesSeed: HandshakePerson[] = [
     {
-        id: "zaralx",
-        name: "zaralX",
-        image: "/img/profile.jpg",
-        contacts: {
-            telegram: "zWork1",
-            github: "zaralX",
-            site: "https://zaralx.ru",
+        "id": "zaralx",
+        "name": "zaralX",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/_zaralX_/full",
+        "contacts": {
+            "telegram": "zWork1",
+            "github": "zaralX",
+            "site": "https://zaralx.ru"
         },
-        note: "Это я :)",
+        "note": "Это я :)"
     },
     {
-        id: "example-friend",
-        name: "Пример: Друг",
-        via: "zaralx",
-        contacts: {
-            telegram: "username",
+        "id": "vifoxy",
+        "name": "Vifoxy",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Vifoxy/full",
+        "contacts": {
+            "telegram": "@vifoxy",
+            "github": "Vifoxy",
+            "site": "https://vifoxy.ru"
         },
-        note: "Это пример — отредактируй или удали меня",
+        "via": [
+            "zaralx"
+        ]
     },
     {
-        id: "example-colleague",
-        name: "Пример: Коллега",
-        via: "zaralx",
+        "id": "barn",
+        "name": "Barn",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Barn0/full",
+        "contacts": {
+            "telegram": "@barn0tg",
+            "site": "https://origon.pro"
+        },
+        "note": "Владелец проекта Origon",
+        "via": [
+            "zaralx"
+        ]
     },
     {
-        id: "example-chain",
-        name: "Пример: Знакомый друга",
-        via: "example-friend",
-        note: "Два рукопожатия от zaralX",
+        "id": "deelter",
+        "name": "DeelTer",
+        "image": "https://deelter.ru/images/deelter.webp",
+        "contacts": {
+            "site": "https://deelter.ru"
+        },
+        "via": [
+            "zaralx",
+            "barn"
+        ]
     },
+    {
+        "id": "safon qa",
+        "name": "Safon QA",
+        "contacts": {
+            "telegram": "@safon_qa"
+        },
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "kirilltwice",
+        "name": "kirilltwice",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/itstwice/full",
+        "via": [
+            "zaralx",
+            "barn"
+        ]
+    },
+    {
+        "id": "mayorleon",
+        "name": "MayorLeon",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/MayorLeon20/full",
+        "contacts": {
+            "github": "MayorLeon20"
+        },
+        "via": [
+            "zaralx",
+            "vifoxy"
+        ]
+    },
+    {
+        "id": "suheugene",
+        "name": "SuhEugene",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/SuhEugene/full",
+        "contacts": {
+            "telegram": "suseugene",
+            "github": "SuhEugene",
+            "site": "https://suheugene.ru/"
+        },
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "vilbux",
+        "name": "vilbux.com",
+        "contacts": {
+            "site": "https://vilbux.com"
+        },
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "en0tuk",
+        "name": "en0tuk",
+        "via": [
+            "vilbux",
+            "multiverse community",
+            "хаб чат community"
+        ]
+    },
+    {
+        "id": "multiverse community",
+        "name": "Multiverse Community",
+        "note": "Чат самых крутых кубонавтов СНГ.",
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "хаб чат community",
+        "name": "Хаб Чат Community",
+        "note": "Предприимчивые и талантливые специалисты из разных сфер — от IT и творчества до ритейла и продакшена.",
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "pigeonov",
+        "name": "Pigeonov",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/pigeonov/full",
+        "via": [
+            "multiverse community",
+            "barn",
+            "хаб чат community"
+        ]
+    },
+    {
+        "id": "artur smirnovsky",
+        "name": "Artur Smirnovsky",
+        "contacts": {
+            "telegram": "@art_smirnovsky"
+        },
+        "note": "Крутой дизайнер",
+        "via": [
+            "хаб чат community",
+            "multiverse community"
+        ]
+    },
+    {
+        "id": "specis",
+        "name": "Specis",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Specis/full",
+        "contacts": {
+            "telegram": "@specisss"
+        },
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "play2go",
+        "name": "play2go",
+        "image": "https://play2go.cloud/logo/light.svg",
+        "contacts": {
+            "site": "https://play2go.cloud/"
+        },
+        "note": "Хостинг игровых серверов",
+        "via": [
+            "vovamod",
+            "en0tuk"
+        ]
+    },
+    {
+        "id": "elytra.pro",
+        "name": "elytra.pro",
+        "image": "https://top-minecrafter.com/s3/servers/icons/30/9e9a18acf422a4530eea21.png?v=1",
+        "contacts": {
+            "site": "https://elytra.pro"
+        },
+        "via": [
+            "pigeonov"
+        ]
+    },
+    {
+        "id": "origon",
+        "name": "origon.pro",
+        "image": "https://origon.pro/_ipx/_/logo.svg",
+        "contacts": {
+            "site": "https://origon.pro/"
+        },
+        "via": [
+            "barn"
+        ]
+    },
+    {
+        "id": "librey",
+        "name": "Librey",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/librey/full",
+        "note": "Аниматор",
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "творческое объединение community",
+        "name": "Творческое объединение Community",
+        "via": [
+            "librey"
+        ]
+    },
+    {
+        "id": "hothawk",
+        "name": "Hothawk",
+        "image": "https://hothawk.net/_next/image?url=%2Ffooter-logo.webp&w=256&q=75",
+        "contacts": {
+            "site": "https://hothawk.net/"
+        },
+        "via": [
+            "specis"
+        ]
+    },
+    {
+        "id": "vovamod",
+        "name": "vovamod",
+        "via": [
+            "vilbux"
+        ],
+        "contacts": {
+            "telegram": "vovamod_unkw",
+            "github": "vovamod",
+            "site": "https://vovamod.dev/"
+        },
+        "note": "тгк: https://t.me/private_vovamod"
+    }
 ];

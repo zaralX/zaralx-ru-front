@@ -33,8 +33,8 @@ onUnmounted(() => {
         <NuxtLink to="/projects">
           <ShButton variant="ghost">Проекты</ShButton>
         </NuxtLink>
-        <NuxtLink to="/donate">
-          <ShButton variant="ghost">Спонсоры</ShButton>
+        <NuxtLink to="/handshakes">
+          <ShButton variant="ghost">Знакомства</ShButton>
         </NuxtLink>
         <NuxtLink to="/experiments">
           <ShButton variant="ghost">Эксперименты</ShButton>
@@ -66,8 +66,8 @@ onUnmounted(() => {
         <NuxtLink to="/projects" class="w-full">
           <ShButton variant="ghost" class="w-full justify-start text-left" icon="lucide:folder-code">Проекты</ShButton>
         </NuxtLink>
-        <NuxtLink to="/donate" class="w-full">
-          <ShButton variant="ghost" class="w-full justify-start text-left" icon="lucide:heart-handshake">Спонсоры</ShButton>
+        <NuxtLink to="/handshakes" class="w-full">
+          <ShButton variant="ghost" class="w-full justify-start text-left" icon="lucide:heart-handshake">Знакомства</ShButton>
         </NuxtLink>
         <NuxtLink to="/experiments" class="w-full">
           <ShButton variant="ghost" class="w-full justify-start text-left" icon="lucide:flask-conical">Эксперименты</ShButton>

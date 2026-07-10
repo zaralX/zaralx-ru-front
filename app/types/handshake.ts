@@ -10,6 +10,6 @@ export interface HandshakePerson {
     image?: string
     contacts?: HandshakeContacts
     note?: string
-    /** id человека, через которого знакомство; пусто = корень карты */
-    via?: string
+    /** id людей, через которых знакомство (первый - основная связь); пусто = корень карты */
+    via?: string[]
 }
