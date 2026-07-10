@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+useSeoMeta({
+  title: 'Эксперименты - zaralx.ru',
+  description: 'Экспериментальные разработки и анимации zaralX: Anime.js, частицы, 3D-эффекты.',
+})
 </script>
 
 <template>

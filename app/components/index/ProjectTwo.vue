@@ -1,20 +1,7 @@
 <script setup lang="ts">
-import {animate, onScroll, svg} from 'animejs';
+import {animate, onScroll} from 'animejs';
 
 onMounted(() => {
-  animate("#project-line-cristalix", {
-    width: [0, 96],
-    ease: 'inOutCirc',
-    duration: 5000,
-    alternate: true,
-    autoplay: onScroll({
-      sync: 1,
-      enter: 'max+=100 bottom',
-      leave: 'top+=300 top',
-      // debug: true,
-    })
-  });
-
   if (useDevice()?.isDesktop) {
     animate("#project-video-cristalix", {
       rotateX: [90, 0],

@@ -1,24 +1,7 @@
 <script setup lang="ts">
-import {animate, onScroll, svg} from 'animejs';
+import {animate, onScroll} from 'animejs';
 
 onMounted(() => {
-  const carAnimation = animate('.car', {
-    ease: 'linear',
-    duration: 5000,
-    loop: true,
-    ...svg.createMotionPath('path')
-  });
-
-// Line drawing animation following the motion path values
-// For demo aesthetic only
-  animate(svg.createDrawable('path'), {
-    draw: '0 1',
-    ease: 'linear',
-    duration: 5000,
-    alternate: true,
-    loop: true,
-  });
-
   if (useDevice()?.isDesktop) {
     animate("#project-video-api", {
       rotateX: [-90, 0],
@@ -84,20 +67,5 @@ onMounted(() => {
 </template>
 
 <style scoped>
-#svg-createmotionpath {
-  position: relative;
-}
 
-#svg-createmotionpath .car {
-  position: absolute;
-  width: 16px;
-  height: 8px;
-  left: -8px;
-  top: -5px;
-  color: #FFF;
-}
-
-#svg-createmotionpath .docs-demo-template .car {
-  display: none;
-}
 </style>

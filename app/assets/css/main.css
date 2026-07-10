@@ -1,5 +1,9 @@
 @import "./tailwind.css";
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Golos Text', Helvetica, Arial, sans-serif;
     @apply bg-stone-950 text-white;
