@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { animate, stagger, svg } from 'animejs'
+import { animate, svg, utils } from 'animejs'
 import type { HandshakePerson } from '~/types/handshake'
 import { handshakesSeed } from '~/data/handshakes'
 import PersonAvatar from '~/components/handshakes/PersonAvatar.vue'
@@ -62,7 +62,7 @@ const LEVEL_H = 176
 const PAD = 56
 
 interface LaidNode { p: HandshakePerson; x: number; y: number; depth: number; px: number; py: number }
-interface LaidEdge { id: string; childId: string; x1: number; y1: number; x2: number; y2: number; bendY: number }
+interface LaidEdge { id: string; childId: string; childDepth: number; x1: number; y1: number; x2: number; y2: number; bendY: number }
 
 const layout = computed(() => {
   const nodes: LaidNode[] = []
@@ -122,10 +122,9 @@ const layout = computed(() => {
       const edge = {
         id: `${viaId}->${p.id}`,
         childId: p.id,
+        childDepth: depthOf.get(p.id) ?? 1,
         x1: from.x + PAD, y1: from.y + PAD + 68,
         x2: to.x + PAD, y2: to.y + PAD + 4,
-        // изгиб заканчивается там, где цель была бы уровнем ниже родителя;
-        // остаток до фактической цели - вертикальная линия, чтобы не резать слои
         bendY: (fromDepth + 1) * LEVEL_H + PAD + 4,
       }
       if (i === 0) edges.push(edge)
@@ -150,7 +149,8 @@ function edgePath(e: LaidEdge): string {
 }
 
 // --- Перемещение и масштаб ---
-const zoom = ref(1)
+const DEFAULT_ZOOM = 0.4
+const zoom = ref(DEFAULT_ZOOM)
 const pan = reactive({ x: 0, y: 0 })
 const MIN_ZOOM = 0.4
 const MAX_ZOOM = 2.5
@@ -179,9 +179,9 @@ function zoomFromCenter(factor: number) {
 function centerMap() {
   const vp = viewport.value
   if (!vp) return
-  zoom.value = 1
-  pan.x = (vp.clientWidth - layout.value.width) / 2
-  pan.y = Math.max((vp.clientHeight - layout.value.height) / 2, 16)
+  zoom.value = DEFAULT_ZOOM
+  pan.x = (vp.clientWidth - layout.value.width * DEFAULT_ZOOM) / 2
+  pan.y = Math.max((vp.clientHeight - layout.value.height * DEFAULT_ZOOM) / 2, 16)
 }
 
 function onWheel(e: WheelEvent) {
@@ -411,7 +411,6 @@ function normalize(arr: unknown): HandshakePerson[] | null {
   if (!arr.every(x => x && typeof x.id === 'string' && typeof x.name === 'string')) return null
   return arr.map(p => ({
     ...p,
-    // старый формат хранил одну связь строкой
     via: typeof p.via === 'string' ? [p.via] : Array.isArray(p.via) ? p.via : undefined,
   }))
 }
@@ -421,17 +420,56 @@ onMounted(() => {
     try {
       const stored = normalize(JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null'))
       if (stored) persons.value = stored
-    } catch { /* битые данные - остаёмся на сиде */ }
+    } catch { }
   }
 
   nextTick(() => {
     centerMap()
-    try {
-      animate('.hs-node', { opacity: [0, 1], duration: 500, ease: 'out(2)', delay: stagger(60) })
-      animate(svg.createDrawable('.hs-edge'), { draw: '0 1', duration: 900, ease: 'out(2)', delay: stagger(80) })
-    } catch { /* нет узлов - нечего анимировать */ }
+    playIntro()
   })
 })
+
+function playIntro() {
+  const LEVEL_DELAY = 320
+  const nodeEls = [...document.querySelectorAll<HTMLElement>('.hs-node')]
+  const edgeEls = [...document.querySelectorAll<SVGPathElement>('.hs-edge')]
+  const extraGroup = document.querySelector<SVGGElement>('.hs-extra-group')
+  if (!nodeEls.length) return
+
+  try {
+    utils.set(nodeEls, { opacity: 0 })
+    animate(nodeEls, {
+      opacity: 1,
+      duration: 450,
+      ease: 'out(2)',
+      delay: el => Number((el as HTMLElement).dataset.depth ?? 0) * LEVEL_DELAY,
+      onComplete: () => nodeEls.forEach(el => { el.style.opacity = '' }),
+    })
+
+    for (const el of edgeEls) {
+      const depth = Number(el.dataset.depth ?? 1)
+      const drawable = svg.createDrawable(el)
+      utils.set(drawable, { draw: '0 0' })
+      animate(drawable, {
+        draw: '0 1',
+        duration: 420,
+        ease: 'out(2)',
+        delay: (depth - 1) * LEVEL_DELAY + 160,
+      })
+    }
+
+    if (extraGroup) {
+      const maxDepth = Math.max(0, ...nodeEls.map(el => Number(el.dataset.depth ?? 0)))
+      utils.set(extraGroup, { opacity: 0 })
+      animate(extraGroup, {
+        opacity: [0, 1],
+        duration: 700,
+        ease: 'out(2)',
+        delay: maxDepth * LEVEL_DELAY + 300,
+      })
+    }
+  } catch { }
+}
 
 watch(persons, (v) => {
   if (isDev && import.meta.client) localStorage.setItem(STORAGE_KEY, JSON.stringify(v))
@@ -477,19 +515,23 @@ function resetMap() {
         <div v-if="persons.length" class="absolute top-0 left-0" :style="canvasStyle">
           <svg class="absolute inset-0 pointer-events-none" :width="layout.width" :height="layout.height"
                :viewBox="`0 0 ${layout.width} ${layout.height}`" fill="none">
-            <path v-for="e in layout.extraEdges" :key="e.id" :d="edgePath(e)"
-                  class="transition-[stroke,opacity] duration-300" stroke-dasharray="4 5"
-                  :stroke="isExtraHighlighted(e) ? '#fb923c' : '#57534e'"
-                  :stroke-width="isExtraHighlighted(e) ? 2 : 1.5"
-                  :opacity="isExtraHighlighted(e) ? 1 : 0.7" />
+            <g class="hs-extra-group">
+              <path v-for="e in layout.extraEdges" :key="e.id" :d="edgePath(e)"
+                    class="transition-[stroke,opacity] duration-300" stroke-dasharray="4 5"
+                    :stroke="isExtraHighlighted(e) ? '#fb923c' : '#57534e'"
+                    :stroke-width="isExtraHighlighted(e) ? 2 : 1.5"
+                    :opacity="isExtraHighlighted(e) ? 1 : 0.7" />
+            </g>
             <path v-for="e in layout.edges" :key="e.id" :d="edgePath(e)"
                   class="hs-edge transition-[stroke] duration-300"
+                  :data-depth="e.childDepth"
                   :stroke="chainIds.has(e.childId) ? '#fb923c' : '#44403c'"
                   :stroke-width="chainIds.has(e.childId) ? 2 : 1.5" />
           </svg>
 
           <button v-for="n in layout.nodes" :key="n.p.id"
                   class="hs-node absolute flex flex-col items-center gap-1.5 cursor-pointer group transition-[left,top,opacity] duration-300"
+                  :data-depth="n.depth"
                   :style="{ left: n.px + 'px', top: n.py + 'px', width: NODE_W + 'px' }"
                   :class="{ 'opacity-40': selectedId && !highlightIds.has(n.p.id) }"
                   @click="onNodeClick(n.p.id)">

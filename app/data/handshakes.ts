@@ -327,7 +327,8 @@ export const handshakesSeed: HandshakePerson[] = [
             "site": "https://genius.com/artists/Vlad-shain"
         },
         "via": [
-            "deelter"
+            "deelter",
+            "пятёрка"
         ]
     },
     {
@@ -387,5 +388,14 @@ export const handshakesSeed: HandshakePerson[] = [
         "via": [
             "студия 115"
         ]
+    },
+    {
+        "id": "денофайн",
+        "name": "Денофайн",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/denoph1ne/full",
+        "via": [
+            "mayorleon",
+            "multiverse community"
+        ]
     }
-];
+]
