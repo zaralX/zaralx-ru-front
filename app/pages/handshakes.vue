@@ -72,9 +72,24 @@ const layout = computed(() => {
   let cursor = 0
   let maxDepth = 0
 
-  function place(p: HandshakePerson, depth: number): number {
+  const depthMemo = new Map<string, number>()
+  const inProgress = new Set<string>()
+  function dagDepth(id: string): number {
+    if (depthMemo.has(id)) return depthMemo.get(id)!
+    if (inProgress.has(id)) return 0 // цикл в данных - разрываем
+    inProgress.add(id)
+    const p = byId.value.get(id)
+    const vias = p ? viasOf(p) : []
+    const d = vias.length ? Math.max(...vias.map(dagDepth)) + 1 : 0
+    inProgress.delete(id)
+    depthMemo.set(id, d)
+    return d
+  }
+
+  function place(p: HandshakePerson): number {
     if (visited.has(p.id)) return pos.get(p.id)?.x ?? cursor * NODE_W
     visited.add(p.id)
+    const depth = dagDepth(p.id)
     maxDepth = Math.max(maxDepth, depth)
     const kids = childrenOf.value.get(p.id) ?? []
     let x: number
@@ -82,7 +97,7 @@ const layout = computed(() => {
       x = cursor * NODE_W + NODE_W / 2
       cursor++
     } else {
-      const xs = kids.map(k => place(k, depth + 1))
+      const xs = kids.map(k => place(k))
       x = (Math.min(...xs) + Math.max(...xs)) / 2
     }
     const y = depth * LEVEL_H
@@ -92,9 +107,8 @@ const layout = computed(() => {
     return x
   }
 
-  for (const r of roots.value) place(r, 0)
-  // страховка от циклов по основным связям - никого не теряем
-  for (const p of persons.value) if (!visited.has(p.id)) place(p, 0)
+  for (const r of roots.value) place(r)
+  for (const p of persons.value) if (!visited.has(p.id)) place(p)
 
   const edges: LaidEdge[] = []
   const extraEdges: LaidEdge[] = []
