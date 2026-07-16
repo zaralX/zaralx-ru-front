@@ -18,7 +18,7 @@ export const handshakesSeed: HandshakePerson[] = [
         "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Vifoxy/full",
         "contacts": {
             "telegram": "@vifoxy",
-            "github": "vifox8",
+            "github": "Vifoxy",
             "site": "https://vifoxy.ru"
         },
         "via": [
@@ -236,5 +236,56 @@ export const handshakesSeed: HandshakePerson[] = [
             "site": "https://vovamod.dev/"
         },
         "note": "тгк: https://t.me/private_vovamod"
+    },
+    {
+        "id": "хайрук",
+        "name": "Хайрук",
+        "note": "Владелец Minetrends",
+        "via": [
+            "artur smirnovsky",
+            "хаб чат community",
+            "multiverse community"
+        ]
+    },
+    {
+        "id": "minetrens",
+        "name": "Minetrends",
+        "image": "https://sun73-2.userapi.com/s/v1/ig2/-m-PkcbZmIdazaOEye5qlHpfd02mle4avyJg_Q-igsYBOmyuI_vaYmTVvjRUFmE254wNPyV1i8q2RP9FWMOMyHIC.jpg?quality=95&crop=0,0,2560,2560&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440,2560x2560&ava=1&u=W4ZtU21uoNRXCh0m1Jwl5xzZDhbd3ZTZKCHT2DtFDx4&cs=200x200",
+        "contacts": {
+            "telegram": "minetrends"
+        },
+        "note": "Майнкрафт СМИ",
+        "via": [
+            "хайрук"
+        ]
+    },
+    {
+        "id": "влад макаров",
+        "name": "Влад Макаров",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/Mokigrad/full",
+        "contacts": {
+            "telegram": "mokigrad"
+        },
+        "via": [
+            "zaralx"
+        ]
+    },
+    {
+        "id": "boji4ata",
+        "name": "BoJI4aTa",
+        "image": "https://assets.zaralx.ru/api/v1/minecraft/vanilla/player/face/BoJI4aTa/full",
+        "contacts": {
+            "telegram": "BoJI4aTa"
+        },
+        "via": [
+            "творческое объединение community"
+        ]
+    },
+    {
+        "id": "astromine",
+        "name": "AstroMine",
+        "via": [
+            "kirilltwice"
+        ]
     }
 ];
