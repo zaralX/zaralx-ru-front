@@ -287,5 +287,105 @@ export const handshakesSeed: HandshakePerson[] = [
         "via": [
             "kirilltwice"
         ]
+    },
+    {
+        "id": "spworlds",
+        "name": "Админы SPWorlds",
+        "via": [
+            "suheugene",
+            "влад макаров"
+        ]
+    },
+    {
+        "id": "пятёрка",
+        "name": "Пятёрка",
+        "image": "https://avatars.yandex.net/get-music-content/16450533/eebcfd0d.p.7544304/300x300",
+        "contacts": {
+            "telegram": "joper5"
+        },
+        "via": [
+            "deelter",
+            "spworlds"
+        ]
+    },
+    {
+        "id": "юлик",
+        "name": "Юлик",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4_tl2F5zuk_-y_1-DF7aDxrjnal9LYXL0Otk5KYDhFA&s=10",
+        "contacts": {
+            "site": "https://www.youtube.com/channel/UC6S1hSjVMFbB9WKv-qZKwuw"
+        },
+        "via": [
+            "deelter"
+        ]
+    },
+    {
+        "id": "влад шайн",
+        "name": "Влад Шайн",
+        "image": "https://images.genius.com/b80779253cfd44cc7010edf8277bf83e.1000x1000x1.png",
+        "contacts": {
+            "site": "https://genius.com/artists/Vlad-shain"
+        },
+        "via": [
+            "deelter"
+        ]
+    },
+    {
+        "id": "dislace community",
+        "name": "Dislace Community",
+        "contacts": {
+            "site": "https://dislace.com/"
+        },
+        "via": [
+            "deelter"
+        ]
+    },
+    {
+        "id": "alenhay",
+        "name": "AlenHay",
+        "note": "Сооснователь сообщества Dislace",
+        "via": [
+            "deelter",
+            "dislace community"
+        ]
+    },
+    {
+        "id": "студия 115",
+        "name": "Студия 115",
+        "image": "https://cdn4.telesco.pe/file/Y-Fo9kSMINdstZ8zYwzfzB1qaknmdamL-dNTtVzvbfGj2lattwKjTDaaDbYcxVfsxyK0bAavBs4FQc9gsqC9X6W3qLMt1Dnm1ddzqXlEs15CQuS6ZfoUfdQNwtVMme5-Gl0dw5F8WeGuX0E9GaWtXkJobe6lcFgRMG4LFCxG5vuYxX6AfWP44FYr0nJ1Ue_13J3S703p7kw3H3iA-d3b8AyNdzYraR64gWnxFqH2Co2YOGE2a4ma8gciU6MQ1SMjhuXpjUP5Xvr1HJnBEdRgrBEXqMiU4WKizsvfJFJCXEWK5jg30DSkUt7vkl2xZdpYcdKldUOFEyUBzXeSj48meA.jpg",
+        "contacts": {
+            "telegram": "studio115",
+            "site": "https://115.studio/"
+        },
+        "via": [
+            "deelter"
+        ]
+    },
+    {
+        "id": "fonbet",
+        "name": "Fonbet",
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABPUlEQVR4AeyWO4jCQBCG7fue67Ix9Z093vXH9Xf2ePbag/aovdqT9CCkjnV0UUQRfKCIwUUQRBkZqzAibLEZEfLBX/8fO/vKIFKIt9ARfujYUZgVkHT6WcvDzlg5SzGJFd0k0IavlMQWfoa7lK4CvwDJawqkAjL3DptmA45yABel4BHLWtW8wOgrD6fFHHSYFH7NC2C5LsZHMC38AeUQBLBz3busG3XzAttOG+LsPJd3Ex6lhDjzSplPQOY+gDIrFWH4mafBU2JegM5ff/cbEsBNpcNZ7ZMZwaEXgA54KhIROCt1dwJwVWhm/0XzAuOfb6CwvgWrWpUuM6+A6nYhzrbd4hWg9z/OmU0AXz8KXjbpjygVMCfg2NGTBYT/rPK+bXnXMZwfoM4pyM7zsB4yiHFVS3M9vSwGdUphlgMAjT5PwcvrG3AAAAAASUVORK5CYII=",
+        "via": [
+            "студия 115"
+        ]
+    },
+    {
+        "id": "betboom",
+        "name": "BetBoom",
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAulBMVEVHcExuIBUPK0INM1AOPGEPR3ITVooZYp0XbbEkfsswj+U9o/xNsv9wzP6O2/ix6Pi95tbb5rXs3HTqzD/1rgD5fAD6VwENExcOGyUNJDUMKkI5nPX7SQD8MwAMDQ0MExhdwP/d5dz7SwAOERQNExcedLsAAADU24hEREVgYWEyMzNkZ2u4uLj///+gpKmwsLD29vd6l7fS0tJ8fX3r7e2Ki4vAwcEohtv5+fkFBQlNTk+G1+6y5Nub4Po9LxIFAAAAPnRSTlMAJq/+/////////////v/////////6r2L//////2L///7//6/y/////////////////////////////686r5BWTf4AAAGCSURBVHgBddGFYoMwFAXQh7usmtCNQCUVpO7t///WXpD5Ls6JBwAkWVE1TTdMy3Zczw/Cl0631x9IgBkSQiilEZbQTWvUcK//+ob14piJECJcN6xR4gVBijqWYBI3wQLoqm7aorLQAUxbxAhWNMNyElTsF1r4YKw8G6G+dHsV8jr1a0wUTWg4r5AvliIrwRm+ZJlmCu1WmBdV0hVnRZ3SdDx/XuG6+bXhcdFka7le2GKa7/BXxvGW5xv81u3Eb7HkHH/tBXK+L4qDOnO8FnfHEv+vBB6PaVGcIv3sfuuz5PFH71QznW94IdeiLXdV9DOwGk/LJY4o52JU2RHvjGozIO2AxDB29YD4oShuRDGAsmYq+QXr11PZibGxSAeFMMQmN96+7TijKmgRaZdvk3H2YVdGFDBUyuqFvzULjyH8itsXwVlH/bplGEGIFBwLlbD4jxBI/lU2hXulEWG/eQIPP3HOhqbQ3ywBqufaM11F/u5DANSnh5VNXVMiWhUQmU6w3jtwwl9zuXxyRwAAAABJRU5ErkJggg==",
+        "via": [
+            "студия 115"
+        ]
+    },
+    {
+        "id": "ultimate.gg",
+        "name": "Ultimate.gg",
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAe1BMVEVHcEx/NfZ5M+txL95rKddpLM5jKsVeKLtXJrBRJKRRJKRPI6JeHsVSGa9JIpajgeWMadGZftCQe75lQLD////i2+9FEJnv6vhEHo+jj894XrHLweI8EYhAHYc3AIk7G36Hea4wB3c2GXRfR5cvF2gnA2aWhb8oFFwjE1PFf+9HAAAAKXRSTlMAl//////////2lv//////////////////////////////////////laGQftIAAAExSURBVHgBfc/FgRxBEATAyOrpZbH/fskKMSy3WHdzFN/CjAQEEoQgSL7lqbpmpCBQzOsN19SsJqQHuKJNyNgin1cOIeuAjNojRXYd5HhxjF0N4NK/NkUCGH07LfmyDxCNEgBcplrIad8AbCpm+m6BBrBRzJ2edafzEiw2lHsda+3rHqAXZWYcO9sAXSkrM9s1+wl0Kpg7QAA1xT2XZr8CSrlvuWKF54oi7tvAp04rocwcauMKNBX3bJmWeK49eGKJ+gZQImbGVW9nQN0/kencqwZMD8Z8fu1qDx6M+foUow4A6m59P5QvAEyzemu/6vVtAGgFgLxe1lDvv9yqm3CtS1h9fPPt3LHbPwdaIauGLQqd0gYTFGRd0NjQKTSKdmlQebB+5U89sRndTV1DQYO8/QHBakf6PomU/gAAAABJRU5ErkJggg==",
+        "contacts": {
+            "site": "https://www.ultimate.gg/"
+        },
+        "via": [
+            "студия 115"
+        ]
     }
 ];

@@ -62,7 +62,7 @@ const LEVEL_H = 176
 const PAD = 56
 
 interface LaidNode { p: HandshakePerson; x: number; y: number; depth: number; px: number; py: number }
-interface LaidEdge { id: string; childId: string; x1: number; y1: number; x2: number; y2: number }
+interface LaidEdge { id: string; childId: string; x1: number; y1: number; x2: number; y2: number; bendY: number }
 
 const layout = computed(() => {
   const nodes: LaidNode[] = []
@@ -118,11 +118,15 @@ const layout = computed(() => {
     viasOf(p).forEach((viaId, i) => {
       const from = pos.get(viaId)
       if (!from) return
+      const fromDepth = depthOf.get(viaId) ?? 0
       const edge = {
         id: `${viaId}->${p.id}`,
         childId: p.id,
         x1: from.x + PAD, y1: from.y + PAD + 68,
         x2: to.x + PAD, y2: to.y + PAD + 4,
+        // изгиб заканчивается там, где цель была бы уровнем ниже родителя;
+        // остаток до фактической цели - вертикальная линия, чтобы не резать слои
+        bendY: (fromDepth + 1) * LEVEL_H + PAD + 4,
       }
       if (i === 0) edges.push(edge)
       else extraEdges.push(edge)
@@ -140,8 +144,9 @@ const layout = computed(() => {
 })
 
 function edgePath(e: LaidEdge): string {
-  const my = (e.y2 - e.y1) / 2
-  return `M ${e.x1} ${e.y1} C ${e.x1} ${e.y1 + my}, ${e.x2} ${e.y2 - my}, ${e.x2} ${e.y2}`
+  const my = (e.bendY - e.y1) / 2
+  const curve = `M ${e.x1} ${e.y1} C ${e.x1} ${e.y1 + my}, ${e.x2} ${e.bendY - my}, ${e.x2} ${e.bendY}`
+  return e.bendY < e.y2 ? `${curve} L ${e.x2} ${e.y2}` : curve
 }
 
 // --- Перемещение и масштаб ---
@@ -266,6 +271,16 @@ const chain = computed<HandshakePerson[]>(() => {
 })
 
 const chainIds = computed(() => new Set(chain.value.map(p => p.id)))
+
+const highlightIds = computed(() => {
+  const s = new Set(chainIds.value)
+  if (selected.value) for (const id of viasOf(selected.value)) s.add(id)
+  return s
+})
+
+function isExtraHighlighted(e: LaidEdge): boolean {
+  return selectedId.value === e.childId
+}
 
 const otherVias = computed(() => {
   if (!selected.value) return []
@@ -463,7 +478,10 @@ function resetMap() {
           <svg class="absolute inset-0 pointer-events-none" :width="layout.width" :height="layout.height"
                :viewBox="`0 0 ${layout.width} ${layout.height}`" fill="none">
             <path v-for="e in layout.extraEdges" :key="e.id" :d="edgePath(e)"
-                  stroke="#57534e" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.7" />
+                  class="transition-[stroke,opacity] duration-300" stroke-dasharray="4 5"
+                  :stroke="isExtraHighlighted(e) ? '#fb923c' : '#57534e'"
+                  :stroke-width="isExtraHighlighted(e) ? 2 : 1.5"
+                  :opacity="isExtraHighlighted(e) ? 1 : 0.7" />
             <path v-for="e in layout.edges" :key="e.id" :d="edgePath(e)"
                   class="hs-edge transition-[stroke] duration-300"
                   :stroke="chainIds.has(e.childId) ? '#fb923c' : '#44403c'"
@@ -473,7 +491,7 @@ function resetMap() {
           <button v-for="n in layout.nodes" :key="n.p.id"
                   class="hs-node absolute flex flex-col items-center gap-1.5 cursor-pointer group transition-[left,top,opacity] duration-300"
                   :style="{ left: n.px + 'px', top: n.py + 'px', width: NODE_W + 'px' }"
-                  :class="{ 'opacity-40': selectedId && !chainIds.has(n.p.id) }"
+                  :class="{ 'opacity-40': selectedId && !highlightIds.has(n.p.id) }"
                   @click="onNodeClick(n.p.id)">
             <div class="relative">
               <PersonAvatar :person="n.p"
