@@ -9,6 +9,53 @@ body {
     @apply bg-stone-950 text-white;
 }
 
+.pixel {
+    image-rendering: pixelated;
+}
+
+.mc-panel {
+    background: #211c18;
+    border: 3px solid;
+    border-color: #5a4f43 #14100d #14100d #5a4f43;
+    box-shadow: 0 4px 0 rgb(0 0 0 / 0.45);
+}
+
+.mc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    border: 3px solid;
+    font-weight: 600;
+    line-height: 1.1;
+    transition: transform 0.08s steps(2), filter 0.08s steps(2);
+}
+
+.mc-btn:active {
+    transform: translateY(3px);
+    filter: brightness(0.92);
+}
+
+.mc-btn-primary {
+    background: #b4652d;
+    color: #1b1310;
+    border-color: #e8a765 #6b3616 #6b3616 #e8a765;
+}
+
+.mc-btn-primary:hover {
+    background: #c6752f;
+}
+
+.mc-btn-secondary {
+    background: #2f2a25;
+    color: #e7ddd0;
+    border-color: #5a4f43 #14100d #14100d #5a4f43;
+}
+
+.mc-btn-secondary:hover {
+    background: #3a332c;
+}
+
 .square-grid {
     position: absolute;
     inset: 0;
@@ -20,6 +67,11 @@ body {
     opacity: 0.5;
     pointer-events: none;
     z-index: 0;
+}
+
+@keyframes tfgm-ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
 }
 
 @keyframes light-shake {

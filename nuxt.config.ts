@@ -59,12 +59,6 @@ export default defineNuxtConfig({
                 {property: 'og:type', content: 'website'},
             ],
             link: [
-                {rel: 'preconnect', href: 'https://fonts.googleapis.com'},
-                {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous'},
-                {
-                    rel: 'stylesheet',
-                    href: 'https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Unbounded:wght@200..900&display=swap',
-                },
                 {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
             ],
         },
@@ -72,5 +66,17 @@ export default defineNuxtConfig({
         layoutTransition: {name: 'layout', mode: 'out-in'}
     },
 
-    modules: ['@nuxt/icon', 'shadcn-nuxt', '@nuxtjs/device', '@nuxt/image'],
+    fonts: {
+        defaults: {
+            weights: [400, 500, 600, 700],
+            subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext'],
+        },
+        families: [
+            {name: 'Golos Text', provider: 'google'},
+            {name: 'Unbounded', provider: 'google'},
+            {name: 'Geist Pixel', provider: 'google'},
+        ],
+    },
+
+    modules: ['@nuxt/icon', 'shadcn-nuxt', '@nuxtjs/device', '@nuxt/image', '@nuxt/fonts'],
 })
