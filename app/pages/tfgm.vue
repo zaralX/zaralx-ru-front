@@ -266,7 +266,7 @@ onMounted(() => {
         <div class="grid items-end gap-10 lg:grid-cols-12">
           <div class="lg:col-span-7">
             <h2 class="font-unbounded text-3xl leading-tight sm:text-4xl">
-              Залетай сейчас к нам
+              Залетай к нам
             </h2>
             <p class="mt-4 max-w-xl text-lg text-stone-300">
               В чате все обсуждения и вайтлист, заходи чтобы ничего не пропустить
