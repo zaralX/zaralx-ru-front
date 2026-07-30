@@ -7,8 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <!-- строка из списка серверов -->
-  <div class="mc-panel flex w-full max-w-lg items-center gap-3 p-2.5">
+  <div class="mc-panel flex w-full max-w-113 items-center gap-3 p-2.5">
     <img src="https://assets.zaralx.ru/api/v1/minecraft/vanilla/item/bricks/icon" alt=""
          class="pixel size-16 shrink-0 sm:size-[4.5rem]">
 

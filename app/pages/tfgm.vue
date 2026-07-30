@@ -57,11 +57,8 @@ const roles = [
 ]
 
 const facts = [
-  { key: 'Старт', value: '5 августа, 13:00 МСК' },
-  { key: 'Сборка', value: 'TFGModern, 1.20.1' },
-  { key: 'Войсчат', value: 'есть, в игре' },
+  { key: 'Войсчат', value: 'есть' },
   { key: 'Лицензия', value: 'не требуется' },
-  { key: 'Правила', value: 'обсуждаем в чате' },
 ]
 
 const checklist = [
@@ -125,7 +122,15 @@ onMounted(() => {
             Новый майнкрафт, который придётся учить заново. Практически все ванильные механики переработаны, это новая игра которую мы пройдём сообща!
           </p>
 
-          <div class="mt-8">
+          <dl class="w-112 mt-6 space-y-2">
+            <div v-for="fact in facts" :key="fact.key" class="flex items-baseline gap-x-2">
+              <dt class="shrink-0 font-montserrat text-stone-300">{{ fact.key }}</dt>
+              <span class="h-px min-w-4 flex-1 border-b border-dotted border-stone-600"></span>
+              <dd class="text-right font-montserrat text-stone-300">{{ fact.value }}</dd>
+            </div>
+          </dl>
+
+          <div class="mt-6">
             <ServerCard :target="START_AT" />
           </div>
 
@@ -137,10 +142,6 @@ onMounted(() => {
             <a :href="links.discord" target="_blank" rel="noopener" class="mc-btn mc-btn-secondary">
               <Icon name="iconoir:discord" class="text-xl" />
               Discord
-            </a>
-            <a :href="links.channel" target="_blank" rel="noopener"
-               class="font-montserrat text-lg text-stone-400 underline decoration-stone-700 underline-offset-4 hover:text-stone-200">
-              тгк с владельца →
             </a>
           </div>
         </div>
@@ -184,13 +185,16 @@ onMounted(() => {
             с нами или со своими друзьями бесплатно на нашем сервере.
           </p>
 
-          <figure class="!mt-10 flex justify-end gap-4 flex-wrap">
+          <figure class="!mt-10 flex justify-end gap-4">
             <NuxtImg src="/img/tfgm/photo.webp" width="1200"
                      alt="Фоточка"
-                     class="w-full max-w-96 border-4 border-black/70 mr-0" />
+                     class="w-full max-w-87 border-4 border-black/70 mr-0" />
             <NuxtImg src="/img/tfgm/photo2.png" width="1200"
                      alt="Фоточка 2"
-                     class="w-full max-w-96 border-4 border-black/70 mr-0" />
+                     class="w-full max-w-87 border-4 border-black/70 mr-0" />
+            <NuxtImg src="/img/tfgm/sail.png" width="1200"
+                     alt="Фоточка 3"
+                     class="w-full max-w-87 border-4 border-black/70 mr-0" />
           </figure>
         </div>
       </div>
@@ -253,50 +257,7 @@ onMounted(() => {
       </div>
     </section>
 
-    <section class="px-4 py-20 sm:px-8 md:px-32">
-      <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div class="lg:col-span-5">
-          <p class="font-montserrat text-lg text-stone-600">03</p>
-          <h2 class="mt-1 font-unbounded text-3xl leading-tight sm:text-4xl">Детали</h2>
-
-          <dl class="mc-panel mt-6 space-y-3 p-5">
-            <div v-for="fact in facts" :key="fact.key" class="flex items-baseline gap-x-2">
-              <dt class="shrink-0 font-montserrat text-lg text-stone-500">{{ fact.key }}</dt>
-              <span class="h-px min-w-4 flex-1 border-b border-dotted border-stone-700"></span>
-              <dd class="text-right font-montserrat text-lg text-stone-200">{{ fact.value }}</dd>
-            </div>
-          </dl>
-
-          <p class="mt-4 font-montserrat text-base text-stone-500">
-            Остались вопросы? Всегда рады ответить в любом чате
-          </p>
-        </div>
-
-        <div class="lg:col-span-7 lg:text-right">
-          <p class="font-montserrat text-lg text-stone-600">04</p>
-          <h2 class="mt-1 font-unbounded text-3xl leading-tight sm:text-4xl">Что сделать до старта</h2>
-
-          <ul class="mt-8 space-y-6">
-            <li v-for="task in checklist" :key="task.title" class="flex lg:flex-row-reverse gap-4">
-              <span class="mt-0.5 flex size-7 shrink-0 items-center justify-center border-2 font-montserrat text-lg"
-                    :class="task.done
-                      ? 'border-lime-700 bg-lime-900/40 text-lime-400'
-                      : 'border-stone-700 bg-black/40 text-stone-700'">
-                {{ task.done ? '✓' : '' }}
-              </span>
-              <div>
-                <p class="font-unbounded text-lg" :class="task.done ? 'text-stone-500 line-through' : ''">
-                  {{ task.title }}
-                </p>
-                <p class="mt-1 max-w-xl text-stone-400">{{ task.text }}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="relative overflow-hidden border-t-4 border-black/80">
+    <section class="relative overflow-hidden">
       <div class="absolute inset-0 opacity-30"
            style="background-image: url('/img/tfgm/tex/dirt.png'); background-size: 44px; image-rendering: pixelated;"></div>
       <div class="absolute inset-0 bg-gradient-to-b from-stone-950/60 to-stone-950"></div>
@@ -324,9 +285,24 @@ onMounted(() => {
           </div>
 
           <div class="lg:col-span-5">
-            <NuxtImg src="/img/tfgm/sail.webp" width="900"
-                     alt="Парусник в TerraFirmaGreg Modern"
-                     class="w-full border-4 border-black/70" />
+            <div class="lg:col-span-7 lg:text-right">
+              <ul class="mt-8 space-y-6">
+                <li v-for="task in checklist" :key="task.title" class="flex lg:flex-row-reverse gap-4">
+              <span class="mt-0.5 flex size-7 shrink-0 items-center justify-center border-2 font-montserrat text-lg"
+                    :class="task.done
+                      ? 'border-lime-700 bg-lime-900/40 text-lime-400'
+                      : 'border-stone-700 bg-black/40 text-stone-700'">
+                {{ task.done ? '✓' : '' }}
+              </span>
+                  <div>
+                    <p class="font-unbounded text-lg" :class="task.done ? 'text-stone-500 line-through' : ''">
+                      {{ task.title }}
+                    </p>
+                    <p class="mt-1 max-w-xl text-stone-400">{{ task.text }}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
