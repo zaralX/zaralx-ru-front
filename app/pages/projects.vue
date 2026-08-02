@@ -4,10 +4,22 @@ import type { Project } from "~/types/project";
 
 useSeoMeta({
   title: 'Проекты - zaralx.ru',
-  description: 'Проекты zaralX: маркетплейс FreshMarket, Cristalix Dungeons, zaralX Assets, FreshDonate, плагины для Minecraft и другие разработки.',
+  description: 'Проекты zaralX: лаунчер Cast Launcher, маркетплейс FreshMarket, Cristalix Dungeons, zaralX Assets, FreshDonate, плагины для Minecraft и другие разработки.',
 })
 
 const projects: Project[] = [
+  {
+    title: "Cast Launcher",
+    description: "Десктопный лаунчер Minecraft на Rust и Tauri: ставит ваниллу, Forge, NeoForge и Fabric, ищет модпаки на Modrinth, а свои сборки раздаёт через каталог CastPacks - установка в один клик и автообновление. Сам подбирает или качает Java, умеет импортировать инстансы из PrismLauncher и Modrinth App.",
+    tags: ["Rust", "Tauri", "Nuxt", "Minecraft", "Open Source"],
+    image: "/img/projects/cast_launcher.webp",
+    gradient: "from-sky-400 via-cyan-300 to-blue-400",
+    accent: "#28b9f5",
+    links: [
+      { label: "Исходный код", href: "https://github.com/zaralX/cast-launcher", icon: "lucide:github" },
+      { label: "Скачать", href: "https://github.com/zaralX/cast-launcher/releases/latest", icon: "lucide:arrow-down-to-line" },
+    ],
+  },
   {
     title: "FreshMarket",
     description: "Маркетплейс, полностью повторяющий работу реальных маркетплейсов внутри Minecraft: банковская система, покупка товаров с доставкой, управление магазином в команде и аналитика продаж.",
