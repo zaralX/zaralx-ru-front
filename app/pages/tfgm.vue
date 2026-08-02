@@ -61,6 +61,17 @@ const facts = [
   { key: 'Лицензия', value: 'не требуется' },
 ]
 
+const launcher = {
+  download: 'https://github.com/zaralX/cast-launcher/releases/latest',
+  repo: 'https://github.com/zaralX/cast-launcher',
+  perks: [
+    'Сборка ставится в один клик',
+    'Автоматическое докачивание обновлений',
+    'Есть перенос данных из других лаунчеров',
+    'Открытый исходный код',
+  ],
+}
+
 const checklist = [
   {
     done: true,
@@ -303,6 +314,51 @@ onMounted(() => {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 opacity-25"
+           ></div>
+
+      <div class="relative px-4 py-20 sm:px-8 md:px-32">
+        <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class="lg:col-span-5">
+            <div class="flex items-end gap-3">
+              <NuxtImg src="/img/tfgm/cast/logo.svg" alt="" class="size-20 bg-stone-900 rounded-lg shadow-xl" />
+              <h2 class="mt-4 font-unbounded text-3xl leading-tight sm:text-4xl">
+                Доступно<br>в <span class="text-[#28B9F5]">CastLauncher</span>
+              </h2>
+            </div>
+
+            <p class="mt-4 max-w-xl text-lg text-stone-300">
+              Установка сборки в пару кликов и автоматическое обновление
+            </p>
+
+            <ul class="mt-6 space-y-2.5">
+              <li v-for="perk in launcher.perks" :key="perk" class="flex gap-3 text-stone-400">
+                <span class="mt-2 size-1.5 shrink-0 bg-[#28B9F5]"></span>
+                <span>{{ perk }}</span>
+              </li>
+            </ul>
+
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a :href="launcher.download" target="_blank" rel="noopener" class="mc-btn mc-btn-cast-primary">
+                <Icon name="lucide:arrow-down-to-line" class="text-xl" />
+                Скачать лаунчер
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 relative">
+            <NuxtImg src="/img/tfgm/cast/launcher.webp" width="1400"
+                     alt="Список сборок в CastLauncher, среди них TerraFirmaGregModern RU"
+                     class="w-full absolute blur-xl" />
+            <NuxtImg src="/img/tfgm/cast/launcher.webp" width="1400"
+                     alt="Список сборок в CastLauncher, среди них TerraFirmaGregModern RU"
+                     class="w-full relative" />
           </div>
         </div>
       </div>

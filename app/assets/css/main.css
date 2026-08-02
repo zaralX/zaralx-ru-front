@@ -42,6 +42,13 @@ body {
     border-color: #e8a765 #6b3616 #6b3616 #e8a765;
 }
 
+.mc-btn-cast-primary {
+    background: #107dab;
+    color: #eef7fc;
+    border-color: #28B9F5 #0a5479 #0a5479 #28B9F5;
+}
+
+
 .mc-btn-primary:hover {
     background: #c6752f;
 }
