@@ -327,7 +327,7 @@ onMounted(() => {
         <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <div class="lg:col-span-5">
             <div class="flex items-end gap-3">
-              <NuxtImg src="/img/tfgm/cast/logo.svg" alt="" class="size-20 bg-stone-900 rounded-lg shadow-xl" />
+              <img src="/img/tfgm/cast/logo.svg" alt="" class="size-20 bg-stone-900 rounded-lg shadow-xl" />
               <h2 class="mt-4 font-unbounded text-3xl leading-tight sm:text-4xl">
                 Доступно<br>в <span class="text-[#28B9F5]">CastLauncher</span>
               </h2>
