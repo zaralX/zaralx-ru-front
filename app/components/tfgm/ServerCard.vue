@@ -13,7 +13,7 @@ defineProps<{
 
     <div class="min-w-0 flex-1">
       <div class="flex items-start justify-between gap-3">
-        <p class="font-unbounded text-sm leading-tight sm:text-base">TerraFirmaGreg Modern RU</p>
+        <p class="font-unbounded text-sm leading-tight sm:text-base">FirmaModern</p>
         <div class="flex shrink-0 items-end gap-[2px] pt-1" aria-hidden="true">
           <span class="w-[3px] bg-lime-400" style="height: 4px"></span>
           <span class="w-[3px] bg-lime-400" style="height: 7px"></span>

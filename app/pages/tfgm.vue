@@ -3,10 +3,10 @@ import { animate, onScroll } from "animejs";
 import ServerCard from "~/components/tfgm/ServerCard.vue";
 
 useSeoMeta({
-  title: 'TerraFirmaGreg Modern RU - публичный сервер',
+  title: 'FirmaModern - майнкрафт сервер',
   description: 'Публичный сервер на сборке TerraFirmaGreg Modern. Старт 5 августа в 13:00 МСК.',
-  ogTitle: 'TerraFirmaGreg Modern RU',
-  ogDescription: 'Публичное выживание на TFG Modern. Старт 5 августа в 13:00 МСК.',
+  ogTitle: 'FirmaModern',
+  ogDescription: 'Публичное выживание на сборке TFG Modern. Старт 5 августа в 13:00 МСК.',
   ogImage: 'https://zaralx.ru/img/tfgm/hero.webp',
 })
 
@@ -124,9 +124,7 @@ onMounted(() => {
           </p>
 
           <h1 class="mt-3 font-unbounded text-4xl leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-            TerraFirmaGreg<br>
-            Modern
-            <span class="ml-1 inline-block -rotate-3 border-2 border-amber-700 bg-amber-600 px-2 pb-1 align-middle font-montserrat text-2xl text-stone-950 sm:text-4xl">RU</span>
+            Firma<span class="text-orange-500">Modern</span>
           </h1>
 
           <p class="mt-6 max-w-xl text-lg text-stone-300">
@@ -186,7 +184,7 @@ onMounted(() => {
 
         <div class="space-y-5 text-lg text-stone-300 lg:col-span-8">
           <p>
-            TerraFirmaGreg Modern - это не "майнкрафт с модами", а другая игра на его движке.
+            FirmaModern - это не "майнкрафт с модами", а другая игра на его движке.
             TerraFirmaCraft переписывает выживание, GregTech - технологии. Здесь всё построено
             на реалистичном развитии из камешек и палочек
           </p>
