@@ -5,6 +5,13 @@ import PerspectiveCube from "~/components/common/PerspectiveCube.vue";
 import LastEditionTime from "~/components/index/LastEditionTime.vue";
 import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
+const areas = [
+  { label: 'веб-сервисы', color: 'text-sky-400' },
+  { label: 'Minecraft', color: 'text-emerald-400' },
+  { label: 'API', color: 'text-orange-400' },
+  { label: 'десктоп', color: 'text-violet-400' },
+]
+
 function animateHello() {
   const { chars } = splitText('#index-hello', { chars: { wrap: 'clip' }});
   animate(chars, {
@@ -28,6 +35,14 @@ function animateTitle() {
 }
 
 function animateIntro() {
+  animate('.index-hero-reveal', {
+    opacity: [0, 1],
+    y: [12, 0],
+    duration: 600,
+    ease: 'out(3)',
+    delay: (_el: unknown, index: number) => 900 + index * 120,
+  });
+
   animate('#index-scroll-hint', {
     opacity: [0, 1],
     duration: 600,
@@ -45,23 +60,53 @@ onMounted(() => {
 
 <template>
   <div class="px-4 sm:px-8 md:px-32">
-    <div class="h-[75vh] min-h-96 relative overflow-hidden">
+    <div class="h-[75vh] min-h-[34rem] relative overflow-hidden">
       <div class="absolute top-1/2 left-1/2 transform -translate-1/2">
         <div class="flex justify-center items-center">
           <PerspectiveCube :class="{ 'size-100': !$device.isDesktop }" />
         </div>
       </div>
-      <div class="absolute top-1/2 left-1/2 transform -translate-1/2 flex items-center flex-col z-10">
+
+      <div class="absolute top-1/2 left-1/2 transform -translate-1/2 flex items-center flex-col z-10 w-max max-w-[92vw]">
+        <ClientOnly>
+          <IndexStatusPill class="index-hero-reveal mb-6" />
+        </ClientOnly>
+
         <div>
           <p id="index-hello" class="text-stone-400 text-left">Привет, я:</p>
           <p id="index-title" class="text-3xl md:text-4xl lg:text-5xl font-unbounded">zaralX</p>
         </div>
-        <p class="bg-gradient-to-r from-stone-400 bg-size-[300%] via-stone-700 to-stone-400 inline-block text-transparent bg-clip-text animate-[animated-gradient_6s_ease_infinite_alternate] absolute text-nowrap translate-y-64 opacity-75 font-medium text-xs sm:text-sm md:text-normal"><LastEditionTime /></p>
+
+        <p class="index-hero-reveal mt-4 text-center text-sm md:text-base text-stone-400">
+          Делаю
+          <template v-for="(area, index) in areas" :key="area.label">
+            <span :class="area.color">{{ area.label }}</span><span v-if="index < areas.length - 2">, </span><span v-else-if="index === areas.length - 2"> и </span>
+          </template>
+        </p>
+
+        <div class="index-hero-reveal mt-6 flex flex-wrap justify-center gap-3">
+          <a href="https://t.me/zWork1" target="_blank">
+            <BeautifulButton>
+              <Icon name="iconoir:telegram" />
+              Обсудить проект
+            </BeautifulButton>
+          </a>
+          <NuxtLink to="/projects">
+            <BeautifulButton>
+              Мои работы
+              <Icon name="lucide:arrow-right" />
+            </BeautifulButton>
+          </NuxtLink>
+        </div>
+
+        <p class="index-hero-reveal mt-8 bg-gradient-to-r from-stone-400 bg-size-[300%] via-stone-700 to-stone-400 inline-block text-transparent bg-clip-text animate-[animated-gradient_6s_ease_infinite_alternate] text-nowrap font-medium text-xs sm:text-sm"><LastEditionTime /></p>
       </div>
+
       <div class="absolute hidden lg:flex justify-between items-center px-32 w-full h-full pointer-events-none" id="index-projects-container">
         <IndexProjectWindow id="index-project-1" title="FreshMarket - Маркетплейс" img="/img/projects/freshmarket_v2_figma.webp" />
         <IndexProjectWindow id="index-project-2" title="API с игровыми ассетами" img="/img/projects/zaralx_assets.webp" />
       </div>
+
       <div id="index-scroll-hint" class="opacity-0 absolute bottom-2 left-0 right-0 flex flex-col items-center text-stone-500 pointer-events-none">
         <p class="text-xs">листай</p>
         <Icon name="lucide:chevron-down" class="animate-bounce text-xl" />

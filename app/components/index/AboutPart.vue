@@ -17,12 +17,10 @@
         </p>
         <p class="text-center md:text-left">
           Меня зовут Михаил, но в онлайн-пространстве меня знают как <span class="font-medium text-orange-400">zaralx</span>.
+          Люблю нестандартные задачи: от коммерческих приложений до игровых модов и своих фреймворков.
         </p>
-        <p class="text-center md:text-left">Моё любимое дело - создавать нестандартные разработки: от коммерческих приложений до игровых модов и фреймворков.</p>
-        <p class="text-center md:text-left">Я знаком с более чем <span class="text-rose-500">20 языками</span> программирования, но особенно увлечён веб-разработкой и современными фреймворками.
-        </p>
-        <p class="text-center md:text-left">
-          В то же время мне не чуждо погрузиться в систему: написать сервер на
+        <p class="text-center md:text-left">Знаком с более чем <span class="text-rose-500">20 языками</span> программирования, но живу в вебе.
+          При этом не боюсь спуститься поглубже: написать сервер на
           <span class="inline-flex items-center gap-1 bg-black/25 rounded-sm px-2 py-0.5 text-orange-500">
             <Icon name="teenyicons:rust-solid" class="text-sm" /> Rust
           </span>, <span class="inline-flex items-center gap-1 bg-black/25 rounded-sm px-2 py-0.5 text-blue-500">

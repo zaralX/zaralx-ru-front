@@ -59,9 +59,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="px-4 md:px-8 lg:px-32 xl:px-64">
+  <div id="activity" class="scroll-mt-24 px-4 md:px-8 lg:px-32 xl:px-64">
     <h2 class="font-unbounded text-center text-3xl">Чем я занят?</h2>
-    <p class="text-stone-400 mt-3 text-center">Активность на GitHub и GitLab за последний год - в одной таблице.</p>
+    <p class="text-stone-400 mt-3 text-center">Активность на GitHub и GitLab за последний год - собирается сама, без ретуши.</p>
 
     <div ref="card" class="relative mt-8 rounded-lg border border-stone-800 bg-stone-900 p-4 md:p-6">
       <div v-if="status === 'pending'" class="h-52 flex items-center justify-center text-stone-500">
@@ -135,5 +135,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <IndexActivityFeed />
   </div>
 </template>
