@@ -3,6 +3,7 @@ import { animate, onScroll } from 'animejs';
 import AboutPart from "~/components/index/AboutPart.vue";
 import SkillsPart from "~/components/index/SkillsPart.vue";
 import ProjectsPart from "~/components/index/ProjectsPart.vue";
+import ActivityPart from "~/components/index/ActivityPart.vue";
 import BeautifulButton from "~/components/common/BeautifulButton.vue";
 
 useSeoMeta({
@@ -74,7 +75,11 @@ onMounted(() => {
         <div style="animation-delay: 200ms" class="bg-stone-800 w-full h-32 animate-clip-fluid opacity-50"></div>
       </div>
     </div>
-    <ProjectsPart />
+    <ActivityPart />
+
+    <div class="mt-24">
+      <ProjectsPart />
+    </div>
 
     <div class="flex justify-center mt-12">
       <NuxtLink to="/projects">
