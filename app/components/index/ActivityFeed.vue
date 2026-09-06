@@ -59,7 +59,7 @@ function plural(count: number, forms: [string, string, string]) {
     </a>
 
     <div v-if="data.events?.length" class="rounded-lg border border-stone-800 bg-stone-900 p-5 lg:col-span-2">
-      <p class="text-xs text-stone-500">Последние события</p>
+      <p class="text-xs text-stone-500">Последние публичные события</p>
 
       <ul class="mt-3 divide-y divide-stone-800">
         <li v-for="event in data.events" :key="event.id">
