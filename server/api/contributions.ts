@@ -8,13 +8,12 @@ const DAY_MS = 24 * 60 * 60 * 1000
 const FETCH_TIMEOUT = 5000
 
 export default defineCachedEventHandler(async (): Promise<ContributionsResponse> => {
-    const to = startOfDay(new Date())
-    const from = startOfWeek(new Date(to.getTime() - 364 * DAY_MS))
-
     const [github, gitlab] = await Promise.all([
-        getGithubDays(from, to).catch(() => null),
-        getGitlabDays(from, to).catch(() => null)
+        getGithubDays().catch(() => null),
+        getGitlabDays().catch(() => null)
     ])
+
+    const {from, to} = getWindow(github)
 
     const days: ContributionDay[] = []
 
@@ -56,62 +55,31 @@ export default defineCachedEventHandler(async (): Promise<ContributionsResponse>
     swr: true
 });
 
-async function getGithubDays(from: Date, to: Date): Promise<Map<string, number>> {
-    const token = process.env.GITHUB_TOKEN
+/**
+ * Границы скользящего года задаёт сам GitHub - забираем их из его же ответа,
+ * чтобы сетка на сайте совпадала с календарём на профиле.
+ */
+function getWindow(github: Map<string, number> | null): {from: Date; to: Date} {
+    const dates = github ? [...github.keys()].sort() : []
 
-    return token
-        ? await getGithubDaysByApi(from, to, token)
-        : await getGithubDaysByCalendar(from, to)
-}
-
-async function getGithubDaysByApi(from: Date, to: Date, token: string): Promise<Map<string, number>> {
-    const query = `query($login: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $login) {
-            contributionsCollection(from: $from, to: $to) {
-                contributionCalendar {
-                    weeks { contributionDays { date contributionCount } }
-                }
-            }
-        }
-    }`
-
-    const data: any = await $fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "User-Agent": "zaralx-ru-app"
-        },
-        timeout: FETCH_TIMEOUT,
-        body: {
-            query,
-            variables: {
-                login: GITHUB_LOGIN,
-                from: from.toISOString(),
-                to: to.toISOString()
-            }
-        }
-    })
-
-    const weeks = data?.data?.user?.contributionsCollection?.contributionCalendar?.weeks
-    if (!weeks) throw new Error("GitHub GraphQL: пустой календарь")
-
-    const days = new Map<string, number>()
-
-    for (const week of weeks) {
-        for (const day of week.contributionDays ?? []) {
-            days.set(day.date, Number(day.contributionCount) || 0)
-        }
+    if (dates.length) {
+        return {from: parseISODate(dates[0]!), to: parseISODate(dates[dates.length - 1]!)}
     }
 
-    return days
+    const to = startOfDay(new Date())
+
+    return {from: startOfWeek(new Date(to.getTime() - 364 * DAY_MS)), to}
 }
 
-async function getGithubDaysByCalendar(from: Date, to: Date): Promise<Map<string, number>> {
+/**
+ * Календарь берём со страницы профиля, а не через GraphQL.
+ * GraphQL с fine-grained токеном видит только те репозитории, на которые токен выдан,
+ * и теряет вклады в чужие и организационные репозитории - на проде выходило 701 вместо 1499.
+ */
+async function getGithubDays(): Promise<Map<string, number>> {
+    // from/to тут не работают: GitHub понимает их как "покажи календарный год"
+    // и отдаёт 1 января - 31 декабря. Без параметров возвращается ровно скользящий год.
     const html: string = await $fetch(`https://github.com/users/${GITHUB_LOGIN}/contributions`, {
-        query: {
-            from: toISODate(from),
-            to: toISODate(to)
-        },
         headers: {
             "User-Agent": "zaralx-ru-app",
             "X-Requested-With": "XMLHttpRequest"
@@ -143,7 +111,7 @@ async function getGithubDaysByCalendar(from: Date, to: Date): Promise<Map<string
     return days
 }
 
-async function getGitlabDays(from: Date, to: Date): Promise<Map<string, number>> {
+async function getGitlabDays(): Promise<Map<string, number>> {
     const token = process.env.GITLAB_TOKEN
 
     const data: Record<string, number> = await $fetch(`https://gitlab.com/users/${GITLAB_LOGIN}/calendar.json`, {
@@ -155,11 +123,9 @@ async function getGitlabDays(from: Date, to: Date): Promise<Map<string, number>>
     })
 
     const days = new Map<string, number>()
-    const fromDate = toISODate(from)
-    const toDate = toISODate(to)
 
     for (const [date, count] of Object.entries(data ?? {})) {
-        if (date >= fromDate && date <= toDate) days.set(date, Number(count) || 0)
+        days.set(date, Number(count) || 0)
     }
 
     return days
@@ -226,6 +192,10 @@ function startOfDay(date: Date): Date {
 
 function startOfWeek(date: Date): Date {
     return new Date(date.getTime() - date.getUTCDay() * DAY_MS)
+}
+
+function parseISODate(date: string): Date {
+    return new Date(`${date}T00:00:00Z`)
 }
 
 function toISODate(date: Date): string {
