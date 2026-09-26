@@ -48,7 +48,11 @@ function plural(count: number, forms: [string, string, string]) {
       <p class="mt-3 font-unbounded text-lg break-all">{{ shortRepo(data.focus.repo) }}</p>
 
       <p class="mt-2 text-sm text-stone-400">
-        {{ data.focus.commits }} {{ plural(data.focus.commits, ['коммит', 'коммита', 'коммитов']) }} за последний месяц
+        {{ data.focus.count }}
+        {{ data.focus.unit === 'commits'
+            ? plural(data.focus.count, ['коммит', 'коммита', 'коммитов'])
+            : plural(data.focus.count, ['пуш', 'пуша', 'пушей']) }}
+        за последний месяц
       </p>
 
       <p class="mt-auto flex items-center gap-1 pt-6 text-xs text-stone-500 group-hover:text-stone-300">

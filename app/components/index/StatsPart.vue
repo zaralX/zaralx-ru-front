@@ -20,7 +20,9 @@ const stats = computed(() => [
     to: '#activity'
   },
   {
-    value: activity.value?.stats ? numberFormatter.format(activity.value.stats.publicRepos) : null,
+    value: activity.value?.stats?.publicRepos != null
+        ? numberFormatter.format(activity.value.stats.publicRepos)
+        : null,
     label: 'публичных репозиториев',
     href: 'https://github.com/zaralX?tab=repositories'
   },
