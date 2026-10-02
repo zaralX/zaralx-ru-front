@@ -39,6 +39,12 @@ function contributions(count: number) {
   return `${numberFormatter.format(count)} ${plural(count, ['вклад', 'вклада', 'вкладов'])}`
 }
 
+function monthPosition(column: number) {
+  return column >= data.value!.weeks.length - 2
+      ? {right: '0px'}
+      : {left: `${GRID_OFFSET + column * CELL_STEP}px`}
+}
+
 function showTooltip(day: ContributionDay, event: MouseEvent) {
   if (!card.value) return
 
@@ -93,7 +99,7 @@ onMounted(() => {
           <div class="w-max text-xs text-stone-500">
             <div class="relative h-5">
               <span v-for="month in data.months" :key="`${month.label}-${month.column}`"
-                    class="absolute top-0" :style="{ left: `${GRID_OFFSET + month.column * CELL_STEP}px` }">
+                    class="absolute top-0" :style="monthPosition(month.column)">
                 {{ month.label }}
               </span>
             </div>
